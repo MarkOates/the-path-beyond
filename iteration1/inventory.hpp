@@ -109,6 +109,10 @@ public:
   {
     this->item = item;
   }
+  void clear_item()
+  {
+    this->item = InventoryItem(InventoryItem::Type::EMPTY);
+  }
   bool is_empty()
   {
     return (item.type == InventoryItem::Type::EMPTY);
@@ -252,6 +256,45 @@ public:
       // set the item in the inventory toggle button
       toggle_button->set_shown_item(button->item);
     }
+    else if (message == "attempt_to_combine()")
+    {
+      InventoryGUIItemButton *combining_button = static_cast<InventoryGUIItemButton *>(sender);
+      InventoryItem combined_item = attempt_combination(current_item_showcase->item, combining_button->item);
+      if (!combined_item.is_empty())
+      {
+        // combination was successful
+        std::cout << "Combination was successful" << std::endl;
+
+        // clear the item on both selected button
+        InventoryGUIItemButton *selected_item_button = get_selected_item_button();
+        selected_item_button->clear_item();
+        selected_item_button->deselect();
+
+        // set the new combined_item item on the combining_button
+        combining_button->set_item(combined_item);
+        combining_button->select();
+        combining_button->send_message_to_parent("feature_my_item()");
+      }
+      else
+      {
+        // combination failed
+        std::cout << "Combination failed" << std::endl;
+      }
+    }
+  }
+
+  InventoryItem attempt_combination(InventoryItem itemA, InventoryItem itemB)
+  {
+    // TODO: process possible combinations here
+    // return the item that is created when combining two other items
+    // a failed combination will return an item that is EMPTY
+    return InventoryItem(InventoryItem::Type::EMPTY);
+  }
+
+  InventoryGUIItemButton *get_selected_item_button()
+  {
+    for (auto &button : item_buttons) if (button->selected) return button;
+    return NULL;
   }
 
   InventoryGUIItemButton *find_first_empty_inventory_button()
