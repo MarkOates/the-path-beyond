@@ -74,6 +74,14 @@ public:
     , item(InventoryItem::Type::EMPTY)
     , show_x_pos(x)
   {}
+  void set_item(InventoryItem item)
+  {
+    this->item = item;
+  }
+  bool is_empty()
+  {
+    return (item.type == InventoryItem::Type::EMPTY);
+  }
   void on_click()
   {
     std::cout << "InventoryGUIItemButton" << std::endl;
@@ -103,7 +111,6 @@ public:
   InventoryGUICurrentItemShowcase *current_item_showcase;
   std::vector<InventoryGUIItemButton *> item_buttons;
 
-  std::vector<InventoryItem> items;
   int current_mode;
 
   InventoryGUIScreen(Display *display)
@@ -138,6 +145,20 @@ public:
     else if (message == "set_mode(0)") set_mode(0);
     else if (message == "set_mode(1)") set_mode(1);
     else if (message == "set_mode(2)") set_mode(2);
+  }
+
+  InventoryGUIItemButton *find_first_empty_inventory_button()
+  {
+    for (auto &button : item_buttons) if (button->is_empty()) return button;
+    return NULL;
+  }
+
+  bool add_item(InventoryItem item)
+  {
+    InventoryGUIItemButton *empty_button = find_first_empty_inventory_button();
+    if (!empty_button) return false;
+    empty_button->set_item(item);
+    return true;
   }
 
   void set_mode(int mode)
