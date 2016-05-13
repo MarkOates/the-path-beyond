@@ -19,7 +19,7 @@ class InventoryGUIInventoryToggleButton : public FGUIWidget
 {
 public:
   InventoryGUIInventoryToggleButton(FGUIWidget *parent)
-    : FGUIWidget(parent, new FGUISurfaceAreaBox(740, 60, 100, 80))
+    : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W-60, 60, 100, 80))
   {}
   void on_click()
   {
@@ -35,7 +35,7 @@ class InventoryGUICurrentItemShowcase : public FGUIWidget
 {
 public:
   InventoryGUICurrentItemShowcase(FGUIWidget *parent)
-    : FGUIWidget(parent, new FGUISurfaceAreaBox(400, 300, 600, 400))
+    : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W-500, SCREEN_H/2, 600, 400))
   {}
   void show() { std::cout << "InventoryGUICurrentItemShowcase.show()" << std::endl; }
   void hide() { std::cout << "InventoryGUICurrentItemShowcase.hide()" << std::endl; }
@@ -87,7 +87,7 @@ public:
     current_item_showcase = new InventoryGUICurrentItemShowcase(this);
     for (unsigned i=0; i<NUM_INVENTORY_ITEM_BUTTONS; i++)
     {
-      InventoryGUIItemButton *button = new InventoryGUIItemButton(this, 700, 150+90*i);
+      InventoryGUIItemButton *button = new InventoryGUIItemButton(this, SCREEN_W-100, 150+90*i);
       item_buttons.push_back(button);
     }
   }
