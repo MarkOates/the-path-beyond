@@ -3,15 +3,20 @@
 class InventoryItem
 {
 public:
-  std::string name;
-  std::string description;
-  ALLEGRO_BITMAP *image;
+  enum Type
+  {
+    EMPTY = 0
+  };
 
-  InventoryItem(std::string name, std::string description, ALLEGRO_BITMAP *image)
-    : name(name)
-    , description(description)
-    , image(image)
+  Type type;
+
+  InventoryItem(InventoryItem::Type type)
+    : type(type)
   {}
+
+  std::string get_name() { return std::string("Item ") + tostring(type); }
+  std::string get_description() { return std::string("description for item ") + tostring(type); }
+  ALLEGRO_BITMAP *get_image() { return NULL; }
 };
 
 
@@ -61,12 +66,12 @@ public:
 class InventoryGUIItemButton : public FGUIWidget
 {
 public:
-  InventoryItem *item;
+  InventoryItem item;
   int show_x_pos;
 
   InventoryGUIItemButton(FGUIWidget *parent, float x, float y)
     : FGUIWidget(parent, new FGUISurfaceAreaBox(x, y, 80, 80))
-    , item(NULL)
+    , item(InventoryItem::Type::EMPTY)
     , show_x_pos(x)
   {}
   void on_click()
@@ -98,7 +103,7 @@ public:
   InventoryGUICurrentItemShowcase *current_item_showcase;
   std::vector<InventoryGUIItemButton *> item_buttons;
 
-  std::vector<InventoryItem *> items;
+  std::vector<InventoryItem> items;
   int current_mode;
 
   InventoryGUIScreen(Display *display)
