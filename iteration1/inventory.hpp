@@ -47,9 +47,33 @@ public:
 class InventoryGUICurrentItemShowcase : public FGUIWidget
 {
 public:
+  InventoryItem item;
+  FGUIImage *featured_image;
+  FGUIText *title_text;
+  FGUITextBox *description_textbox;
+
   InventoryGUICurrentItemShowcase(FGUIWidget *parent)
     : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W-500, SCREEN_H/2, 600, 400))
-  {}
+    , item(InventoryItem::Type::EMPTY)
+    , title_text(NULL)
+    , description_textbox(NULL)
+    , featured_image(NULL)
+  {
+    featured_image = new FGUIImage(this, place.size.x/2, place.size.y/2, item.get_image());
+    title_text = new FGUIText(this, 0, 0, item.get_name());
+    title_text->place.align.y = 0;
+    description_textbox = new FGUITextBox(this, place.size.x/2, place.size.y*0.75, place.size.x*0.8, place.size.y*0.25, item.get_description()) ;
+    description_textbox->set_text_color(color::white);
+    description_textbox->place.align.x = 0.5;
+    description_textbox->place.align.y = 0;
+  }
+  void set_item(InventoryItem item)
+  {
+    this->item = item;
+    featured_image->set_bitmap(item.get_image());
+    title_text->set_text(item.get_name());
+    description_textbox->set_text(item.get_description());
+  }
   void show(float speed=0.5)
   {
     std::cout << "InventoryGUICurrentItemShowcase.show()" << std::endl;
