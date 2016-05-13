@@ -92,11 +92,13 @@ class InventoryGUIItemButton : public FGUIWidget
 public:
   InventoryItem item;
   int show_x_pos;
+  bool selected;
 
   InventoryGUIItemButton(FGUIWidget *parent, float x, float y)
     : FGUIWidget(parent, new FGUISurfaceAreaBox(x, y, 80, 80))
     , item(InventoryItem::Type::EMPTY)
     , show_x_pos(x)
+    , selected(false)
   {}
   void set_item(InventoryItem item)
   {
@@ -109,6 +111,20 @@ public:
   void on_click()
   {
     std::cout << "InventoryGUIItemButton" << std::endl;
+    send_message_to_parent("feature_my_item()");
+  }
+  void select()
+  {
+    selected = true;
+  }
+  void deselect()
+  {
+    selected = false;
+  }
+  void on_draw()
+  {
+    FGUIWidget::on_draw();
+    if (selected) al_draw_rounded_rectangle(0, 0, place.size.x, place.size.y, 5, 5, color::orange, 3.0);
   }
   void show(float speed=0.5)
   {
@@ -169,6 +185,17 @@ public:
     else if (message == "set_visibility_mode(0)") set_visibility_mode(0);
     else if (message == "set_visibility_mode(1)") set_visibility_mode(1);
     else if (message == "set_visibility_mode(2)") set_visibility_mode(2);
+    else if (message == "feature_my_item()")
+    {
+      // deselect all the other buttons
+      for (auto &item : item_buttons)
+        if (item != sender) static_cast<InventoryGUIItemButton *>(item)->deselect();
+
+      // set the item in the showcase
+      InventoryGUIItemButton *button = static_cast<InventoryGUIItemButton *>(sender);
+      current_item_showcase->set_item(button->item);
+      button->select();
+    }
   }
 
   InventoryGUIItemButton *find_first_empty_inventory_button()
