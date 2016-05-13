@@ -14,6 +14,11 @@ public:
     : type(type)
   {}
 
+  bool is_empty()
+  {
+    return type == EMPTY;
+  }
+
   std::string get_name() { return std::string("Item ") + tostring(type); }
   std::string get_description() { return std::string("description for item ") + tostring(type); }
   ALLEGRO_BITMAP *get_image() { return NULL; }
@@ -23,13 +28,37 @@ public:
 class InventoryGUIInventoryToggleButton : public FGUIWidget
 {
 public:
+  InventoryItem shown_item;
+
   InventoryGUIInventoryToggleButton(FGUIWidget *parent)
     : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W-80, 60, 120, 80))
+    , shown_item(InventoryItem::Type::EMPTY)
   {}
   void on_click()
   {
     std::cout << "InventoryGUIInventoryToggleButton" << std::endl;
     send_message_to_parent("toggle_visibility_mode()");
+  }
+  void set_shown_item(InventoryItem item)
+  {
+    shown_item = item;
+  }
+  void on_draw()
+  {
+    if (shown_item.is_empty())
+    {
+      al_draw_text(af::fonts["DroidSans.ttf 20"], color::white, place.size.x/2, place.size.y/2-14, ALLEGRO_ALIGN_CENTER, "Inventory");
+    }
+    else
+    {
+      BitmapObject image(shown_item.get_image());
+      image.scale_to_fit(place.size.x, place.size.y);
+      image.align(0.5, 0.5);
+      image.position(place.size.x/2, place.size.y/2);
+      image.draw();
+    }
+
+    FGUIWidget::on_draw();
   }
   void show(float speed=0.5)
   {
@@ -195,6 +224,9 @@ public:
       InventoryGUIItemButton *button = static_cast<InventoryGUIItemButton *>(sender);
       current_item_showcase->set_item(button->item);
       button->select();
+
+      // set the item in the inventory toggle button
+      toggle_button->set_shown_item(button->item);
     }
   }
 
