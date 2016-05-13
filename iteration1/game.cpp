@@ -28,7 +28,10 @@ public:
   void on_click()
   {
     std::cout << "InventoryGUIInventoryToggleButton" << std::endl;
+    send_message_to_parent("set_mode(1)");
   }
+  void show() { std::cout << "InventoryGUIInventoryToggleButton.show()" << std::endl; }
+  void hide() { std::cout << "InventoryGUIInventoryToggleButton.hide()" << std::endl; }
 };
 
 
@@ -38,10 +41,8 @@ public:
   InventoryGUICurrentItemShowcase(FGUIWidget *parent)
     : FGUIWidget(parent, new FGUISurfaceAreaBox(400, 300, 600, 400))
   {}
-  void on_click()
-  {
-    std::cout << "InventoryGUIItemShowcase" << std::endl;
-  }
+  void show() { std::cout << "InventoryGUICurrentItemShowcase.show()" << std::endl; }
+  void hide() { std::cout << "InventoryGUICurrentItemShowcase.hide()" << std::endl; }
 };
 
 
@@ -58,6 +59,8 @@ public:
   {
     std::cout << "InventoryGUIItemButton" << std::endl;
   }
+  void show() { std::cout << "InventoryGUIItemButton.show()" << std::endl; }
+  void hide() { std::cout << "InventoryGUIItemButton.hide()" << std::endl; }
 };
 
 
@@ -93,9 +96,40 @@ public:
     }
   }
 
-  void show() {}
-  void hide() {}
-  void set_mode(int mode) {}
+  void on_message(FGUIWidget *sender, std::string message) override
+  {
+    if (message == "") return;
+    else if (message == "set_mode(0)") set_mode(0);
+    else if (message == "set_mode(1)") set_mode(1);
+    else if (message == "set_mode(2)") set_mode(2);
+  }
+
+  void set_mode(int mode)
+  {
+    std::cout << " === setting GUI mode " << mode << " ===" << std::endl;
+    switch(mode)
+    {
+      case 0:
+        toggle_button->hide();
+        current_item_showcase->hide();
+        for (auto &button : item_buttons) button->hide();
+        break;
+      case 1:
+        toggle_button->show();
+        current_item_showcase->hide();
+        for (auto &button : item_buttons) button->hide();
+        break;
+      case 2:
+        toggle_button->show();
+        current_item_showcase->show();
+        for (auto &button : item_buttons) button->show();
+        break;
+      default:
+        // Undefined Mode
+        std::cout << "undefined InventoryGUIScreen mode " << mode << std::endl;
+        break;
+    }
+  }
 };
 
 
