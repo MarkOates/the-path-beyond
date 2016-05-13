@@ -7,6 +7,40 @@
 #include "inventory.hpp"
 
 
+
+
+class StartScreenGUIScreen : public FGUIScreen
+{
+private:
+  class StartScreenGUIStartButton : public FGUIWidget
+  {
+  public:
+    StartScreenGUIStartButton(FGUIWidget *parent)
+      : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W/2, SCREEN_H/3*2, 200, 90))
+    {}
+    void on_click() override
+    {
+      std::cout << "StartScreeGUIStartButton" << std::endl;
+    }
+  };
+
+public:
+  FGUIText *title_text;
+  StartScreenGUIStartButton *start_screen_button;
+
+  StartScreenGUIScreen(Display *display)
+    : FGUIScreen(display)
+    , title_text(NULL)
+    , start_screen_button(NULL)
+  {
+    title_text = new FGUIText(this, SCREEN_W/2, SCREEN_H/3, "- THE PATH -");
+    title_text->place.align.x = 0.5;
+    start_screen_button = new StartScreenGUIStartButton(this);
+  }
+};
+
+
+
 ////////////////////////////////////////////////////////////////
 
 
