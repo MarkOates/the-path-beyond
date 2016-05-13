@@ -19,16 +19,23 @@ class InventoryGUIInventoryToggleButton : public FGUIWidget
 {
 public:
   InventoryGUIInventoryToggleButton(FGUIWidget *parent)
-    : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W-60, 60, 100, 80))
+    : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W-80, 60, 120, 80))
   {}
   void on_click()
   {
     std::cout << "InventoryGUIInventoryToggleButton" << std::endl;
     send_message_to_parent("toggle_mode()");
   }
+  void show(float speed=0.5)
+  {
+    std::cout << "InventoryGUIInventoryToggleButton.show()" << std::endl;
+    af::motion.cmove_to(&place.position.x, SCREEN_W-80, speed);
   }
-  void show() { std::cout << "InventoryGUIInventoryToggleButton.show()" << std::endl; }
-  void hide() { std::cout << "InventoryGUIInventoryToggleButton.hide()" << std::endl; }
+  void hide(float speed=0.5)
+  {
+    std::cout << "InventoryGUIInventoryToggleButton.hide()" << std::endl;
+    af::motion.cmove_to(&place.position.x, SCREEN_W+60, speed);
+  }
 };
 
 
@@ -38,8 +45,16 @@ public:
   InventoryGUICurrentItemShowcase(FGUIWidget *parent)
     : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W-500, SCREEN_H/2, 600, 400))
   {}
-  void show() { std::cout << "InventoryGUICurrentItemShowcase.show()" << std::endl; }
-  void hide() { std::cout << "InventoryGUICurrentItemShowcase.hide()" << std::endl; }
+  void show(float speed=0.5)
+  {
+    std::cout << "InventoryGUICurrentItemShowcase.show()" << std::endl;
+    af::motion.cmove_to(&place.position.x, SCREEN_W-500, speed);
+  }
+  void hide(float speed=0.5)
+  {
+    std::cout << "InventoryGUICurrentItemShowcase.hide()" << std::endl;
+    af::motion.cmove_to(&place.position.x, SCREEN_W+500, speed);
+  }
 };
 
 
@@ -47,17 +62,27 @@ class InventoryGUIItemButton : public FGUIWidget
 {
 public:
   InventoryItem *item;
+  int show_x_pos;
 
   InventoryGUIItemButton(FGUIWidget *parent, float x, float y)
     : FGUIWidget(parent, new FGUISurfaceAreaBox(x, y, 80, 80))
     , item(NULL)
+    , show_x_pos(x)
   {}
   void on_click()
   {
     std::cout << "InventoryGUIItemButton" << std::endl;
   }
-  void show() { std::cout << "InventoryGUIItemButton.show()" << std::endl; }
-  void hide() { std::cout << "InventoryGUIItemButton.hide()" << std::endl; }
+  void show(float speed=0.5)
+  {
+    std::cout << "InventoryGUIItemButton.show()" << std::endl;
+    af::motion.cmove_to(&place.position.x, show_x_pos, speed);
+  }
+  void hide(float speed=0.5)
+  {
+    std::cout << "InventoryGUIItemButton.hide()" << std::endl;
+    af::motion.cmove_to(&place.position.x, show_x_pos+150, speed);
+  }
 };
 
 
@@ -89,7 +114,7 @@ public:
     current_item_showcase = new InventoryGUICurrentItemShowcase(this);
     for (unsigned i=0; i<NUM_INVENTORY_ITEM_BUTTONS; i++)
     {
-      InventoryGUIItemButton *button = new InventoryGUIItemButton(this, SCREEN_W-100, 150+90*i);
+      InventoryGUIItemButton *button = new InventoryGUIItemButton(this, SCREEN_W-100, 200+90*i);
       item_buttons.push_back(button);
     }
 
