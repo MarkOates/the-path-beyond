@@ -73,7 +73,7 @@ public:
     , inventory_screen(new InventoryGUIScreen(display))
     , start_screen(new StartScreenGUIScreen(this, display))
   {
-    inventory_screen->set_mode(0);
+    inventory_screen->set_visibility_mode(0);
     start_screen->hide(0);
     start_screen->show(8.0);
   }
@@ -83,7 +83,7 @@ public:
   }
   void start_game()
   {
-    inventory_screen->set_mode(1);
+    inventory_screen->set_visibility_mode(1);
     start_screen->hide(2.0);
   }
 };

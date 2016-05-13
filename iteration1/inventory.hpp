@@ -29,7 +29,7 @@ public:
   void on_click()
   {
     std::cout << "InventoryGUIInventoryToggleButton" << std::endl;
-    send_message_to_parent("toggle_mode()");
+    send_message_to_parent("toggle_visibility_mode()");
   }
   void show(float speed=0.5)
   {
@@ -131,20 +131,20 @@ public:
     }
 
     // set our current GUI mode
-    set_mode(current_mode);
+    set_visibility_mode(current_mode);
   }
 
   void on_message(FGUIWidget *sender, std::string message) override
   {
     if (message == "") return;
-    else if (message == "toggle_mode()")
+    else if (message == "toggle_visibility_mode()")
     {
-      if (current_mode == 1) set_mode(2);
-      else if (current_mode == 2) set_mode(1);
+      if (current_mode == 1) set_visibility_mode(2);
+      else if (current_mode == 2) set_visibility_mode(1);
     }
-    else if (message == "set_mode(0)") set_mode(0);
-    else if (message == "set_mode(1)") set_mode(1);
-    else if (message == "set_mode(2)") set_mode(2);
+    else if (message == "set_visibility_mode(0)") set_visibility_mode(0);
+    else if (message == "set_visibility_mode(1)") set_visibility_mode(1);
+    else if (message == "set_visibility_mode(2)") set_visibility_mode(2);
   }
 
   InventoryGUIItemButton *find_first_empty_inventory_button()
@@ -161,7 +161,7 @@ public:
     return true;
   }
 
-  void set_mode(int mode)
+  void set_visibility_mode(int mode)
   {
     std::cout << " === setting GUI mode " << mode << " ===" << std::endl;
     switch(mode)
