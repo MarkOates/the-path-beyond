@@ -144,7 +144,7 @@ public:
   void hide(float speed=0.5)
   {
     std::cout << "InventoryGUIItemButton.hide()" << std::endl;
-    af::motion.cmove_to(&place.position.x, show_x_pos+150, speed);
+    af::motion.cmove_to(&place.position.x, show_x_pos+200, speed);
   }
 };
 
