@@ -24,7 +24,8 @@ public:
   void on_click()
   {
     std::cout << "InventoryGUIInventoryToggleButton" << std::endl;
-    send_message_to_parent("set_mode(1)");
+    send_message_to_parent("toggle_mode()");
+  }
   }
   void show() { std::cout << "InventoryGUIInventoryToggleButton.show()" << std::endl; }
   void hide() { std::cout << "InventoryGUIInventoryToggleButton.hide()" << std::endl; }
@@ -81,6 +82,7 @@ public:
     , toggle_button(NULL)
     , current_item_showcase(NULL)
     , item_buttons()
+    , current_mode(1)
   {
     // create our Inventory GUI Widgets
     toggle_button = new InventoryGUIInventoryToggleButton(this);
@@ -90,11 +92,19 @@ public:
       InventoryGUIItemButton *button = new InventoryGUIItemButton(this, SCREEN_W-100, 150+90*i);
       item_buttons.push_back(button);
     }
+
+    // set our current GUI mode
+    set_mode(current_mode);
   }
 
   void on_message(FGUIWidget *sender, std::string message) override
   {
     if (message == "") return;
+    else if (message == "toggle_mode()")
+    {
+      if (current_mode == 1) set_mode(2);
+      else if (current_mode == 2) set_mode(1);
+    }
     else if (message == "set_mode(0)") set_mode(0);
     else if (message == "set_mode(1)") set_mode(1);
     else if (message == "set_mode(2)") set_mode(2);
@@ -109,16 +119,19 @@ public:
         toggle_button->hide();
         current_item_showcase->hide();
         for (auto &button : item_buttons) button->hide();
+        current_mode = 0;
         break;
       case 1:
         toggle_button->show();
         current_item_showcase->hide();
         for (auto &button : item_buttons) button->hide();
+        current_mode = 1;
         break;
       case 2:
         toggle_button->show();
         current_item_showcase->show();
         for (auto &button : item_buttons) button->show();
+        current_mode = 2;
         break;
       default:
         // Undefined Mode
