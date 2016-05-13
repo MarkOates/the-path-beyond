@@ -75,17 +75,36 @@ public:
 
 class InventoryGUIItemButton : public FGUIWidget
 {
+private:
+  class GUICombineButton : public FGUIWidget
+  {
+  public:
+    GUICombineButton(FGUIWidget *parent)
+      : FGUIWidget(parent, new FGUISurfaceAreaBox(-30, parent->place.size.y/2, 40, 50))
+    {}
+    void on_click()
+    {
+      std::cout << "GUICombineButton.on_click()" << std::endl;
+      send_message_to_parent("attempt_to_combine()");
+    }
+  };
+
 public:
   InventoryItem item;
   int show_x_pos;
   bool selected;
+
+  GUICombineButton *combine_button;
 
   InventoryGUIItemButton(FGUIWidget *parent, float x, float y)
     : FGUIWidget(parent, new FGUISurfaceAreaBox(x, y, 80, 80))
     , item(InventoryItem::Type::EMPTY)
     , show_x_pos(x)
     , selected(false)
-  {}
+    , combine_button(NULL)
+  {
+    combine_button = new GUICombineButton(this);
+  }
   void set_item(InventoryItem item)
   {
     this->item = item;
@@ -106,6 +125,11 @@ public:
   void deselect()
   {
     selected = false;
+  }
+  void on_message(FGUIWidget *sender, std::string message)
+  {
+    // message will always be attempt_to_combine()
+    if (sender == combine_button) send_message_to_parent("attempt_to_combine()");
   }
   void on_draw()
   {
