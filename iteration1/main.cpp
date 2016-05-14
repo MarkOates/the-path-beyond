@@ -11,8 +11,6 @@
 #include "navigation.hpp"
 #include "script.hpp"
 
-#include "game/scripts/start_title_screen.hpp"
-#include "game/scripts/start_game.hpp"
 #include "game/project.hpp"
 
 

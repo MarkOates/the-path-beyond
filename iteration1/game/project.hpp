@@ -1,8 +1,19 @@
 
 
+#include "./scripts/start_title_screen.hpp"
+#include "./scripts/start_game.hpp"
+
 
 class Project : public FGUIScreen
 {
+private:
+  void load_scripts()
+  {
+    // load the individual scripts
+    new StartTitleScreen();
+    new StartGame();
+  }
+
 public:
   WorldRenderScreen *world_render;
   WorldNavigationGUIScreen *world_navigation_gui;
@@ -29,12 +40,6 @@ public:
       std::cout << "Project running script \"" << trigger_id << "\"" << std::endl;
       Script::run(trigger_id);
     }
-  }
-  void load_scripts()
-  {
-    // load the individual scripts
-    new StartTitleScreen();
-    new StartGame();
   }
 };
 
