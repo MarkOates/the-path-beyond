@@ -18,6 +18,10 @@ public:
   TargetID(std::string id)
     : id(id)
   {}
+  bool is_empty()
+  {
+    return id == "";
+  }
   std::string get_trigger_message() { return tostring("trigger_target_id ") + id; }
   static bool extract_trigger_id(std::string message, std::string *extracted_id)
   {
@@ -56,6 +60,19 @@ public:
     // match the pixel color to a target ID, and send a trigger message
     // to the parent
   }
+  void on_draw() override
+  {
+    al_draw_rectangle(0, 0, place.size.x, place.size.y, color::green, 8);
+    al_draw_bitmap(render, 0, 0, 0);
+  }
+  void show()
+  {
+    af::motion.cmove_to(&place.scale.x, 1.0, 0);
+  }
+  void hide()
+  {
+    af::motion.cmove_to(&place.scale.x, 0.0, 0);
+  }
 };
 
 
@@ -63,13 +80,27 @@ class WorldScreenGUINavButton : public FGUIWidget
 {
 public:
   TargetID target_id;
+  float show_pos_y;
 
   WorldScreenGUINavButton(FGUIWidget *parent, float x, float y, float w, float h)
     : FGUIWidget(parent, new FGUISurfaceAreaBox(x, y, w, h))
     , target_id("")
+    , show_pos_y(y)
   {}
   void set_target_id(TargetID target_id) { this->target_id = target_id; }
   void on_click() override { send_message_to_parent(target_id.get_trigger_message()); }
+  void show(float speed=0.4)
+  {
+    af::motion.cmove_to(&place.position.y, show_pos_y, speed);
+  }
+  void hide(float speed=0.4)
+  {
+    af::motion.cmove_to(&place.position.y, -200, speed);
+  }
+  void show_if_has_target(float speed=0.4)
+  {
+    if (!target_id.is_empty()) show(speed);
+  }
 };
 
 
@@ -107,6 +138,31 @@ public:
     if (TargetID::extract_trigger_id(message, &trigger_id))
       trigger_target_with_id(trigger_id);
   }
+  void set_usability_mode(int mode)
+  {
+    std::cout << " === setting WorldScreen mode " << mode << " ===" << std::endl;
+    switch(mode)
+    {
+      case 0:
+        nav_view->hide();
+        nav_up_button->hide();
+        nav_down_button->hide();
+        nav_left_button->hide();
+        nav_right_button->hide();
+        break;
+      case 1:
+        nav_view->show();
+        nav_up_button->show_if_has_target();
+        nav_down_button->show_if_has_target();
+        nav_left_button->show_if_has_target();
+        nav_right_button->show_if_has_target();
+        break;
+      default:
+        // Undefined Mode
+        std::cout << "undefined InventoryGUIScreen mode " << mode << std::endl;
+        break;
+    }
+  }
 };
 
 
@@ -128,6 +184,7 @@ public:
     , inventory_screen(new InventoryGUIScreen(display))
     , start_screen(new StartScreenGUIScreen(this, display))
   {
+    world_screen->set_usability_mode(0);
     inventory_screen->set_visibility_mode(0);
     start_screen->hide(0);
     start_screen->show(8.0);
@@ -138,6 +195,7 @@ public:
   }
   void start_game()
   {
+    world_screen->set_usability_mode(1);
     inventory_screen->set_visibility_mode(1);
     start_screen->hide(2.0);
   }
