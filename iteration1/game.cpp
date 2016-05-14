@@ -11,6 +11,26 @@
 ////////////////////////////////////////////////////////////////
 
 
+class TargetID
+{
+public:
+  std::string id;
+  TargetID(std::string id)
+    : id(id)
+  {}
+  std::string get_trigger_message() { return tostring("trigger_target_id ") + id; }
+  static bool extract_trigger_id(std::string message, std::string *extracted_id)
+  {
+    if (strncmp(message.c_str(), "trigger_target_id ", 18) == 0)
+    {
+      // we have a valid trigger message
+      *extracted_id = message.substr(18);
+      return true;
+    }
+    return false;
+  }
+};
+
 
 class WorldScreenGUINavView : public FGUIWidget
 {
@@ -30,15 +50,26 @@ public:
     al_clear_to_color(color::skyblue);
     al_restore_state(&state);
   }
+  void on_click() override
+  {
+    // TODO: sample the render for mouse clicks on colors
+    // match the pixel color to a target ID, and send a trigger message
+    // to the parent
+  }
 };
 
 
 class WorldScreenGUINavButton : public FGUIWidget
 {
 public:
+  TargetID target_id;
+
   WorldScreenGUINavButton(FGUIWidget *parent, float x, float y, float w, float h)
     : FGUIWidget(parent, new FGUISurfaceAreaBox(x, y, w, h))
+    , target_id("")
   {}
+  void set_target_id(TargetID target_id) { this->target_id = target_id; }
+  void on_click() override { send_message_to_parent(target_id.get_trigger_message()); }
 };
 
 
@@ -64,6 +95,17 @@ public:
     nav_down_button = new WorldScreenGUINavButton(this, SCREEN_W/2, SCREEN_H-100, 300, 30);
     nav_left_button = new WorldScreenGUINavButton(this, 100, SCREEN_H/2, 30, 300);
     nav_right_button = new WorldScreenGUINavButton(this, SCREEN_W-100, SCREEN_H/2, 30, 300);
+  }
+  void trigger_target_with_id(std::string id)
+  {
+    std::cout << "Triggering TargetID " << id << std::endl;
+    // TODO: send out a message to activate a target by id
+  }
+  void on_message(FGUIWidget *sender, std::string message)
+  {
+    std::string trigger_id;
+    if (TargetID::extract_trigger_id(message, &trigger_id))
+      trigger_target_with_id(trigger_id);
   }
 };
 
