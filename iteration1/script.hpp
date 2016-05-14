@@ -5,12 +5,14 @@ class Script : public ElementID
 {
 public:
   static ElementIDManager *manager;
+  static WorldRenderScreen *world_render;
   static WorldNavigationGUIScreen *world_navigation_gui;
   static InventoryGUIScreen *inventory_gui;
   static StartScreenGUIScreen *start_screen_gui;
   static bool initialized;
 
   static void initialize(
+      WorldRenderScreen *wrs,
       WorldNavigationGUIScreen *wnguis,
       InventoryGUIScreen *iguis,
       StartScreenGUIScreen *ssgui
@@ -19,6 +21,7 @@ public:
     if (initialized) return;
 
     manager = new ElementIDManager();
+    world_render = wrs;
     world_navigation_gui = wnguis;
     start_screen_gui = ssgui;
     inventory_gui = iguis;
@@ -55,6 +58,7 @@ ElementIDManager *Script::manager = NULL;
 WorldNavigationGUIScreen *Script::world_navigation_gui = NULL;
 InventoryGUIScreen *Script::inventory_gui = NULL;
 StartScreenGUIScreen *Script::start_screen_gui = NULL;
+WorldRenderScreen *Script::world_render = NULL;
 bool Script::initialized = false;
 
 
