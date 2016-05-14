@@ -32,7 +32,7 @@ all: bin/game$(EXE_EXTENSION)
 bin/game$(EXE_EXTENSION): obj/game.o
 		g++ obj/game.o -o bin/game -l$(ALLEGRO_FLARE_LIB) $(ALLEGRO_LIBS) -L$(ALLEGRO_FLARE_DIR)/lib -L$(ALLEGRO_DIR)/lib
 
-obj/game.o: game.cpp inventory.hpp start_screen.hpp target_id.hpp navigation.hpp
+obj/game.o: game.cpp inventory.hpp start_screen.hpp target_id.hpp navigation.hpp world_render.hpp
 		g++ -o $@ -c -std=gnu++11 $< -I$(ALLEGRO_FLARE_DIR)/include -I$(ALLEGRO_DIR)/include
 
 
