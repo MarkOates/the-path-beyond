@@ -12,8 +12,8 @@ private:
     {}
     void on_click() override
     {
-      send_message_to_parent("start_game_please()");
       std::cout << "StartScreeGUIStartButton" << std::endl;
+      send_message_to_parent(TargetID("StartGame()").get_trigger_message());
     }
   };
 
@@ -34,7 +34,8 @@ public:
   }
   void on_message(FGUIWidget *sender, std::string message) override
   {
-    if (message == "start_game_please()") project_screen->on_message(this, message); // bubbles it up
+    std::string trigger_id;
+    if (TargetID::extract_trigger_id(message, &trigger_id)) project_screen->on_message(this, message); // bubbles it up
   }
   void show(float speed=2.0)
   {

@@ -72,6 +72,35 @@ bool Script::initialized = false;
 
 
 
+class StartTitleScreen: public Script
+{
+public:
+  StartTitleScreen() : Script("StartTitleScreen()") {}
+  void activate() override
+  {
+    world_navigation_gui->set_usability_mode(0);
+    inventory_gui->set_visibility_mode(0);
+    start_screen_gui->hide(0);
+    start_screen_gui->show(8.0);
+  }
+};
+
+
+
+class StartGame: public Script
+{
+public:
+  StartGame() : Script("StartGame()") {}
+  void activate() override
+  {
+    world_navigation_gui->set_usability_mode(1);
+    inventory_gui->set_visibility_mode(1);
+    start_screen_gui->hide(2.0);
+  }
+};
+
+
+
 ////////////////////////////////////////////////////////////////
 
 
@@ -90,10 +119,9 @@ public:
     , start_screen(new StartScreenGUIScreen(this, display))
   {
     Script::initialize(world_navigation_screen, inventory_screen, start_screen);
-    world_navigation_screen->set_usability_mode(0);
-    inventory_screen->set_visibility_mode(0);
-    start_screen->hide(0);
-    start_screen->show(8.0);
+    load_scripts();
+
+    Script::run("StartTitleScreen()");
   }
   void on_message(FGUIWidget *sender, std::string message)
   {
@@ -103,13 +131,12 @@ public:
       std::cout << "Project running script \"" << trigger_id << "\"" << std::endl;
       Script::run(trigger_id);
     }
-    else if (message == "start_game_please()") start_game();
   }
-  void start_game()
+  void load_scripts()
   {
-    world_navigation_screen->set_usability_mode(1);
-    inventory_screen->set_visibility_mode(1);
-    start_screen->hide(2.0);
+    // load the individual scripts
+    new StartTitleScreen();
+    new StartGame();
   }
 };
 
