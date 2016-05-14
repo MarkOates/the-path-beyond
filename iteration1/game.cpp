@@ -10,36 +10,8 @@
 #include "navigation.hpp"
 #include "script.hpp"
 
-
-////////////////////////////////////////////////////////////////
-
-
-
-class StartTitleScreen: public Script
-{
-public:
-  StartTitleScreen() : Script("StartTitleScreen()") {}
-  void activate() override
-  {
-    world_navigation_gui->set_usability_mode(0);
-    inventory_gui->set_visibility_mode(0);
-    start_screen_gui->hide(0);
-    start_screen_gui->show(8.0);
-  }
-};
-
-
-class StartGame: public Script
-{
-public:
-  StartGame() : Script("StartGame()") {}
-  void activate() override
-  {
-    world_navigation_gui->set_usability_mode(1);
-    inventory_gui->set_visibility_mode(1);
-    start_screen_gui->hide(2.0);
-  }
-};
+#include "game/scripts/start_title_screen.hpp"
+#include "game/scripts/start_game.hpp"
 
 
 
