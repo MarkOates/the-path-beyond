@@ -36,12 +36,12 @@ public:
 };
 
 
-class WorldScreenGUINavView : public FGUIWidget
+class WorldNavigationGUINavView : public FGUIWidget
 {
 public:
   ALLEGRO_BITMAP *render;
 
-  WorldScreenGUINavView(FGUIWidget *parent)
+  WorldNavigationGUINavView(FGUIWidget *parent)
     : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W/2, SCREEN_H/2, SCREEN_W, SCREEN_H))
     , render(NULL)
   {
@@ -76,13 +76,13 @@ public:
 };
 
 
-class WorldScreenGUINavButton : public FGUIWidget
+class WorldNavigationGUINavButton : public FGUIWidget
 {
 public:
   TargetID target_id;
   float show_pos_y;
 
-  WorldScreenGUINavButton(FGUIWidget *parent, float x, float y, float w, float h)
+  WorldNavigationGUINavButton(FGUIWidget *parent, float x, float y, float w, float h)
     : FGUIWidget(parent, new FGUISurfaceAreaBox(x, y, w, h))
     , target_id("")
     , show_pos_y(y)
@@ -104,16 +104,16 @@ public:
 };
 
 
-class WorldScreenGUIScreen : public FGUIScreen
+class WorldNavigationGUIScreen : public FGUIScreen
 {
 public:
-  WorldScreenGUINavView *nav_view;
-  WorldScreenGUINavButton *nav_up_button;
-  WorldScreenGUINavButton *nav_down_button;
-  WorldScreenGUINavButton *nav_left_button;
-  WorldScreenGUINavButton *nav_right_button;
+  WorldNavigationGUINavView *nav_view;
+  WorldNavigationGUINavButton *nav_up_button;
+  WorldNavigationGUINavButton *nav_down_button;
+  WorldNavigationGUINavButton *nav_left_button;
+  WorldNavigationGUINavButton *nav_right_button;
 
-  WorldScreenGUIScreen(Display *display)
+  WorldNavigationGUIScreen(Display *display)
     : FGUIScreen(display)
     , nav_view(NULL)
     , nav_up_button(NULL)
@@ -121,11 +121,11 @@ public:
     , nav_left_button(NULL)
     , nav_right_button(NULL)
   {
-    nav_view = new WorldScreenGUINavView(this);
-    nav_up_button = new WorldScreenGUINavButton(this, SCREEN_W/2, 100, 300, 30);
-    nav_down_button = new WorldScreenGUINavButton(this, SCREEN_W/2, SCREEN_H-100, 300, 30);
-    nav_left_button = new WorldScreenGUINavButton(this, 100, SCREEN_H/2, 30, 300);
-    nav_right_button = new WorldScreenGUINavButton(this, SCREEN_W-100, SCREEN_H/2, 30, 300);
+    nav_view = new WorldNavigationGUINavView(this);
+    nav_up_button = new WorldNavigationGUINavButton(this, SCREEN_W/2, 100, 300, 30);
+    nav_down_button = new WorldNavigationGUINavButton(this, SCREEN_W/2, SCREEN_H-100, 300, 30);
+    nav_left_button = new WorldNavigationGUINavButton(this, 100, SCREEN_H/2, 30, 300);
+    nav_right_button = new WorldNavigationGUINavButton(this, SCREEN_W-100, SCREEN_H/2, 30, 300);
   }
   void trigger_target_with_id(std::string id)
   {
@@ -140,7 +140,7 @@ public:
   }
   void set_usability_mode(int mode)
   {
-    std::cout << " === setting WorldScreen mode " << mode << " ===" << std::endl;
+    std::cout << " === setting WorldNavigation mode " << mode << " ===" << std::endl;
     switch(mode)
     {
       case 0:
@@ -174,17 +174,17 @@ public:
 class Project : public FGUIScreen
 {
 public:
-  WorldScreenGUIScreen *world_screen;
+  WorldNavigationGUIScreen *world_navigation_screen;
   InventoryGUIScreen *inventory_screen;
   StartScreenGUIScreen *start_screen;
 
   Project(Display *display)
     : FGUIScreen(display)
-    , world_screen(new WorldScreenGUIScreen(display))
+    , world_navigation_screen(new WorldNavigationGUIScreen(display))
     , inventory_screen(new InventoryGUIScreen(display))
     , start_screen(new StartScreenGUIScreen(this, display))
   {
-    world_screen->set_usability_mode(0);
+    world_navigation_screen->set_usability_mode(0);
     inventory_screen->set_visibility_mode(0);
     start_screen->hide(0);
     start_screen->show(8.0);
@@ -195,7 +195,7 @@ public:
   }
   void start_game()
   {
-    world_screen->set_usability_mode(1);
+    world_navigation_screen->set_usability_mode(1);
     inventory_screen->set_visibility_mode(1);
     start_screen->hide(2.0);
   }
