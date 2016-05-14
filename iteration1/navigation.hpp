@@ -15,7 +15,7 @@ public:
     ALLEGRO_STATE state;
     al_store_state(&state, ALLEGRO_STATE_TARGET_BITMAP);
     al_set_target_bitmap(render);
-    al_clear_to_color(color::skyblue);
+    al_clear_to_color(color::transparent);
     al_restore_state(&state);
   }
   void on_click() override
