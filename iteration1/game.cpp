@@ -4,6 +4,7 @@
 #define SCREEN_W 1920
 #define SCREEN_H 1080
 
+#include "target_id.hpp"
 #include "inventory.hpp"
 #include "start_screen.hpp"
 #include "navigation.hpp"
@@ -22,7 +23,7 @@ public:
 
   Project(Display *display)
     : FGUIScreen(display)
-    , world_navigation_screen(new WorldNavigationGUIScreen(display))
+    , world_navigation_screen(new WorldNavigationGUIScreen(this, display))
     , inventory_screen(new InventoryGUIScreen(display))
     , start_screen(new StartScreenGUIScreen(this, display))
   {
