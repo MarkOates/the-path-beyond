@@ -33,7 +33,13 @@ public:
   }
   void on_message(FGUIWidget *sender, std::string message)
   {
-    if (message == "start_game_please()") start_game();
+    std::string trigger_id;
+    if (TargetID::extract_trigger_id(message, &trigger_id))
+    {
+      // TODO: find and call the script here
+      std::cout << "Project running script \"" << trigger_id << "\"" << std::endl;
+    }
+    else if (message == "start_game_please()") start_game();
   }
   void start_game()
   {

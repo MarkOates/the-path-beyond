@@ -97,14 +97,17 @@ public:
 class WorldNavigationGUIScreen : public FGUIScreen
 {
 public:
+  FGUIScreen *project_screen;
+
   WorldNavigationGUINavView *nav_view;
   WorldNavigationGUINavButton *nav_up_button;
   WorldNavigationGUINavButton *nav_down_button;
   WorldNavigationGUINavButton *nav_left_button;
   WorldNavigationGUINavButton *nav_right_button;
 
-  WorldNavigationGUIScreen(Display *display)
+  WorldNavigationGUIScreen(FGUIScreen *project_screen, Display *display)
     : FGUIScreen(display)
+    , project_screen(project_screen)
     , nav_view(NULL)
     , nav_up_button(NULL)
     , nav_down_button(NULL)
@@ -117,16 +120,15 @@ public:
     nav_left_button = new WorldNavigationGUINavButton(this, 100, SCREEN_H/2, 30, 300);
     nav_right_button = new WorldNavigationGUINavButton(this, SCREEN_W-100, SCREEN_H/2, 30, 300);
   }
-  void trigger_target_with_id(std::string id)
-  {
-    std::cout << "Triggering TargetID " << id << std::endl;
-    // TODO: send out a message to activate a target by id
-  }
+
   void on_message(FGUIWidget *sender, std::string message)
   {
     std::string trigger_id;
     if (TargetID::extract_trigger_id(message, &trigger_id))
-      trigger_target_with_id(trigger_id);
+    {
+      std::cout << "WorldNavigationGUIScreen sending on_message for script \"" << trigger_id << "\"" << std::endl;
+      project_screen->on_message(this, message);
+    }
   }
   void set_usability_mode(int mode)
   {
