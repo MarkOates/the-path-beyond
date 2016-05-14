@@ -22,17 +22,17 @@
 class Project : public FGUIScreen
 {
 public:
-  WorldNavigationGUIScreen *world_navigation_screen;
-  InventoryGUIScreen *inventory_screen;
-  StartScreenGUIScreen *start_screen;
+  WorldNavigationGUIScreen *world_navigation_gui;
+  InventoryGUIScreen *inventory_gui;
+  StartScreenGUIScreen *start_screen_gui;
 
   Project(Display *display)
     : FGUIScreen(display)
-    , world_navigation_screen(new WorldNavigationGUIScreen(this, display))
-    , inventory_screen(new InventoryGUIScreen(display))
-    , start_screen(new StartScreenGUIScreen(this, display))
+    , world_navigation_gui(new WorldNavigationGUIScreen(this, display))
+    , inventory_gui(new InventoryGUIScreen(display))
+    , start_screen_gui(new StartScreenGUIScreen(this, display))
   {
-    Script::initialize(world_navigation_screen, inventory_screen, start_screen);
+    Script::initialize(world_navigation_gui, inventory_gui, start_screen_gui);
     load_scripts();
 
     Script::run("StartTitleScreen()");
