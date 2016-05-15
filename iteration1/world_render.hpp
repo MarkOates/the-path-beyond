@@ -91,6 +91,7 @@ private:
   void primary_timer_func() override
   {
     update_scene();
+    if (scene_targets_render_surface_ref) draw_scene_targets(scene_targets_render_surface_ref);
     draw_scene();
   }
 
@@ -105,13 +106,21 @@ public:
   ElementIDManager *manager;
   Entity *camera;
 
+  ALLEGRO_BITMAP *scene_targets_render_surface_ref;
+
   WorldRenderScreen(Display *display)
     : Screen(display)
     , manager(new ElementIDManager())
     , camera(NULL)
+    , scene_targets_render_surface_ref(NULL)
   {
     // create the camera
     camera = new Entity(manager, "Camera", NULL, NULL);
+  }
+
+  void set_scene_targets_render_surface(ALLEGRO_BITMAP *surface)
+  {
+    scene_targets_render_surface_ref = surface;
   }
 
   void update_scene()
@@ -146,9 +155,26 @@ public:
       entity->draw();
     }
   }
+
+  void draw_scene_targets(ALLEGRO_BITMAP *surface)
+  {
+    ALLEGRO_STATE state;
+    al_store_state(&state, ALLEGRO_STATE_TARGET_BITMAP);
+    al_set_target_bitmap(surface);
+
+    prep_render(surface, camera->place);
+    al_clear_to_color(color::transparent);
+
+    // draw our entities
+    for (auto &elem : manager->elements)
+    {
+      Entity *entity = static_cast<Entity *>(elem);
+      entity->draw_flat_color(encode_id(entity->get_attached_script_id()));
+    }
+
+    al_restore_state(&state);
+  }
 };
-
-
 
 
 
