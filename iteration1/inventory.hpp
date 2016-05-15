@@ -36,7 +36,7 @@ public:
   {}
   void on_click()
   {
-    std::cout << "InventoryGUIInventoryToggleButton" << std::endl;
+    if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIInventoryToggleButton" << std::endl;
     send_message_to_parent("toggle_visibility_mode()");
   }
   void set_shown_item(InventoryItem item)
@@ -62,12 +62,12 @@ public:
   }
   void show(float speed=0.5)
   {
-    std::cout << "InventoryGUIInventoryToggleButton.show()" << std::endl;
+    if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIInventoryToggleButton.show()" << std::endl;
     af::motion.cmove_to(&place.position.x, SCREEN_W-80, speed);
   }
   void hide(float speed=0.5)
   {
-    std::cout << "InventoryGUIInventoryToggleButton.hide()" << std::endl;
+    if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIInventoryToggleButton.hide()" << std::endl;
     af::motion.cmove_to(&place.position.x, SCREEN_W+60, speed);
   }
 };
@@ -84,7 +84,7 @@ private:
     {}
     void on_click()
     {
-      std::cout << "GUICombineButton.on_click()" << std::endl;
+      if (Logging::at_least(L_VERBOSE)) std::cout << "GUICombineButton.on_click()" << std::endl;
       send_message_to_parent("attempt_to_combine()");
     }
   };
@@ -119,7 +119,7 @@ public:
   }
   void on_click()
   {
-    std::cout << "InventoryGUIItemButton" << std::endl;
+    if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIItemButton" << std::endl;
     send_message_to_parent("feature_my_item()");
   }
   void select()
@@ -142,12 +142,12 @@ public:
   }
   void show(float speed=0.5)
   {
-    std::cout << "InventoryGUIItemButton.show()" << std::endl;
+    if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIItemButton.show()" << std::endl;
     af::motion.cmove_to(&place.position.x, show_x_pos, speed);
   }
   void hide(float speed=0.5)
   {
-    std::cout << "InventoryGUIItemButton.hide()" << std::endl;
+    if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIItemButton.hide()" << std::endl;
     af::motion.cmove_to(&place.position.x, show_x_pos+200, speed);
   }
 };
@@ -185,12 +185,12 @@ public:
   }
   void show(float speed=0.5)
   {
-    std::cout << "InventoryGUICurrentItemShowcase.show()" << std::endl;
+    if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUICurrentItemShowcase.show()" << std::endl;
     af::motion.cmove_to(&place.position.x, SCREEN_W-500, speed);
   }
   void hide(float speed=0.5)
   {
-    std::cout << "InventoryGUICurrentItemShowcase.hide()" << std::endl;
+    if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUICurrentItemShowcase.hide()" << std::endl;
     af::motion.cmove_to(&place.position.x, SCREEN_W+500, speed);
   }
 };

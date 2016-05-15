@@ -32,7 +32,7 @@ public:
     {
       if (mouse_x < 0 || mouse_x > al_get_bitmap_width(render)) return;
       if (mouse_y < 0 || mouse_y > al_get_bitmap_height(render)) return;
-      std::cout << "sampling bitmap at " << mouse_x << ", " << mouse_y << std::endl;
+      if (Logging::at_least(L_VERBOSE)) std::cout << "sampling bitmap at " << mouse_x << ", " << mouse_y << std::endl;
       send_message_to_parent(tostring("clicked_on_id ") + tostring(decode_id(al_get_pixel(render, mouse_x, mouse_y))));
     }
   }
@@ -112,7 +112,7 @@ public:
     std::string trigger_id;
     if (TargetID::extract_trigger_id(message, &trigger_id))
     {
-      std::cout << "WorldNavigationGUIScreen sending on_message for script \"" << trigger_id << "\"" << std::endl;
+      if (Logging::at_least(L_VERBOSE)) std::cout << "WorldNavigationGUIScreen sending on_message for script \"" << trigger_id << "\"" << std::endl;
       project_screen->on_message(this, message);
     }
     else if (strncmp(message.c_str(), "clicked_on_id ", 14) == 0)
@@ -124,7 +124,7 @@ public:
   }
   void set_usability_mode(int mode)
   {
-    std::cout << " === setting WorldNavigation mode " << mode << " ===" << std::endl;
+    if (Logging::at_least(L_VERBOSE)) std::cout << " === setting WorldNavigation mode " << mode << " ===" << std::endl;
     switch(mode)
     {
       case 0:
@@ -143,7 +143,12 @@ public:
         break;
       default:
         // Undefined Mode
-        std::cout << "undefined InventoryGUIScreen mode " << mode << std::endl;
+        if (Logging::at_least(L_NORMAL))
+          std::cout
+            << CONSOLE_COLOR_YELLOW
+            << "undefined InventoryGUIScreen mode " << mode
+            << CONSOLE_COLOR_DEFAULT
+            << std::endl;
         break;
     }
   }

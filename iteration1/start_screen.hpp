@@ -12,7 +12,7 @@ private:
     {}
     void on_click() override
     {
-      std::cout << "StartScreeGUIStartButton" << std::endl;
+      if (Logging::at_least(L_NORMAL)) std::cout << "StartScreeGUIStartButton" << std::endl;
       send_message_to_parent(TargetID("StartGame()").get_trigger_message());
     }
   };

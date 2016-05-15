@@ -19,7 +19,13 @@ public:
     Script *script = find_by_id(id);
     if (!script)
     {
-      std::cout << "Could not run script: Script \"" << id << "\" not foud." << std::endl;
+      if (Logging::at_least(L_ERRORS))
+        std::cout
+          << CONSOLE_COLOR_RED
+          << "Could not run script: Script \"" << id << "\" not foud."
+          << CONSOLE_COLOR_DEFAULT
+          << std::endl;
+
       return false;
     }
     std::cout << "{{{ Activating script \"" << script->get_id() << "\"" << std::endl;
