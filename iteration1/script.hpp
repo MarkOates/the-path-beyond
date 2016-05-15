@@ -8,6 +8,10 @@ private:
   static bool initialized;
 
 public:
+  static Script *find_by_unique_id(int unique_id)
+  {
+    return static_cast<Script *>(manager->get_element_by_unique_id(unique_id));
+  }
   static Script *find_by_id(std::string id)
   {
     ElementID *element = manager->get_element_by_id(id);

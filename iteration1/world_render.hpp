@@ -22,6 +22,7 @@ public:
   placement3d velocity;
   ModelNew *model;
   ALLEGRO_BITMAP *texture;
+  int attached_script_id;
 
   Entity(ElementIDManager *manager, std::string id, ModelNew *model=NULL, ALLEGRO_BITMAP *texture=NULL)
     : ElementID(manager)
@@ -29,12 +30,28 @@ public:
     , velocity()
     , model(model)
     , texture(texture)
+    , attached_script_id(0)
   {
     initialize_shaders();
 
     set_id(id);
     velocity.align = vec3d(0, 0, 0);
     velocity.scale = vec3d(0, 0, 0);
+  }
+
+  void attach_script_id(int script_unique_id)
+  {
+    attached_script_id = script_unique_id;
+  }
+
+  int get_attached_script_id()
+  {
+    return attached_script_id;
+  }
+
+  bool is_script_attached()
+  {
+    return attached_script_id != 0;
   }
 
   void draw()
@@ -54,7 +71,8 @@ public:
     if (!model) return;
 
     flat_color_shader->use();
-    Shader::set_vec4("tint", color.r, color.g, color.b, color.a);
+    if (is_script_attached()) Shader::set_vec4("tint", color.r, color.g, color.b, color.a);
+    else Shader::set_vec4("tint", 0, 0, 0, 0);
 
     place.start_transform();
     model->draw();
