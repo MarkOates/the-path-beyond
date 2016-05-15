@@ -10,6 +10,56 @@ protected:
   static bool initialized;
 
 public:
+  // helper methods
+  static float normalize_rotation(float *rotation)
+  {
+    while (*rotation > 0.0) *rotation -= 1.0;
+    while (*rotation < 0.0) *rotation += 1.0;
+    return *rotation;
+  }
+  static void fix_least_distance(placement3d *from, placement3d *to)
+  {
+    normalize_rotation(&from->rotation.x);
+    normalize_rotation(&from->rotation.y);
+    normalize_rotation(&from->rotation.z);
+
+    normalize_rotation(&to->rotation.x);
+    normalize_rotation(&to->rotation.y);
+    normalize_rotation(&to->rotation.z);
+
+    if (fabs(to->rotation.y-from->rotation.y) > 0.5)
+      to->rotation.y = to->rotation.y-1.0;
+  }
+  static void move_to(placement3d *from, placement3d to, float speed=0.4)
+  {
+    af::motion.cmove_to(&from->position.x, to.position.x, speed);
+    af::motion.cmove_to(&from->position.y, to.position.y, speed);
+    af::motion.cmove_to(&from->position.z, to.position.z, speed);
+
+    fix_least_distance(from, &to);
+
+    af::motion.cmove_to(&from->rotation.x, to.rotation.x, speed);
+    af::motion.cmove_to(&from->rotation.y, to.rotation.y, speed);
+    af::motion.cmove_to(&from->rotation.z, to.rotation.z, speed);
+
+    af::motion.cmove_to(&from->anchor.x, to.anchor.x, speed);
+    af::motion.cmove_to(&from->anchor.y, to.anchor.y, speed);
+    af::motion.cmove_to(&from->anchor.z, to.anchor.z, speed);
+  }
+  static void set_nav_buttons
+    ( std::string up_target
+    , std::string down_target
+    , std::string left_target
+    , std::string right_target
+    )
+  {
+    world_navigation_gui->nav_up_button->set_target_id(TargetID(up_target));
+    world_navigation_gui->nav_down_button->set_target_id(TargetID(down_target));
+    world_navigation_gui->nav_left_button->set_target_id(TargetID(left_target));
+    world_navigation_gui->nav_right_button->set_target_id(TargetID(right_target));
+
+    world_navigation_gui->set_usability_mode(1);
+  }
   static void initialize(
       WorldRenderScreen *wrs,
       WorldNavigationGUIScreen *wnguis,
