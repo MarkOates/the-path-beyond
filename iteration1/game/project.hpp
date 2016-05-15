@@ -31,6 +31,9 @@ public:
     , inventory_gui(new InventoryGUIScreen(display))
     , start_screen_gui(new StartScreenGUIScreen(this, display))
   {
+    // link nav render surface
+    world_render->set_scene_targets_render_surface(world_navigation_gui->nav_view->render);
+
     load_scripts();
 
     Script::run("StartTitleScreen()");
