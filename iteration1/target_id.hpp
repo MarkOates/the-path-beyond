@@ -39,6 +39,20 @@ public:
     }
     return false;
   }
+  static std::string compose_unique_trigger_id_message(int unique_id)
+  {
+    return tostring("trigger_unique_target_id ") + tostring(unique_id);
+  }
+  static bool extract_unique_trigger_id(std::string message, int *extracted_unique_id)
+  {
+    if (strncmp(message.c_str(), "trigger_unique_target_id ", 25) == 0)
+    {
+      // we have a valid trigger message
+      *extracted_unique_id = atoi(message.substr(25).c_str());
+      return true;
+    }
+    return false;
+  }
 };
 
 

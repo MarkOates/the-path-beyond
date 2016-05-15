@@ -40,11 +40,17 @@ public:
   }
   void on_message(FGUIWidget *sender, std::string message)
   {
-    std::string trigger_id;
+    std::string trigger_id = "";
+    int unique_trigger_id = 0;
     if (TargetID::extract_trigger_id(message, &trigger_id))
     {
       std::cout << "Project running script \"" << trigger_id << "\"" << std::endl;
       Script::run(trigger_id);
+    }
+    else if (TargetID::extract_unique_trigger_id(message, &unique_trigger_id))
+    {
+      if (Logging::at_least(L_VERBOSE)) std::cout << "Project running script ID\"" << unique_trigger_id << "\"" << std::endl;
+      Script::run_by_unique_id(unique_trigger_id);
     }
   }
 };

@@ -33,7 +33,9 @@ public:
       if (mouse_x < 0 || mouse_x > al_get_bitmap_width(render)) return;
       if (mouse_y < 0 || mouse_y > al_get_bitmap_height(render)) return;
       if (Logging::at_least(L_VERBOSE)) std::cout << "sampling bitmap at " << mouse_x << ", " << mouse_y << std::endl;
-      send_message_to_parent(tostring("clicked_on_id ") + tostring(decode_id(al_get_pixel(render, mouse_x, mouse_y))));
+
+      int clicked_id = decode_id(al_get_pixel(render, mouse_x, mouse_y));
+      send_message_to_parent(TargetID::compose_unique_trigger_id_message(clicked_id));
     }
   }
   void on_draw() override
@@ -109,17 +111,18 @@ public:
 
   void on_message(FGUIWidget *sender, std::string message)
   {
-    std::string trigger_id;
+    int unique_trigger_id = 0;
+    std::string trigger_id = "";
     if (TargetID::extract_trigger_id(message, &trigger_id))
     {
       if (Logging::at_least(L_VERBOSE)) std::cout << "WorldNavigationGUIScreen sending on_message for script \"" << trigger_id << "\"" << std::endl;
       project_screen->on_message(this, message);
     }
-    else if (strncmp(message.c_str(), "clicked_on_id ", 14) == 0)
+    else if (TargetID::extract_unique_trigger_id(message, &unique_trigger_id))
     {
       // we have a recieved trigger message
-      std::string id_clicked_on = message.substr(14);
-      std::cout << "clicked on id " << id_clicked_on << std::endl;
+      if (Logging::at_least(L_VERBOSE)) std::cout << "WorldNavigationGUIScreen sending on_message for script id \"" << unique_trigger_id << "\"" << std::endl;
+      project_screen->on_message(this, message);
     }
   }
   void set_usability_mode(int mode)
