@@ -8,16 +8,6 @@
 
 class Project : public FGUIScreen
 {
-private:
-  void load_scripts()
-  {
-    Script::initialize();
-    ScriptHelper::initialize(world_render, world_navigation_gui, inventory_gui, start_screen_gui);
-    // load the individual scripts
-    new StartTitleScreen();
-    new StartGame();
-  }
-
 public:
   WorldRenderScreen *world_render;
   WorldNavigationGUIScreen *world_navigation_gui;
@@ -34,7 +24,7 @@ public:
     // link nav render surface
     world_render->set_scene_targets_render_surface(world_navigation_gui->nav_view->render);
 
-    load_scripts();
+    ScriptHelper::initialize(world_render, world_navigation_gui, inventory_gui, start_screen_gui);
 
     Script::run("StartTitleScreen()");
   }

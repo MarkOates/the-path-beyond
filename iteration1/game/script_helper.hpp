@@ -10,6 +10,8 @@ protected:
   static bool initialized;
 
 public:
+  static void load_game_scripts();
+
   // helper methods
   static float normalize_rotation(float *rotation)
   {
@@ -85,10 +87,14 @@ public:
   {
     if (initialized) return;
 
+    Script::initialize();
+
     world_render = wrs;
     world_navigation_gui = wnguis;
     start_screen_gui = ssgui;
     inventory_gui = iguis;
+
+    load_game_scripts();
 
     initialized = true;
   }

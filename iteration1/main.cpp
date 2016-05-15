@@ -14,6 +14,7 @@
 #include "script.hpp"
 
 #include "game/project.hpp"
+#include "game/load_game_scripts.hpp"
 
 
 ////////////////////////////////////////////////////////////////
