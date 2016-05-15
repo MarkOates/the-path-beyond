@@ -1,6 +1,6 @@
 
 
-class StartTitleScreen: public Script
+class StartTitleScreen: public Script, public ScriptHelper
 {
 public:
   StartTitleScreen() : Script("StartTitleScreen()") {}

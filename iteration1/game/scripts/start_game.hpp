@@ -1,6 +1,6 @@
 
 
-class StartGame: public Script
+class StartGame: public Script, public ScriptHelper
 {
 public:
   StartGame() : Script("StartGame()") {}
