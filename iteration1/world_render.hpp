@@ -72,7 +72,7 @@ public:
     }
   }
 
-  void draw_scene()
+  void prep_render(ALLEGRO_BITMAP *surface, placement3d &camera_view)
   {
     // setup the render settings
     al_set_render_state(ALLEGRO_DEPTH_TEST, 1);
@@ -80,8 +80,13 @@ public:
     al_clear_depth_buffer(1);
 
     ALLEGRO_TRANSFORM t;
-    camera->place.build_reverse_transform(&t);
-    set_projection(backbuffer_sub_bitmap, &t);
+    camera_view.build_reverse_transform(&t);
+    set_projection(surface, &t);
+  }
+
+  void draw_scene()
+  {
+    prep_render(backbuffer_sub_bitmap, camera->place);
 
     // draw our entities
     for (auto &elem : manager->elements)
