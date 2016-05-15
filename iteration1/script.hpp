@@ -3,31 +3,11 @@
 
 class Script : public ElementID
 {
-public:
+private:
   static ElementIDManager *manager;
-  static WorldRenderScreen *world_render;
-  static WorldNavigationGUIScreen *world_navigation_gui;
-  static InventoryGUIScreen *inventory_gui;
-  static StartScreenGUIScreen *start_screen_gui;
   static bool initialized;
 
-  static void initialize(
-      WorldRenderScreen *wrs,
-      WorldNavigationGUIScreen *wnguis,
-      InventoryGUIScreen *iguis,
-      StartScreenGUIScreen *ssgui
-      )
-  {
-    if (initialized) return;
-
-    manager = new ElementIDManager();
-    world_render = wrs;
-    world_navigation_gui = wnguis;
-    start_screen_gui = ssgui;
-    inventory_gui = iguis;
-
-    initialized = true;
-  }
+public:
   static Script *find_by_id(std::string id)
   {
     ElementID *element = manager->get_element_by_id(id);
@@ -47,6 +27,12 @@ public:
     std::cout << "}}} Script \"" << script->get_id() << "\" finished" << std::endl;
     return true;
   }
+  static void initialize()
+  {
+    if (initialized) return;
+    manager = new ElementIDManager();
+    initialized = true;
+  }
 
   Script(std::string id) : ElementID(manager)
   {
@@ -55,10 +41,6 @@ public:
   virtual void activate() = 0;
 };
 ElementIDManager *Script::manager = NULL;
-WorldNavigationGUIScreen *Script::world_navigation_gui = NULL;
-InventoryGUIScreen *Script::inventory_gui = NULL;
-StartScreenGUIScreen *Script::start_screen_gui = NULL;
-WorldRenderScreen *Script::world_render = NULL;
 bool Script::initialized = false;
 
 

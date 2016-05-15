@@ -1,5 +1,7 @@
 
 
+#include "./script_helper.hpp"
+
 #include "./scripts/start_title_screen.hpp"
 #include "./scripts/start_game.hpp"
 
@@ -9,6 +11,8 @@ class Project : public FGUIScreen
 private:
   void load_scripts()
   {
+    Script::initialize();
+    ScriptHelper::initialize(world_render, world_navigation_gui, inventory_gui, start_screen_gui);
     // load the individual scripts
     new StartTitleScreen();
     new StartGame();
@@ -27,7 +31,6 @@ public:
     , inventory_gui(new InventoryGUIScreen(display))
     , start_screen_gui(new StartScreenGUIScreen(this, display))
   {
-    Script::initialize(world_render, world_navigation_gui, inventory_gui, start_screen_gui);
     load_scripts();
 
     Script::run("StartTitleScreen()");
