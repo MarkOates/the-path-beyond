@@ -13,7 +13,9 @@ public:
     , mouse_y(0)
   {
     // initialize our rendering surface
+    al_set_new_bitmap_depth(32);
     render = al_create_bitmap(place.size.x, place.size.y);
+    al_set_new_bitmap_depth(0);
 
     ALLEGRO_STATE state;
     al_store_state(&state, ALLEGRO_STATE_TARGET_BITMAP);

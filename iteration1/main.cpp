@@ -1,3 +1,4 @@
+#define ALLEGRO_UNSTABLE
 
 #include <allegro_flare/allegro_flare.h>
 
