@@ -4,10 +4,13 @@ class WorldNavigationGUINavView : public FGUIWidget
 {
 public:
   ALLEGRO_BITMAP *render;
+  int mouse_x, mouse_y;
 
   WorldNavigationGUINavView(FGUIWidget *parent)
     : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W/2, SCREEN_H/2, SCREEN_W, SCREEN_H))
     , render(NULL)
+    , mouse_x(0)
+    , mouse_y(0)
   {
     // initialize our rendering surface
     render = al_create_bitmap(place.size.x, place.size.y);
@@ -18,11 +21,20 @@ public:
     al_clear_to_color(color::transparent);
     al_restore_state(&state);
   }
+  void on_mouse_move(float x, float y, float dx, float dy) override
+  {
+    mouse_x = x;
+    mouse_y = y;
+  }
   void on_click() override
   {
-    // TODO: sample the render for mouse clicks on colors
-    // match the pixel color to a target ID, and send a trigger message
-    // to the parent
+    if (render)
+    {
+      if (mouse_x < 0 || mouse_x > al_get_bitmap_width(render)) return;
+      if (mouse_y < 0 || mouse_y > al_get_bitmap_height(render)) return;
+      std::cout << "sampling bitmap at " << mouse_x << ", " << mouse_y << std::endl;
+      send_message_to_parent(tostring("clicked_on_id ") + tostring(decode_id(al_get_pixel(render, mouse_x, mouse_y))));
+    }
   }
   void on_draw() override
   {
@@ -103,6 +115,12 @@ public:
       std::cout << "WorldNavigationGUIScreen sending on_message for script \"" << trigger_id << "\"" << std::endl;
       project_screen->on_message(this, message);
     }
+    else if (strncmp(message.c_str(), "clicked_on_id ", 14) == 0)
+    {
+      // we have a recieved trigger message
+      std::string id_clicked_on = message.substr(14);
+      std::cout << "clicked on id " << id_clicked_on << std::endl;
+    }
   }
   void set_usability_mode(int mode)
   {
@@ -130,7 +148,6 @@ public:
     }
   }
 };
-
 
 
 
