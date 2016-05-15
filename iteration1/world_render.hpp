@@ -3,6 +3,20 @@
 
 class Entity : public ElementID
 {
+private:
+  static Shader *flat_color_shader;
+  static bool shaders_initialized;
+
+  void initialize_shaders()
+  {
+    if (!shaders_initialized)
+    {
+      flat_color_shader = new Shader("data/shaders/flat_color_vertex.glsl",
+        "data/shaders/flat_color_fragment.glsl");
+      shaders_initialized = true;
+    }
+  }
+
 public:
   placement3d place;
   placement3d velocity;
@@ -16,6 +30,8 @@ public:
     , model(model)
     , texture(texture)
   {
+    initialize_shaders();
+
     set_id(id);
     velocity.align = vec3d(0, 0, 0);
     velocity.scale = vec3d(0, 0, 0);
@@ -26,11 +42,28 @@ public:
     if (!model) return;
     if (texture) model->set_texture(texture);
 
+    Shader::stop();
+
+    place.start_transform();
+    model->draw();
+    place.restore_transform();
+  }
+
+  void draw_flat_color(ALLEGRO_COLOR color)
+  {
+    if (!model) return;
+
+    flat_color_shader->use();
+    Shader::set_vec4("tint", color.r, color.g, color.b, color.a);
+
     place.start_transform();
     model->draw();
     place.restore_transform();
   }
 };
+Shader *Entity::flat_color_shader = NULL;
+bool Entity::shaders_initialized = false;
+
 
 
 
