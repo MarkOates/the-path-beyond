@@ -46,6 +46,15 @@ public:
     af::motion.cmove_to(&from->anchor.y, to.anchor.y, speed);
     af::motion.cmove_to(&from->anchor.z, to.anchor.z, speed);
   }
+  static void camera_to(vec3d position, vec3d rotation, vec3d anchor, float speed=0.4)
+  {
+    placement3d place = placement3d();
+    place.position = position;
+    place.rotation = rotation;
+    place.anchor = anchor;
+
+    move_to(&world_render->camera->place, place, speed);
+  }
   static void set_nav_buttons
     ( std::string up_target
     , std::string down_target
