@@ -13,14 +13,14 @@ public:
 
 
 
-class PickupCardKey : public Script, public ScriptHelper
+class PickupEncryptedCardKey : public Script, public ScriptHelper
 {
 public:
-  PickupCardKey() : Script("PickupCardKey") {}
+  PickupEncryptedCardKey() : Script("PickupEncryptedCardKey") {}
   void activate() override
   {
-    inventory_gui->add_item(InventoryItem::CARD_KEY);
-    delete_entity("CardKey");
+    inventory_gui->add_item(InventoryItem::ENCRYPTED_CARD_KEY);
+    delete_entity("EncryptedCardKey");
   }
 };
 

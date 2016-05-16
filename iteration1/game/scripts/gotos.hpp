@@ -12,7 +12,7 @@ public:
     simple_camera_to(0, 0, 0.25);
     set_nav("", "", "5", "2");
 
-    attach("Ring1", "goto18");
+    attach("MainDoorDoor", "goto18");
   }
 };
 
@@ -56,7 +56,7 @@ public:
     simple_camera_to(0, 0, 0.7);
     set_nav("", "", "3", "5");
 
-    attach("CardKey", "PickupCardKey");
+    attach("EncryptedCardKey", "PickupEncryptedCardKey");
   }
 };
 

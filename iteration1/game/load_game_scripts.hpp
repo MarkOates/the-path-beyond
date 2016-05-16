@@ -18,7 +18,7 @@ void ScriptHelper::load_game_scripts()
 
 
   new PickupCardKeyDecrypter();
-  new PickupCardKey();
+  new PickupEncryptedCardKey();
 }
 
 

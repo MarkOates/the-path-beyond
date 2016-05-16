@@ -8,7 +8,7 @@ public:
     EMPTY = 0,
     ENCRYPTED_CARD_KEY,
     CARD_KEY_DECRYPTER,
-    CARD_KEY,
+    DECRYPTED_CARD_KEY,
   };
 
   Type type;
@@ -32,7 +32,7 @@ public:
       case CARD_KEY_DECRYPTER:
         return "Card Key Decrypter";
         break;
-      case CARD_KEY:
+      case DECRYPTED_CARD_KEY:
         return "Decrypted Card Key";
         break;
       default:
@@ -50,7 +50,7 @@ public:
       case CARD_KEY_DECRYPTER:
         return "";
         break;
-      case CARD_KEY:
+      case DECRYPTED_CARD_KEY:
         return "";
         break;
       default:
@@ -69,7 +69,7 @@ public:
       case CARD_KEY_DECRYPTER:
         return NULL;
         break;
-      case CARD_KEY:
+      case DECRYPTED_CARD_KEY:
         return NULL;
         break;
       default:

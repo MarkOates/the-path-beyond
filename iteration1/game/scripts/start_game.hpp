@@ -21,18 +21,16 @@ public:
         af::bitmaps["floor_texture.jpeg"]);
         //af::bitmaps["uv.png"]);
 
-    // create our triggerable entities
-    Entity *entity = new Entity(world_render->manager,
-        "Ring1",
-        af::models["coin_ring-01.obj"],
-        af::bitmaps["uv.png"]);
-    entity->place.position = vec3d(-4, 2, 0);
-
     // create the card key
-    create_entity("CardKey", vec3d(5, 0, 4), 0.4, "card_key-02.obj", "sci_fi_panel2.jpg");
+    create_entity("EncryptedCardKey", vec3d(5, 0, 4), 0.4, "card_key-02.obj", "sci_fi_panel2.jpg");
 
     // create the card key decrypter
     create_entity("CardKeyDecrypter", vec3d(-2, 0, 4), 0.3, "card_key_decrypter-02.obj", "tech_device_texture.jpg");
+
+    // create the door frame
+    create_entity("MainDoorFrame", vec3d(-12, 0, 0), 0.25, "main_door_frame-01.obj", "tech_device_texture.jpg");
+    create_entity("MainDoorTerminal", vec3d(-12, 0, 0), 0.25, "main_door_terminal-01.obj", "tech_device_texture.jpg");
+    create_entity("MainDoorDoor", vec3d(-12, 0, 0), 0.25, "main_door_door-01.obj", "sci_fi_panel2.jpg");
 
     // goto the starting point
     Script::run("goto1");
