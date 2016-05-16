@@ -64,13 +64,13 @@ public:
     switch(type)
     {
       case ENCRYPTED_CARD_KEY:
-        return NULL;
+        return af::bitmaps["card_key.png"];
         break;
       case CARD_KEY_DECRYPTER:
-        return NULL;
+        return af::bitmaps["card_key_decryptor.png"];
         break;
       case DECRYPTED_CARD_KEY:
-        return NULL;
+        return af::bitmaps["card_key.png"];
         break;
       default:
         return NULL;
@@ -101,7 +101,7 @@ public:
   }
   void on_draw()
   {
-    Style::draw_button(Style::NORMAL, place, "0", shown_item.get_image());
+    Style::draw_button(Style::NORMAL, place, shown_item.is_empty() ? "0" : "", shown_item.get_image());
   }
   void show(float speed=0.5)
   {
@@ -184,7 +184,7 @@ public:
   }
   void on_draw()
   {
-    Style::draw_button(selected ? Style::SELECTED : Style::NORMAL, place, "-");
+    Style::draw_button(selected ? Style::SELECTED : Style::NORMAL, place, item.is_empty() ? "-" : "", item.get_image());
   }
   void show(float speed=0.5)
   {
@@ -246,6 +246,35 @@ public:
 };
 
 
+class InventoryGUINotification : public FGUIWidget
+{
+public:
+  std::string notification_text;
+  float visibility_timer;
+
+  InventoryGUINotification(FGUIWidget *parent)
+    : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W/2, SCREEN_H/3*2, 320, 120))
+    , visibility_timer(-1)
+  {
+  }
+  void on_timer() override
+  {
+    visibility_timer -= 1.0/60.0;
+    if (visibility_timer < 0) visibility_timer = -1.0;
+  }
+  void on_draw() override
+  {
+    if (visibility_timer < 0) return;
+    Style::draw_text_box(0, 0, place.size.x, place.size.y, notification_text);
+  }
+  void show(std::string text)
+  {
+    notification_text = text;
+    visibility_timer = 5.0;
+  }
+};
+
+
 class InventoryGUIScreen : public FGUIScreen
 {
 public:
@@ -258,19 +287,23 @@ public:
   InventoryGUICurrentItemShowcase *current_item_showcase;
   std::vector<InventoryGUIItemButton *> item_buttons;
 
+  InventoryGUINotification *notification;
+
   int current_mode;
 
   InventoryGUIScreen(Display *display)
     : FGUIScreen(display)
-    , NUM_INVENTORY_ITEM_BUTTONS(9)
+    , NUM_INVENTORY_ITEM_BUTTONS(2)
     , toggle_button(NULL)
     , current_item_showcase(NULL)
+    , notification(NULL)
     , item_buttons()
     , current_mode(1)
   {
     // create our Inventory GUI Widgets
     toggle_button = new InventoryGUIInventoryToggleButton(this);
     current_item_showcase = new InventoryGUICurrentItemShowcase(this);
+    notification = new InventoryGUINotification(this);
     for (unsigned i=0; i<NUM_INVENTORY_ITEM_BUTTONS; i++)
     {
       InventoryGUIItemButton *button = new InventoryGUIItemButton(this, SCREEN_W-100, 200+90*i);

@@ -108,6 +108,10 @@ public:
     }
     return e;
   }
+  static void show_notification(std::string message)
+  {
+    inventory_gui->notification->show(message);
+  }
   static void camera_to(vec3d position, vec3d rotation, vec3d anchor, float speed=0.4)
   {
     placement3d place = placement3d();

@@ -8,6 +8,7 @@ public:
   {
     inventory_gui->add_item(InventoryItem::CARD_KEY_DECRYPTER);
     delete_entity("CardKeyDecrypter");
+    show_notification("picked up Card Key Decrypter");
   }
 };
 
@@ -21,6 +22,7 @@ public:
   {
     inventory_gui->add_item(InventoryItem::ENCRYPTED_CARD_KEY);
     delete_entity("EncryptedCardKey");
+    show_notification("picked up Encrypted Card Key");
   }
 };
 
