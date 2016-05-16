@@ -7,6 +7,7 @@ public:
   void activate() override
   {
     inventory_gui->add_item(InventoryItem::CARD_KEY_DECRYPTER);
+    delete_entity("CardKeyDecrypter");
   }
 };
 
@@ -19,6 +20,7 @@ public:
   void activate() override
   {
     inventory_gui->add_item(InventoryItem::CARD_KEY);
+    delete_entity("CardKey");
   }
 };
 

@@ -72,6 +72,12 @@ public:
       entity->attach_script_id(0);
     }
   }
+  static void delete_entity(std::string entity_id)
+  {
+    Entity *e = entity_by_id(entity_id);
+    // god save us all...
+    delete e; 
+  }
   static int get_script_unique_id(std::string script_id)
   {
     Script *script = Script::find_by_id(script_id);

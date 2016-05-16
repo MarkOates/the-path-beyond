@@ -32,7 +32,7 @@ public:
     create_entity("CardKey", vec3d(5, 0, 4), 0.4, "card_key-02.obj", "sci_fi_panel2.jpg");
 
     // create the card key decrypter
-    create_entity("CardKeyDecrypter", vec3d(-2, 0, 3), 0.3, "card_key_decrypter-02.obj", "tech_device_texture.jpg");
+    create_entity("CardKeyDecrypter", vec3d(-2, 0, 4), 0.3, "card_key_decrypter-02.obj", "tech_device_texture.jpg");
 
     // goto the starting point
     Script::run("goto1");
