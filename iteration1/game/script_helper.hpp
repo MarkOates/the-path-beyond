@@ -64,6 +64,44 @@ public:
 
     move_to(&world_render->camera->place, place, speed);
   }
+  static void clear_attached_scripts()
+  {
+    for (auto &e : world_render->manager->elements)
+    {
+      Entity *entity = static_cast<Entity *>(e);
+      entity->attach_script_id(0);
+    }
+  }
+  static int get_script_unique_id(std::string script_id)
+  {
+    Script *script = Script::find_by_id(script_id);
+    if (script) return script->get_unique_id_num();
+
+    std::cout << CONSOLE_COLOR_RED << "could not locate script by id \"" << script_id << "\"" << CONSOLE_COLOR_DEFAULT << std::endl;
+    return 0;
+  }
+  static void attach(std::string entity_id, std::string script_id)
+  {
+    Entity *e = entity_by_id(entity_id);
+    int script_unique_id = get_script_unique_id(script_id);
+    if (e && (script_unique_id != 0))
+    {
+      e->attach_script_id(script_unique_id);
+    }
+    else
+    {
+      std::cout << CONSOLE_COLOR_RED << "attachment failed" << CONSOLE_COLOR_DEFAULT << std::endl;
+    }
+  }
+  static Entity *entity_by_id(std::string entity_id)
+  {
+    Entity *e = static_cast<Entity *>(world_render->manager->get_element_by_id(entity_id));
+    if (!e)
+    {
+      std::cout << CONSOLE_COLOR_RED << "could not locate entity by id \"" << entity_id << "\"" << CONSOLE_COLOR_DEFAULT << std::endl;
+    }
+    return e;
+  }
   static void camera_to(vec3d position, vec3d rotation, vec3d anchor, float speed=0.4)
   {
     placement3d place = placement3d();
@@ -94,7 +132,9 @@ public:
     , std::string right_target_num
     )
   {
-   std::string up = (up_target_num.empty() ? "" : (tostring("goto") + up_target_num));
+    world_navigation_gui->set_usability_mode(0);
+
+    std::string up = (up_target_num.empty() ? "" : (tostring("goto") + up_target_num));
     world_navigation_gui->nav_up_button->set_target_id(TargetID(up));
 
     std::string down = (down_target_num.empty() ? "" : (tostring("goto") + down_target_num));

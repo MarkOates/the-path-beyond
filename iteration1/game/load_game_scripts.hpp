@@ -13,6 +13,7 @@ void ScriptHelper::load_game_scripts()
   new goto3();
   new goto4();
   new goto5();
+  new goto18();
 }
 
 

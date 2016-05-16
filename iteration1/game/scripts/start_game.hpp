@@ -20,6 +20,13 @@ public:
         af::models["space_station-01.obj"],
         af::bitmaps["uv.png"]);
 
+    // create our triggerable entities
+    Entity *entity = new Entity(world_render->manager,
+        "Ring1",
+        af::models["coin_ring-01.obj"],
+        af::bitmaps["uv.png"]);
+    entity->place.position = vec3d(-4, 2, 0);
+
     Script::run("goto1");
   }
 };
