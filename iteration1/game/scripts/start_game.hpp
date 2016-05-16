@@ -8,7 +8,7 @@ public:
   {
     world_navigation_gui->set_usability_mode(1);
     inventory_gui->set_visibility_mode(1);
-    start_screen_gui->hide(2.0);
+    start_screen_gui->hide(0);
 
     // clean up all the previous game's assets here
     // (hahahaha!)
