@@ -215,10 +215,10 @@ public:
     , featured_image(NULL)
   {
     featured_image = new FGUIImage(this, place.size.x/2, place.size.y/2, item.get_image());
-    title_text = new FGUIText(this, 0, 0, item.get_name());
+    title_text = new FGUIText(this, 20, 20, item.get_name());
     title_text->place.align.y = 0;
     description_textbox = new FGUITextBox(this, place.size.x/2, place.size.y*0.75, place.size.x*0.8, place.size.y*0.25, item.get_description()) ;
-    description_textbox->set_text_color(color::white);
+    description_textbox->set_text_color(color::black);
     description_textbox->place.align.x = 0.5;
     description_textbox->place.align.y = 0;
   }
@@ -253,7 +253,7 @@ public:
   float visibility_timer;
 
   InventoryGUINotification(FGUIWidget *parent)
-    : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W/2, SCREEN_H/3*2, 900, 100))
+    : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W/2, SCREEN_H/4*3, 900, 100))
     , visibility_timer(-1)
   {
   }

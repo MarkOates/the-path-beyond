@@ -34,7 +34,7 @@ void draw_button(BUTTON_STATE state, float x, float y, float w, float h, std::st
 
   ALLEGRO_COLOR col = get_state_color(state);
 
-  al_draw_filled_rounded_rectangle(x+inset, y+inset, w-inset, h-inset, 4, 4, color::color(col, 0.4));
+  al_draw_filled_rounded_rectangle(x+inset, y+inset, w-inset, h-inset, 4, 4, color::color(color::black, 0.4));
 
   if (bitmap)
   {
