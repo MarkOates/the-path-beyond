@@ -402,8 +402,21 @@ public:
     }
   }
 
+  bool symmetric_yes(InventoryItem itemA, InventoryItem itemB, InventoryItem::Type type1, InventoryItem::Type type2)
+    // ^ nice 3AM name for a function
+  {
+    if (itemA.type == type1 && itemB.type == type2) return true;
+    if (itemB.type == type1 && itemA.type == type2) return true;
+    return false;
+  }
+
   InventoryItem attempt_combination(InventoryItem itemA, InventoryItem itemB)
   {
+    if (symmetric_yes(itemA, itemB, InventoryItem::Type::ENCRYPTED_CARD_KEY, InventoryItem::Type::CARD_KEY_DECRYPTER))
+    {
+      return InventoryItem(InventoryItem::Type::DECRYPTED_CARD_KEY);
+    }
+
     // TODO: process possible combinations here
     // return the item that is created when combining two other items
     // a failed combination will return an item that is EMPTY
