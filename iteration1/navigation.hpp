@@ -71,7 +71,7 @@ public:
   void on_click() override { send_message_to_parent(target_id.get_trigger_message()); }
   void on_draw() override
   {
-    al_draw_rounded_rectangle(0, 0, place.size.x, place.size.y, 8, 8, color::white, 6.0);
+    Style::draw_button(Style::NORMAL, place, "•");
   }
   void show(float speed=0.4)
   {

@@ -55,6 +55,15 @@ public:
     af::motion.cmove_to(&from->anchor.y, to.anchor.y, speed);
     af::motion.cmove_to(&from->anchor.z, to.anchor.z, speed);
   }
+  static void simple_camera_to(float x, float y, float rotation, float speed=1.0)
+  {
+    placement3d place = placement3d();
+    place.position = vec3d(x, 2, y);
+    place.rotation = vec3d(0, rotation, 0);
+    place.anchor = vec3d(0, 0, 1);
+
+    move_to(&world_render->camera->place, place, speed);
+  }
   static void camera_to(vec3d position, vec3d rotation, vec3d anchor, float speed=0.4)
   {
     placement3d place = placement3d();
@@ -75,6 +84,27 @@ public:
     world_navigation_gui->nav_down_button->set_target_id(TargetID(down_target));
     world_navigation_gui->nav_left_button->set_target_id(TargetID(left_target));
     world_navigation_gui->nav_right_button->set_target_id(TargetID(right_target));
+
+    world_navigation_gui->set_usability_mode(1);
+  }
+  static void set_nav
+    ( std::string up_target_num
+    , std::string down_target_num
+    , std::string left_target_num
+    , std::string right_target_num
+    )
+  {
+   std::string up = (up_target_num.empty() ? "" : (tostring("goto") + up_target_num));
+    world_navigation_gui->nav_up_button->set_target_id(TargetID(up));
+
+    std::string down = (down_target_num.empty() ? "" : (tostring("goto") + down_target_num));
+    world_navigation_gui->nav_down_button->set_target_id(TargetID(down));
+
+    std::string left = (left_target_num.empty() ? "" : (tostring("goto") + left_target_num));
+    world_navigation_gui->nav_left_button->set_target_id(TargetID(left));
+
+    std::string right = (right_target_num.empty() ? "" : (tostring("goto") + right_target_num));
+    world_navigation_gui->nav_right_button->set_target_id(TargetID(right));
 
     world_navigation_gui->set_usability_mode(1);
   }
