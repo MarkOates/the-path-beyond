@@ -5,7 +5,10 @@ class InventoryItem
 public:
   enum Type
   {
-    EMPTY = 0
+    EMPTY = 0,
+    ENCRYPTED_CARD_KEY,
+    CARD_KEY_DECRYPTER,
+    CARD_KEY,
   };
 
   Type type;
@@ -19,9 +22,62 @@ public:
     return type == EMPTY;
   }
 
-  std::string get_name() { return std::string(""); }
-  std::string get_description() { return std::string(""); }
-  ALLEGRO_BITMAP *get_image() { return NULL; }
+  std::string get_name()
+  {
+    switch(type)
+    {
+      case ENCRYPTED_CARD_KEY:
+        return "Encrypted Card Key";
+        break;
+      case CARD_KEY_DECRYPTER:
+        return "Card Key Decrypter";
+        break;
+      case CARD_KEY:
+        return "Decrypted Card Key";
+        break;
+      default:
+        return "";
+        break;
+    }
+  }
+  std::string get_description()
+  {
+    switch(type)
+    {
+      case ENCRYPTED_CARD_KEY:
+        return "";
+        break;
+      case CARD_KEY_DECRYPTER:
+        return "";
+        break;
+      case CARD_KEY:
+        return "";
+        break;
+      default:
+        return "";
+        break;
+    }
+    return std::string("");
+  }
+  ALLEGRO_BITMAP *get_image()
+  {
+    switch(type)
+    {
+      case ENCRYPTED_CARD_KEY:
+        return NULL;
+        break;
+      case CARD_KEY_DECRYPTER:
+        return NULL;
+        break;
+      case CARD_KEY:
+        return NULL;
+        break;
+      default:
+        return NULL;
+        break;
+    }
+    return NULL;
+  }
 };
 
 

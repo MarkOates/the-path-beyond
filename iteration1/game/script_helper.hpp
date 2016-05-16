@@ -125,6 +125,18 @@ public:
 
     world_navigation_gui->set_usability_mode(1);
   }
+  static Entity *create_entity(std::string id, vec3d position, float rotation, std::string obj_filename, std::string texture_filename)
+  {
+    Entity *e = new Entity(
+        world_render->manager,
+        id,
+        af::models[obj_filename],
+        af::bitmaps[texture_filename]);
+    e->place.position = position;
+    e->place.rotation.y = rotation;
+
+    return e;
+  }
   static void set_nav
     ( std::string up_target_num
     , std::string down_target_num

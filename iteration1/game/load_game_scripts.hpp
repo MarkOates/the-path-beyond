@@ -1,6 +1,7 @@
 
 
 #include "./scripts/gotos.hpp"
+#include "./scripts/pickups.hpp"
 
 void ScriptHelper::load_game_scripts()
 {
@@ -14,6 +15,10 @@ void ScriptHelper::load_game_scripts()
   new goto4();
   new goto5();
   new goto18();
+
+
+  new PickupCardKeyDecrypter();
+  new PickupCardKey();
 }
 
 

@@ -41,6 +41,8 @@ public:
     clear_attached_scripts();
     simple_camera_to(0, 0, 0.9);
     set_nav("", "", "2", "4");
+
+    attach("CardKey", "PickupCardKey");
   }
 };
 
@@ -69,6 +71,8 @@ public:
     clear_attached_scripts();
     simple_camera_to(0, 0, 0.5);
     set_nav("", "", "4", "1");
+
+    attach("CardKeyDecrypter", "PickupCardKeyDecrypter");
   }
 };
 
