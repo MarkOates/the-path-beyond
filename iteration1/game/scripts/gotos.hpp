@@ -90,7 +90,6 @@ public:
     set_nav("", "5", "", "");
 
     attach("CardKeyDecrypter", "PickupCardKeyDecrypter");
-    //attach("PoetryPoster", "goto");
   }
 };
 
