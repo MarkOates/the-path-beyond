@@ -27,3 +27,22 @@ public:
 };
 
 
+
+class OpenMainDoor : public Script, public ScriptHelper
+{
+public:
+  OpenMainDoor() : Script("OpenMainDoor") {}
+  void activate() override
+  {
+    if (inventory_gui->has_item(InventoryItem::Type::DECRYPTED_CARD_KEY))
+    {
+      show_notification("Congratulations, you have escaped the moon base.");
+    }
+    else
+    {
+      show_notification("You need a valid key");
+    }
+  }
+};
+
+

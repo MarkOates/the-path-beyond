@@ -146,6 +146,7 @@ public:
 
   void draw_scene()
   {
+    al_clear_to_color(color::black);
     prep_render(backbuffer_sub_bitmap, camera->place);
 
     // draw our entities

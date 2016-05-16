@@ -131,24 +131,24 @@ public:
       project_screen->on_message(this, message);
     }
   }
-  void set_usability_mode(int mode)
+  void set_usability_mode(int mode, float speed=0.4)
   {
     if (Logging::at_least(L_VERBOSE)) std::cout << " === setting WorldNavigation mode " << mode << " ===" << std::endl;
     switch(mode)
     {
       case 0:
         nav_view->hide();
-        nav_up_button->hide();
-        nav_down_button->hide();
-        nav_left_button->hide();
-        nav_right_button->hide();
+        nav_up_button->hide(speed);
+        nav_down_button->hide(speed);
+        nav_left_button->hide(speed);
+        nav_right_button->hide(speed);
         break;
       case 1:
         nav_view->show();
-        nav_up_button->show_if_has_target();
-        nav_down_button->show_if_has_target();
-        nav_left_button->show_if_has_target();
-        nav_right_button->show_if_has_target();
+        nav_up_button->show_if_has_target(speed);
+        nav_down_button->show_if_has_target(speed);
+        nav_left_button->show_if_has_target(speed);
+        nav_right_button->show_if_has_target(speed);
         break;
       default:
         // Undefined Mode

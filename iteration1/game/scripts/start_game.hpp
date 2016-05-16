@@ -29,7 +29,7 @@ public:
 
     // create the door frame
     create_entity("MainDoorFrame", vec3d(-12, 0, 0), 0.25, "main_door_frame-01.obj", "tech_device_texture.jpg");
-    create_entity("MainDoorTerminal", vec3d(-12, 0, 0), 0.25, "main_door_terminal-01.obj", "tech_device_texture.jpg");
+    create_entity("MainDoorTerminal", vec3d(-12, 0, 0), 0.25, "main_door_terminal-01.obj", "terminal_gui.jpg");
     create_entity("MainDoorDoor", vec3d(-12, 0, 0), 0.25, "main_door_door-01.obj", "sci_fi_panel2.jpg");
 
     // goto the starting point

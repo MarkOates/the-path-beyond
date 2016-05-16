@@ -6,6 +6,7 @@ enum BUTTON_STATE
 {
   NORMAL = 0,
   SELECTED,
+  ERROR,
 };
 
 ALLEGRO_COLOR get_state_color(BUTTON_STATE state)
@@ -17,6 +18,9 @@ ALLEGRO_COLOR get_state_color(BUTTON_STATE state)
       break;
     case SELECTED:
       return color::dodgerblue;
+      break;
+    case ERROR:
+      return color::red;
       break;
     default:
       return color::navajowhite;

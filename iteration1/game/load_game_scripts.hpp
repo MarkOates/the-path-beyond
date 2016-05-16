@@ -19,6 +19,9 @@ void ScriptHelper::load_game_scripts()
 
   new PickupCardKeyDecrypter();
   new PickupEncryptedCardKey();
+
+  
+  new OpenMainDoor();
 }
 
 

@@ -46,10 +46,8 @@ public:
   {
     af::motion.cmove_to(&title_text->place.position.x, SCREEN_W/2, 1.0 * speed);
     af::motion.cmove_to(&start_screen_button->place.position.x, SCREEN_W/2, 1.0 * speed);
-    title_text->place.scale.x = 0.95;
-    title_text->place.scale.y = 0.95;
-    af::motion.cmove_to(&title_text->place.scale.x, 1.75, 20.0 * speed);
-    af::motion.cmove_to(&title_text->place.scale.y, 1.75, 20.0 * speed);
+    af::motion.cmove_to(&title_text->place.scale.x, 1.05, 2.0 * speed);
+    af::motion.cmove_to(&title_text->place.scale.y, 1.05, 2.0 * speed);
   }
   void hide(float speed=2.0)
   {

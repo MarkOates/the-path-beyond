@@ -89,6 +89,8 @@ public:
     clear_attached_scripts();
     simple_camera_to(-7, 0, 0.25);
     set_nav("", "1", "", "");
+
+    attach("MainDoorTerminal", "OpenMainDoor");
   }
 };
 

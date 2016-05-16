@@ -253,7 +253,7 @@ public:
   float visibility_timer;
 
   InventoryGUINotification(FGUIWidget *parent)
-    : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W/2, SCREEN_H/3*2, 320, 120))
+    : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W/2, SCREEN_H/3*2, 900, 100))
     , visibility_timer(-1)
   {
   }
@@ -262,15 +262,48 @@ public:
     visibility_timer -= 1.0/60.0;
     if (visibility_timer < 0) visibility_timer = -1.0;
   }
+  void mouse_down_func() override
+  {
+    FGUIWidget::mouse_down_func();
+    visibility_timer = -1.0;
+  }
   void on_draw() override
   {
     if (visibility_timer < 0) return;
-    Style::draw_text_box(0, 0, place.size.x, place.size.y, notification_text);
+    Style::draw_button(Style::NORMAL, 0, 0, place.size.x, place.size.y, notification_text);
+    //Style::draw_text_box(0, 0, place.size.x, place.size.y, notification_text);
   }
   void show(std::string text)
   {
     notification_text = text;
     visibility_timer = 5.0;
+  }
+};
+
+
+class InventoryGUIBehindBlocker : public FGUIWidget
+{
+public:
+  InventoryGUIBehindBlocker(FGUIWidget *parent)
+    : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W/2, SCREEN_H/2, SCREEN_W, SCREEN_H))
+  {}
+  void on_click() override
+  {
+    send_message_to_parent("set_visibility_mode(1)");
+  }
+  void on_draw() override
+  {
+    al_draw_filled_rectangle(0, 0, place.size.x, place.size.y, color::color(color::black, 0.3));
+  }
+  void show()
+  {
+    place.scale.x = 1.0;
+    place.scale.y = 1.0;
+  }
+  void hide()
+  {
+    place.scale.x = 0;
+    place.scale.y = 0;
   }
 };
 
@@ -285,6 +318,7 @@ public:
 
   // MODE 2 Widgets
   InventoryGUICurrentItemShowcase *current_item_showcase;
+  InventoryGUIBehindBlocker *behind_blocker;
   std::vector<InventoryGUIItemButton *> item_buttons;
 
   InventoryGUINotification *notification;
@@ -296,11 +330,13 @@ public:
     , NUM_INVENTORY_ITEM_BUTTONS(2)
     , toggle_button(NULL)
     , current_item_showcase(NULL)
+    , behind_blocker(NULL)
     , notification(NULL)
     , item_buttons()
     , current_mode(1)
   {
     // create our Inventory GUI Widgets
+    behind_blocker = new InventoryGUIBehindBlocker(this);
     toggle_button = new InventoryGUIInventoryToggleButton(this);
     current_item_showcase = new InventoryGUICurrentItemShowcase(this);
     notification = new InventoryGUINotification(this);
@@ -374,6 +410,13 @@ public:
     return InventoryItem(InventoryItem::Type::EMPTY);
   }
 
+  bool has_item(InventoryItem::Type item_type)
+  {
+    for (auto &button : item_buttons)
+      if (button->item.type == item_type) return true;
+    return false;
+  }
+
   InventoryGUIItemButton *get_selected_item_button()
   {
     for (auto &button : item_buttons) if (button->selected) return button;
@@ -400,18 +443,21 @@ public:
     switch(mode)
     {
       case 0:
+        behind_blocker->hide();
         toggle_button->hide();
         current_item_showcase->hide();
         for (auto &button : item_buttons) button->hide();
         current_mode = 0;
         break;
       case 1:
+        behind_blocker->hide();
         toggle_button->show();
         current_item_showcase->hide();
         for (auto &button : item_buttons) button->hide();
         current_mode = 1;
         break;
       case 2:
+        behind_blocker->show();
         toggle_button->show();
         current_item_showcase->show();
         for (auto &button : item_buttons) button->show();
