@@ -394,6 +394,8 @@ public:
         combining_button->set_item(combined_item);
         combining_button->select();
         combining_button->send_message_to_parent("feature_my_item()");
+
+        notification->show("You decrypted the Card Key");
       }
       else
       {
