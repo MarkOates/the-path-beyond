@@ -217,6 +217,7 @@ public:
     featured_image = new FGUIImage(this, place.size.x/2, place.size.y/2, item.get_image());
     title_text = new FGUIText(this, 20, 20, item.get_name());
     title_text->place.align.y = 0;
+    title_text->set_font(af::fonts["space age.otf 34"]);
     description_textbox = new FGUITextBox(this, place.size.x/2, place.size.y*0.75, place.size.x*0.8, place.size.y*0.25, item.get_description()) ;
     description_textbox->set_text_color(color::black);
     description_textbox->place.align.x = 0.5;

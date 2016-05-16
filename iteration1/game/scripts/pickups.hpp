@@ -36,7 +36,7 @@ public:
   {
     if (inventory_gui->has_item(InventoryItem::Type::DECRYPTED_CARD_KEY))
     {
-      show_notification("Congratulations, you have escaped the moon base.");
+      show_notification("You have escaped the moon base.");
     }
     else
     {
