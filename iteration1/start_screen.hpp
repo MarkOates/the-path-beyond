@@ -53,7 +53,7 @@ public:
   }
   void hide(float speed=2.0)
   {
-    af::motion.cmove_to(&title_text->place.position.x, -100, 1.0 * speed);
+    af::motion.cmove_to(&title_text->place.position.x, -1000, 1.0 * speed);
     af::motion.cmove_to(&start_screen_button->place.position.x, SCREEN_W+200, 1.0 * speed);
   }
 };

@@ -17,8 +17,9 @@ public:
     Entity *e = new Entity(
         world_render->manager,
         "Station",
-        af::models["space_station-01.obj"],
-        af::bitmaps["uv.png"]);
+        af::models["space_station-04.obj"],
+        af::bitmaps["floor_texture.jpeg"]);
+        //af::bitmaps["uv.png"]);
 
     // create our triggerable entities
     Entity *entity = new Entity(world_render->manager,
