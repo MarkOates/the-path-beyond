@@ -57,6 +57,7 @@ public:
     set_nav("", "", "3", "5");
 
     attach("EncryptedCardKey", "PickupEncryptedCardKey");
+    attach("SnowPoster", "goto23");
   }
 };
 
@@ -72,7 +73,24 @@ public:
     simple_camera_to(0, 0, 0.5);
     set_nav("", "", "4", "1");
 
+    attach("PoetryPoster", "goto8");
+  }
+};
+
+
+
+class goto8: public Script, public ScriptHelper
+{
+public:
+  goto8() : Script("goto8") {}
+  void activate() override
+  {
+    clear_attached_scripts();
+    simple_camera_to(0, 24, 0.45);
+    set_nav("", "5", "", "");
+
     attach("CardKeyDecrypter", "PickupCardKeyDecrypter");
+    //attach("PoetryPoster", "goto");
   }
 };
 
@@ -91,6 +109,20 @@ public:
     set_nav("", "1", "", "");
 
     attach("MainDoorTerminal", "OpenMainDoor");
+  }
+};
+
+
+
+class goto23: public Script, public ScriptHelper
+{
+public:
+  goto23() : Script("goto23") {}
+  void activate() override
+  {
+    clear_attached_scripts();
+    simple_camera_to(16, 0, 0.75);
+    set_nav("", "4", "", "");
   }
 };
 
