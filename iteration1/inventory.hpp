@@ -19,8 +19,8 @@ public:
     return type == EMPTY;
   }
 
-  std::string get_name() { return std::string("Item ") + tostring(type); }
-  std::string get_description() { return std::string("description for item ") + tostring(type); }
+  std::string get_name() { return std::string(""); }
+  std::string get_description() { return std::string(""); }
   ALLEGRO_BITMAP *get_image() { return NULL; }
 };
 
@@ -45,20 +45,7 @@ public:
   }
   void on_draw()
   {
-    if (shown_item.is_empty())
-    {
-      al_draw_text(af::fonts["DroidSans.ttf 20"], color::white, place.size.x/2, place.size.y/2-14, ALLEGRO_ALIGN_CENTER, "Inventory");
-    }
-    else
-    {
-      BitmapObject image(shown_item.get_image());
-      image.scale_to_fit(place.size.x, place.size.y);
-      image.align(0.5, 0.5);
-      image.position(place.size.x/2, place.size.y/2);
-      image.draw();
-    }
-
-    FGUIWidget::on_draw();
+    Style::draw_button(Style::NORMAL, place, "0", shown_item.get_image());
   }
   void show(float speed=0.5)
   {
@@ -82,10 +69,14 @@ private:
     GUICombineButton(FGUIWidget *parent)
       : FGUIWidget(parent, new FGUISurfaceAreaBox(-30, parent->place.size.y/2, 40, 50))
     {}
-    void on_click()
+    void on_click() override
     {
       if (Logging::at_least(L_VERBOSE)) std::cout << "GUICombineButton.on_click()" << std::endl;
       send_message_to_parent("attempt_to_combine()");
+    }
+    void on_draw() override
+    {
+      Style::draw_button(Style::NORMAL, place, "<");
     }
   };
 
@@ -137,8 +128,7 @@ public:
   }
   void on_draw()
   {
-    FGUIWidget::on_draw();
-    if (selected) al_draw_rounded_rectangle(0, 0, place.size.x, place.size.y, 5, 5, color::orange, 3.0);
+    Style::draw_button(selected ? Style::SELECTED : Style::NORMAL, place, "-");
   }
   void show(float speed=0.5)
   {
@@ -175,6 +165,10 @@ public:
     description_textbox->set_text_color(color::white);
     description_textbox->place.align.x = 0.5;
     description_textbox->place.align.y = 0;
+  }
+  void on_draw() override
+  {
+    Style::draw_button(Style::NORMAL, place, item.is_empty() ? "- EMPTY -" : "");
   }
   void set_item(InventoryItem item)
   {

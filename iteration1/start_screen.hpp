@@ -8,12 +8,16 @@ private:
   {
   public:
     StartScreenGUIStartButton(FGUIWidget *parent)
-      : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W/2, SCREEN_H/3*2, 200, 90))
+      : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W/2, SCREEN_H/3*2, 240, 90))
     {}
     void on_click() override
     {
       if (Logging::at_least(L_NORMAL)) std::cout << "StartScreeGUIStartButton" << std::endl;
       send_message_to_parent(TargetID("StartGame()").get_trigger_message());
+    }
+    void on_draw() override
+    {
+      Style::draw_button(Style::NORMAL, place, "start");
     }
   };
 
@@ -28,7 +32,8 @@ public:
     , title_text(NULL)
     , start_screen_button(NULL)
   {
-    title_text = new FGUIText(this, SCREEN_W/2, SCREEN_H/3, "- THE PATH -");
+    title_text = new FGUIText(this, SCREEN_W/2, SCREEN_H/2, "- THE PATH -");
+    title_text->set_font(af::fonts["space age.otf 100"]);
     title_text->place.align.x = 0.5;
     start_screen_button = new StartScreenGUIStartButton(this);
   }
@@ -41,6 +46,10 @@ public:
   {
     af::motion.cmove_to(&title_text->place.position.x, SCREEN_W/2, 1.0 * speed);
     af::motion.cmove_to(&start_screen_button->place.position.x, SCREEN_W/2, 1.0 * speed);
+    title_text->place.scale.x = 0.95;
+    title_text->place.scale.y = 0.95;
+    af::motion.cmove_to(&title_text->place.scale.x, 1.75, 20.0 * speed);
+    af::motion.cmove_to(&title_text->place.scale.y, 1.75, 20.0 * speed);
   }
   void hide(float speed=2.0)
   {
