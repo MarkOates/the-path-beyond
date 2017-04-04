@@ -66,7 +66,7 @@ public:
   }
   static void clear_attached_scripts()
   {
-    for (auto &e : world_render->manager->elements)
+    for (auto &e : world_render->manager->get_children())
     {
       Entity *entity = static_cast<Entity *>(e);
       entity->attach_script_id(0);
@@ -81,7 +81,8 @@ public:
   static int get_script_unique_id(std::string script_id)
   {
     Script *script = Script::find_by_id(script_id);
-    if (script) return script->get_unique_id_num();
+    if (script) return script->get_id();
+    //if (script) return script->get_unique_id_num();
 
     std::cout << CONSOLE_COLOR_RED << "could not locate script by id \"" << script_id << "\"" << CONSOLE_COLOR_DEFAULT << std::endl;
     return 0;
@@ -101,7 +102,8 @@ public:
   }
   static Entity *entity_by_id(std::string entity_id)
   {
-    Entity *e = static_cast<Entity *>(world_render->manager->get_element_by_id(entity_id));
+    //Entity *e = static_cast<Entity *>(world_render->manager->get_element_by_id(entity_id));
+    Entity *e = static_cast<Entity *>(world_render->manager->find_first(ENTITY_ID_ATTRIBUTE, entity_id));
     if (!e)
     {
       std::cout << CONSOLE_COLOR_RED << "could not locate entity by id \"" << entity_id << "\"" << CONSOLE_COLOR_DEFAULT << std::endl;

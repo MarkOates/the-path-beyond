@@ -24,7 +24,7 @@ public:
   ALLEGRO_BITMAP *texture;
   int attached_script_id;
 
-  Entity(ElementIDManager *manager, std::string id, Model3D *model=NULL, ALLEGRO_BITMAP *texture=NULL)
+  Entity(ElementID *manager, std::string id, Model3D *model=NULL, ALLEGRO_BITMAP *texture=NULL)
     : ElementID(manager)
     , place()
     , velocity()
@@ -34,7 +34,8 @@ public:
   {
     initialize_shaders();
 
-    set_id(id);
+    //set_id(id);
+    set(ENTITY_ID_ATTRIBUTE, id);
     velocity.align = vec3d(0, 0, 0);
     velocity.scale = vec3d(0, 0, 0);
   }
@@ -103,14 +104,14 @@ private:
   }
 
 public:
-  ElementIDManager *manager;
+  ElementID *manager;
   Entity *camera;
 
   ALLEGRO_BITMAP *scene_targets_render_surface_ref;
 
   WorldRenderScreen(Display *display)
     : Screen(display)
-    , manager(new ElementIDManager())
+    , manager(new ElementID(nullptr))
     , camera(NULL)
     , scene_targets_render_surface_ref(NULL)
   {
@@ -125,7 +126,7 @@ public:
 
   void update_scene()
   {
-    for (auto &elem : manager->elements)
+    for (auto &elem : manager->get_children())
     {
       Entity *entity = static_cast<Entity *>(elem);
       entity->place += entity->velocity;
@@ -150,7 +151,7 @@ public:
     prep_render(backbuffer_sub_bitmap, camera->place);
 
     // draw our entities
-    for (auto &elem : manager->elements)
+    for (auto &elem : manager->get_children())
     {
       Entity *entity = static_cast<Entity *>(elem);
       entity->draw();
@@ -167,7 +168,7 @@ public:
     al_clear_to_color(color::transparent);
 
     // draw our entities
-    for (auto &elem : manager->elements)
+    for (auto &elem : manager->get_children())
     {
       Entity *entity = static_cast<Entity *>(elem);
       entity->draw_flat_color(encode_id(entity->get_attached_script_id()));

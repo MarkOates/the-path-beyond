@@ -8,6 +8,9 @@
 
 #include "style_assets.hpp"
 
+#define SCRIPT_ID_ATTRIBUTE "script_id"
+#define ENTITY_ID_ATTRIBUTE "entity_id"
+
 #include "logging.hpp"
 #include "target_id.hpp"
 #include "inventory.hpp"
