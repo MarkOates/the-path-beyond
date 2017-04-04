@@ -41,19 +41,19 @@ public:
   }
   static void move_to(placement3d *from, placement3d to, float speed=0.4)
   {
-    af::motion.cmove_to(&from->position.x, to.position.x, speed);
-    af::motion.cmove_to(&from->position.y, to.position.y, speed);
-    af::motion.cmove_to(&from->position.z, to.position.z, speed);
+    Framework::motion.cmove_to(&from->position.x, to.position.x, speed);
+    Framework::motion.cmove_to(&from->position.y, to.position.y, speed);
+    Framework::motion.cmove_to(&from->position.z, to.position.z, speed);
 
     fix_least_distance_rotation(from, &to);
 
-    af::motion.cmove_to(&from->rotation.x, to.rotation.x, speed);
-    af::motion.cmove_to(&from->rotation.y, to.rotation.y, speed);
-    af::motion.cmove_to(&from->rotation.z, to.rotation.z, speed);
+    Framework::motion.cmove_to(&from->rotation.x, to.rotation.x, speed);
+    Framework::motion.cmove_to(&from->rotation.y, to.rotation.y, speed);
+    Framework::motion.cmove_to(&from->rotation.z, to.rotation.z, speed);
 
-    af::motion.cmove_to(&from->anchor.x, to.anchor.x, speed);
-    af::motion.cmove_to(&from->anchor.y, to.anchor.y, speed);
-    af::motion.cmove_to(&from->anchor.z, to.anchor.z, speed);
+    Framework::motion.cmove_to(&from->anchor.x, to.anchor.x, speed);
+    Framework::motion.cmove_to(&from->anchor.y, to.anchor.y, speed);
+    Framework::motion.cmove_to(&from->anchor.z, to.anchor.z, speed);
   }
   static void simple_camera_to(float x, float y, float rotation, float speed=1.0)
   {
@@ -140,8 +140,8 @@ public:
     Entity *e = new Entity(
         world_render->manager,
         id,
-        af::models[obj_filename],
-        af::bitmaps[texture_filename]);
+        Framework::models[obj_filename],
+        Framework::bitmaps[texture_filename]);
     e->place.position = position;
     e->place.rotation.y = rotation;
 

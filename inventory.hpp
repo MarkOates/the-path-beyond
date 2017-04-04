@@ -64,13 +64,13 @@ public:
     switch(type)
     {
       case ENCRYPTED_CARD_KEY:
-        return af::bitmaps["card_key.png"];
+        return Framework::bitmaps["card_key.png"];
         break;
       case CARD_KEY_DECRYPTER:
-        return af::bitmaps["card_key_decryptor.png"];
+        return Framework::bitmaps["card_key_decryptor.png"];
         break;
       case DECRYPTED_CARD_KEY:
-        return af::bitmaps["card_key.png"];
+        return Framework::bitmaps["card_key.png"];
         break;
       default:
         return NULL;
@@ -106,12 +106,12 @@ public:
   void show(float speed=0.5)
   {
     if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIInventoryToggleButton.show()" << std::endl;
-    af::motion.cmove_to(&place.position.x, SCREEN_W-80, speed);
+    Framework::motion.cmove_to(&place.position.x, SCREEN_W-80, speed);
   }
   void hide(float speed=0.5)
   {
     if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIInventoryToggleButton.hide()" << std::endl;
-    af::motion.cmove_to(&place.position.x, SCREEN_W+60, speed);
+    Framework::motion.cmove_to(&place.position.x, SCREEN_W+60, speed);
   }
 };
 
@@ -189,12 +189,12 @@ public:
   void show(float speed=0.5)
   {
     if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIItemButton.show()" << std::endl;
-    af::motion.cmove_to(&place.position.x, show_x_pos, speed);
+    Framework::motion.cmove_to(&place.position.x, show_x_pos, speed);
   }
   void hide(float speed=0.5)
   {
     if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIItemButton.hide()" << std::endl;
-    af::motion.cmove_to(&place.position.x, show_x_pos+200, speed);
+    Framework::motion.cmove_to(&place.position.x, show_x_pos+200, speed);
   }
 };
 
@@ -217,7 +217,7 @@ public:
     featured_image = new FGUIImage(this, place.size.x/2, place.size.y/2, item.get_image());
     title_text = new FGUIText(this, 20, 20, item.get_name());
     title_text->place.align.y = 0;
-    title_text->set_font(af::fonts["space age.otf 34"]);
+    title_text->set_font(Framework::fonts["space age.otf 34"]);
     description_textbox = new FGUITextBox(this, place.size.x/2, place.size.y*0.75, place.size.x*0.8, place.size.y*0.25, item.get_description()) ;
     description_textbox->set_text_color(color::black);
     description_textbox->place.align.x = 0.5;
@@ -237,12 +237,12 @@ public:
   void show(float speed=0.5)
   {
     if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUICurrentItemShowcase.show()" << std::endl;
-    af::motion.cmove_to(&place.position.x, SCREEN_W-500, speed);
+    Framework::motion.cmove_to(&place.position.x, SCREEN_W-500, speed);
   }
   void hide(float speed=0.5)
   {
     if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUICurrentItemShowcase.hide()" << std::endl;
-    af::motion.cmove_to(&place.position.x, SCREEN_W+500, speed);
+    Framework::motion.cmove_to(&place.position.x, SCREEN_W+500, speed);
   }
 };
 

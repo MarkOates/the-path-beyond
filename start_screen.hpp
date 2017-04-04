@@ -35,13 +35,13 @@ public:
     , start_screen_button(NULL)
   {
     title_text = new FGUIText(this, SCREEN_W/2, SCREEN_H/2, "- THE PATH -");
-    title_text->set_font(af::fonts["space age.otf 100"]);
+    title_text->set_font(Framework::fonts["space age.otf 100"]);
     title_text->place.align.x = 0.5;
 
     start_screen_button = new StartScreenGUIStartButton(this);
 
     instructions = new FGUIText(this, SCREEN_W/2, SCREEN_H/2 + 60, "use only mouse clicks to play");
-    instructions->set_font(af::fonts["space age.otf 40"]);
+    instructions->set_font(Framework::fonts["space age.otf 40"]);
     instructions->set_font_color(color::gray);
     instructions->place.align.x = 0.5;
   }
@@ -52,16 +52,16 @@ public:
   }
   void show(float speed=2.0)
   {
-    af::motion.cmove_to(&title_text->place.position.x, SCREEN_W/2, 1.0 * speed);
-    af::motion.cmove_to(&start_screen_button->place.position.x, SCREEN_W/2, 1.0 * speed);
-    af::motion.cmove_to(&title_text->place.scale.x, 1.05, 2.0 * speed);
-    af::motion.cmove_to(&title_text->place.scale.y, 1.05, 2.0 * speed);
+    Framework::motion.cmove_to(&title_text->place.position.x, SCREEN_W/2, 1.0 * speed);
+    Framework::motion.cmove_to(&start_screen_button->place.position.x, SCREEN_W/2, 1.0 * speed);
+    Framework::motion.cmove_to(&title_text->place.scale.x, 1.05, 2.0 * speed);
+    Framework::motion.cmove_to(&title_text->place.scale.y, 1.05, 2.0 * speed);
     instructions->place.scale.x = 1;
   }
   void hide(float speed=2.0)
   {
-    af::motion.cmove_to(&title_text->place.position.x, -1000, 1.0 * speed);
-    af::motion.cmove_to(&start_screen_button->place.position.x, SCREEN_W+200, 1.0 * speed);
+    Framework::motion.cmove_to(&title_text->place.position.x, -1000, 1.0 * speed);
+    Framework::motion.cmove_to(&start_screen_button->place.position.x, SCREEN_W+200, 1.0 * speed);
     instructions->place.scale.x = 0;
   }
 };

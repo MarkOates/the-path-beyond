@@ -47,7 +47,7 @@ void draw_button(BUTTON_STATE state, float x, float y, float w, float h, std::st
 
   if (!text.empty())
   {
-    ALLEGRO_FONT *f = af::fonts["space age.otf 34"];
+    ALLEGRO_FONT *f = Framework::fonts["space age.otf 34"];
     al_draw_text(f, color::white, w/2, h/2-al_get_font_line_height(f)/2, ALLEGRO_ALIGN_CENTER, text.c_str());
   }
 
@@ -63,7 +63,7 @@ void draw_text_box(float x, float y, float w, float h, std::string text="")
 
   if (!text.empty())
   {
-    ALLEGRO_FONT *f = af::fonts["DroidSans.ttf 34"];
+    ALLEGRO_FONT *f = Framework::fonts["DroidSans.ttf 34"];
     al_draw_multiline_text(f, color::black, x+20, y+10, w-20, h, 0, text.c_str());
   }
 

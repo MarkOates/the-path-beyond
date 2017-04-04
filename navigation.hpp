@@ -47,11 +47,11 @@ public:
   }
   void show()
   {
-    af::motion.cmove_to(&place.scale.x, 1.0, 0);
+    Framework::motion.cmove_to(&place.scale.x, 1.0, 0);
   }
   void hide()
   {
-    af::motion.cmove_to(&place.scale.x, 0.0, 0);
+    Framework::motion.cmove_to(&place.scale.x, 0.0, 0);
   }
 };
 
@@ -75,11 +75,11 @@ public:
   }
   void show(float speed=0.4)
   {
-    af::motion.cmove_to(&place.position.y, show_pos_y, speed);
+    Framework::motion.cmove_to(&place.position.y, show_pos_y, speed);
   }
   void hide(float speed=0.4)
   {
-    af::motion.cmove_to(&place.position.y, -200, speed);
+    Framework::motion.cmove_to(&place.position.y, -200, speed);
   }
   void show_if_has_target(float speed=0.4)
   {

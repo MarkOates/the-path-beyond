@@ -24,10 +24,10 @@
 
 int main(int argc, char **argv)
 {
-  af::initialize();
-  Display *display = af::create_display(SCREEN_W, SCREEN_H, ALLEGRO_OPENGL | ALLEGRO_PROGRAMMABLE_PIPELINE);
+  Framework::initialize();
+  Display *display = Framework::create_display(SCREEN_W, SCREEN_H, ALLEGRO_OPENGL | ALLEGRO_PROGRAMMABLE_PIPELINE);
   Project *project = new Project(display);
-  af::run_loop();
+  Framework::run_loop();
   return 0;
 }
 
