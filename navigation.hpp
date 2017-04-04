@@ -43,7 +43,8 @@ public:
   void on_draw() override
   {
     al_draw_rectangle(0, 0, place.size.x, place.size.y, color::green, 8);
-    //al_draw_bitmap(render, 0, 0, 0);
+    al_draw_filled_rectangle(0, 0, place.size.x, place.size.y, color::mix(color::red, color::transparent, 0.4));
+    al_draw_bitmap(render, 0, 0, 0);
   }
   void show()
   {
