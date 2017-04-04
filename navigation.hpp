@@ -93,26 +93,26 @@ class WorldNavigationGUIScreen : public UIScreen
 public:
   UIScreen *project_screen;
 
-  WorldNavigationGUINavView *nav_view;
   WorldNavigationGUINavButton *nav_up_button;
   WorldNavigationGUINavButton *nav_down_button;
   WorldNavigationGUINavButton *nav_left_button;
   WorldNavigationGUINavButton *nav_right_button;
+  WorldNavigationGUINavView *nav_view;
 
   WorldNavigationGUIScreen(UIScreen *project_screen, Display *display)
     : UIScreen(display)
     , project_screen(project_screen)
-    , nav_view(NULL)
     , nav_up_button(NULL)
     , nav_down_button(NULL)
     , nav_left_button(NULL)
     , nav_right_button(NULL)
+    , nav_view(NULL)
   {
-    nav_view = new WorldNavigationGUINavView(this);
     nav_up_button = new WorldNavigationGUINavButton(this, SCREEN_W/2, 100, 300, 30);
     nav_down_button = new WorldNavigationGUINavButton(this, SCREEN_W/2, SCREEN_H-100, 300, 30);
     nav_left_button = new WorldNavigationGUINavButton(this, 100, SCREEN_H/2, 30, 300);
     nav_right_button = new WorldNavigationGUINavButton(this, SCREEN_W-100, SCREEN_H/2, 30, 300);
+    nav_view = new WorldNavigationGUINavView(this);
   }
 
   void on_message(UIWidget *sender, std::string message)
