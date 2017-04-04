@@ -64,13 +64,13 @@ public:
     switch(type)
     {
       case ENCRYPTED_CARD_KEY:
-        return Framework::bitmaps["card_key.png"];
+        return Framework::bitmap("card_key.png");
         break;
       case CARD_KEY_DECRYPTER:
-        return Framework::bitmaps["card_key_decryptor.png"];
+        return Framework::bitmap("card_key_decryptor.png");
         break;
       case DECRYPTED_CARD_KEY:
-        return Framework::bitmaps["card_key.png"];
+        return Framework::bitmap("card_key.png");
         break;
       default:
         return NULL;
