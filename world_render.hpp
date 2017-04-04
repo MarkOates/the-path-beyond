@@ -20,11 +20,11 @@ private:
 public:
   placement3d place;
   placement3d velocity;
-  ModelNew *model;
+  Model3D *model;
   ALLEGRO_BITMAP *texture;
   int attached_script_id;
 
-  Entity(ElementIDManager *manager, std::string id, ModelNew *model=NULL, ALLEGRO_BITMAP *texture=NULL)
+  Entity(ElementIDManager *manager, std::string id, Model3D *model=NULL, ALLEGRO_BITMAP *texture=NULL)
     : ElementID(manager)
     , place()
     , velocity()

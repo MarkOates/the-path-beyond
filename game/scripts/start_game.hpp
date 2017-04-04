@@ -17,8 +17,8 @@ public:
     Entity *e = new Entity(
         world_render->manager,
         "Station",
-        Framework::models["space_station-04.obj"],
-        Framework::bitmaps["floor_texture.jpeg"]);
+        Framework::model("space_station-04.obj"),
+        Framework::bitmap("floor_texture.jpeg"));
         //Framework::bitmaps["uv.png"]);
 
     // create the card key

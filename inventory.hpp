@@ -81,13 +81,13 @@ public:
 };
 
 
-class InventoryGUIInventoryToggleButton : public FGUIWidget
+class InventoryGUIInventoryToggleButton : public UIWidget
 {
 public:
   InventoryItem shown_item;
 
-  InventoryGUIInventoryToggleButton(FGUIWidget *parent)
-    : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W-80, 60, 120, 80))
+  InventoryGUIInventoryToggleButton(UIWidget *parent)
+    : UIWidget(parent, "InventoryGUIInventoryToggleButton", new UISurfaceAreaBox(SCREEN_W-80, 60, 120, 80))
     , shown_item(InventoryItem::Type::EMPTY)
   {}
   void on_click()
@@ -106,24 +106,24 @@ public:
   void show(float speed=0.5)
   {
     if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIInventoryToggleButton.show()" << std::endl;
-    Framework::motion.cmove_to(&place.position.x, SCREEN_W-80, speed);
+    Framework::motion().cmove_to(&place.position.x, SCREEN_W-80, speed);
   }
   void hide(float speed=0.5)
   {
     if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIInventoryToggleButton.hide()" << std::endl;
-    Framework::motion.cmove_to(&place.position.x, SCREEN_W+60, speed);
+    Framework::motion().cmove_to(&place.position.x, SCREEN_W+60, speed);
   }
 };
 
 
-class InventoryGUIItemButton : public FGUIWidget
+class InventoryGUIItemButton : public UIWidget
 {
 private:
-  class GUICombineButton : public FGUIWidget
+  class GUICombineButton : public UIWidget
   {
   public:
-    GUICombineButton(FGUIWidget *parent)
-      : FGUIWidget(parent, new FGUISurfaceAreaBox(-30, parent->place.size.y/2, 40, 50))
+    GUICombineButton(UIWidget *parent)
+      : UIWidget(parent, "InventoryGUIItemButton::GUICombineButton", new UISurfaceAreaBox(-30, parent->place.size.y/2, 40, 50))
     {}
     void on_click() override
     {
@@ -143,8 +143,8 @@ public:
 
   GUICombineButton *combine_button;
 
-  InventoryGUIItemButton(FGUIWidget *parent, float x, float y)
-    : FGUIWidget(parent, new FGUISurfaceAreaBox(x, y, 80, 80))
+  InventoryGUIItemButton(UIWidget *parent, float x, float y)
+    : UIWidget(parent, "InventoryGUIItemButton", new UISurfaceAreaBox(x, y, 80, 80))
     , item(InventoryItem::Type::EMPTY)
     , show_x_pos(x)
     , selected(false)
@@ -177,7 +177,7 @@ public:
   {
     selected = false;
   }
-  void on_message(FGUIWidget *sender, std::string message)
+  void on_message(UIWidget *sender, std::string message)
   {
     // message will always be attempt_to_combine()
     if (sender == combine_button) send_message_to_parent("attempt_to_combine()");
@@ -189,36 +189,36 @@ public:
   void show(float speed=0.5)
   {
     if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIItemButton.show()" << std::endl;
-    Framework::motion.cmove_to(&place.position.x, show_x_pos, speed);
+    Framework::motion().cmove_to(&place.position.x, show_x_pos, speed);
   }
   void hide(float speed=0.5)
   {
     if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIItemButton.hide()" << std::endl;
-    Framework::motion.cmove_to(&place.position.x, show_x_pos+200, speed);
+    Framework::motion().cmove_to(&place.position.x, show_x_pos+200, speed);
   }
 };
 
 
-class InventoryGUICurrentItemShowcase : public FGUIWidget
+class InventoryGUICurrentItemShowcase : public UIWidget
 {
 public:
   InventoryItem item;
-  FGUIImage *featured_image;
-  FGUIText *title_text;
-  FGUITextBox *description_textbox;
+  UIImage *featured_image;
+  UIText *title_text;
+  UITextBox *description_textbox;
 
-  InventoryGUICurrentItemShowcase(FGUIWidget *parent)
-    : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W-500, SCREEN_H/2, 600, 400))
+  InventoryGUICurrentItemShowcase(UIWidget *parent)
+    : UIWidget(parent, "InventoryGUICurrentItemShowcase", new UISurfaceAreaBox(SCREEN_W-500, SCREEN_H/2, 600, 400))
     , item(InventoryItem::Type::EMPTY)
     , title_text(NULL)
     , description_textbox(NULL)
     , featured_image(NULL)
   {
-    featured_image = new FGUIImage(this, place.size.x/2, place.size.y/2, item.get_image());
-    title_text = new FGUIText(this, 20, 20, item.get_name());
+    featured_image = new UIImage(this, place.size.x/2, place.size.y/2, item.get_image());
+    title_text = new UIText(this, 20, 20, item.get_name());
     title_text->place.align.y = 0;
-    title_text->set_font(Framework::fonts["space age.otf 34"]);
-    description_textbox = new FGUITextBox(this, place.size.x/2, place.size.y*0.75, place.size.x*0.8, place.size.y*0.25, item.get_description()) ;
+    title_text->set_font(Framework::font("space age.otf 34"));
+    description_textbox = new UITextBox(this, place.size.x/2, place.size.y*0.75, place.size.x*0.8, place.size.y*0.25, item.get_description()) ;
     description_textbox->set_text_color(color::black);
     description_textbox->place.align.x = 0.5;
     description_textbox->place.align.y = 0;
@@ -237,24 +237,24 @@ public:
   void show(float speed=0.5)
   {
     if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUICurrentItemShowcase.show()" << std::endl;
-    Framework::motion.cmove_to(&place.position.x, SCREEN_W-500, speed);
+    Framework::motion().cmove_to(&place.position.x, SCREEN_W-500, speed);
   }
   void hide(float speed=0.5)
   {
     if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUICurrentItemShowcase.hide()" << std::endl;
-    Framework::motion.cmove_to(&place.position.x, SCREEN_W+500, speed);
+    Framework::motion().cmove_to(&place.position.x, SCREEN_W+500, speed);
   }
 };
 
 
-class InventoryGUINotification : public FGUIWidget
+class InventoryGUINotification : public UIWidget
 {
 public:
   std::string notification_text;
   float visibility_timer;
 
-  InventoryGUINotification(FGUIWidget *parent)
-    : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W/2, SCREEN_H/4*3, 900, 100))
+  InventoryGUINotification(UIWidget *parent)
+    : UIWidget(parent, "InventoryGUINotification", new UISurfaceAreaBox(SCREEN_W/2, SCREEN_H/4*3, 900, 100))
     , visibility_timer(-1)
   {
   }
@@ -265,7 +265,7 @@ public:
   }
   void mouse_down_func() override
   {
-    FGUIWidget::mouse_down_func();
+    UIWidget::mouse_down_func();
     visibility_timer = -1.0;
   }
   void on_draw() override
@@ -282,11 +282,11 @@ public:
 };
 
 
-class InventoryGUIBehindBlocker : public FGUIWidget
+class InventoryGUIBehindBlocker : public UIWidget
 {
 public:
-  InventoryGUIBehindBlocker(FGUIWidget *parent)
-    : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W/2, SCREEN_H/2, SCREEN_W, SCREEN_H))
+  InventoryGUIBehindBlocker(UIWidget *parent)
+    : UIWidget(parent, "InventoryGUIBehindBlocker", new UISurfaceAreaBox(SCREEN_W/2, SCREEN_H/2, SCREEN_W, SCREEN_H))
   {}
   void on_click() override
   {
@@ -309,7 +309,7 @@ public:
 };
 
 
-class InventoryGUIScreen : public FGUIScreen
+class InventoryGUIScreen : public UIScreen
 {
 public:
   const int NUM_INVENTORY_ITEM_BUTTONS;
@@ -327,7 +327,7 @@ public:
   int current_mode;
 
   InventoryGUIScreen(Display *display)
-    : FGUIScreen(display)
+    : UIScreen(display)
     , NUM_INVENTORY_ITEM_BUTTONS(2)
     , toggle_button(NULL)
     , current_item_showcase(NULL)
@@ -351,7 +351,7 @@ public:
     set_visibility_mode(current_mode);
   }
 
-  void on_message(FGUIWidget *sender, std::string message) override
+  void on_message(UIWidget *sender, std::string message) override
   {
     if (message == "") return;
     else if (message == "toggle_visibility_mode()")
