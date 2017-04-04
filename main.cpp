@@ -1,6 +1,7 @@
 #define ALLEGRO_UNSTABLE
 
 #include <allegro_flare/allegro_flare.h>
+#include <cmath>
 
 #define SCREEN_W 1920
 #define SCREEN_H 1080
