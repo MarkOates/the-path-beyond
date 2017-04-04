@@ -17,9 +17,9 @@ public:
     Entity *e = new Entity(
         world_render->manager,
         "Station",
-        af::models["space_station-04.obj"],
-        af::bitmaps["floor_texture.jpeg"]);
-        //af::bitmaps["uv.png"]);
+        Framework::model("space_station-04.obj"),
+        Framework::bitmap("floor_texture.jpeg"));
+        //Framework::bitmaps["uv.png"]);
 
     // create the card key
     create_entity("EncryptedCardKey", vec3d(5, 0, 4), 0.4, "card_key-02.obj", "sci_fi_panel2.jpg");

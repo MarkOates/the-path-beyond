@@ -4,17 +4,19 @@
 class Script : public ElementID
 {
 private:
-  static ElementIDManager *manager;
+  static ElementID *manager;
   static bool initialized;
 
 public:
   static Script *find_by_unique_id(int unique_id)
   {
-    return static_cast<Script *>(manager->get_element_by_unique_id(unique_id));
+    return static_cast<Script *>(manager->find_descendant_by_id(unique_id));
+    //return static_cast<Script *>(manager->get_element_by_unique_id(unique_id));
   }
   static Script *find_by_id(std::string id)
   {
-    ElementID *element = manager->get_element_by_id(id);
+    ElementID *element = manager->find_first(SCRIPT_ID_ATTRIBUTE, id);
+    //ElementID *element = manager->get_element_by_id(id);
     if (element) return static_cast<Script *>(element);
     return NULL;
   }
@@ -61,17 +63,22 @@ public:
   static void initialize()
   {
     if (initialized) return;
-    manager = new ElementIDManager();
+    manager = new ElementID(nullptr);
     initialized = true;
   }
-
-  Script(std::string id) : ElementID(manager)
+  static ElementID *get_manager()
   {
-    set_id(id);
+     if (!initialized) initialize();
+     return manager;
+  }
+
+  Script(std::string id) : ElementID(get_manager())
+  {
+    set(SCRIPT_ID_ATTRIBUTE, id);
   }
   virtual void activate() = 0;
 };
-ElementIDManager *Script::manager = NULL;
+ElementID *Script::manager = nullptr;
 bool Script::initialized = false;
 
 

@@ -19,7 +19,8 @@ ALLEGRO_DIR=$(LIBS_ROOT)/allegro5
 ALLEGRO_LIBS=-lallegro_color -lallegro_font -lallegro_ttf -lallegro_dialog -lallegro_audio -lallegro_acodec -lallegro_primitives -lallegro_image -lallegro_main -lallegro
 
 ALLEGRO_FLARE_DIR=$(LIBS_ROOT)/allegro_flare
-ALLEGRO_FLARE_LIB=allegro_flare-0.8.7wip
+ALLEGRO_FLARE_LIB=allegro_flare-0.8.9wip
+# ALLEGRO_FLARE_LIB=allegro_flare-0.8.7wip
 
 
 

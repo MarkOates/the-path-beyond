@@ -6,7 +6,7 @@
 #include "./scripts/start_game.hpp"
 
 
-class Project : public FGUIScreen
+class Project : public UIScreen
 {
 public:
   WorldRenderScreen *world_render;
@@ -15,7 +15,7 @@ public:
   StartScreenGUIScreen *start_screen_gui;
 
   Project(Display *display)
-    : FGUIScreen(display)
+    : UIScreen(display)
     , world_render(new WorldRenderScreen(display))
     , world_navigation_gui(new WorldNavigationGUIScreen(this, display))
     , inventory_gui(new InventoryGUIScreen(display))
@@ -28,7 +28,7 @@ public:
 
     Script::run("StartTitleScreen()");
   }
-  void on_message(FGUIWidget *sender, std::string message)
+  void on_message(UIWidget *sender, std::string message)
   {
     std::string trigger_id = "";
     int unique_trigger_id = 0;

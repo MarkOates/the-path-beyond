@@ -41,19 +41,19 @@ public:
   }
   static void move_to(placement3d *from, placement3d to, float speed=0.4)
   {
-    af::motion.cmove_to(&from->position.x, to.position.x, speed);
-    af::motion.cmove_to(&from->position.y, to.position.y, speed);
-    af::motion.cmove_to(&from->position.z, to.position.z, speed);
+    Framework::motion().cmove_to(&from->position.x, to.position.x, speed);
+    Framework::motion().cmove_to(&from->position.y, to.position.y, speed);
+    Framework::motion().cmove_to(&from->position.z, to.position.z, speed);
 
     fix_least_distance_rotation(from, &to);
 
-    af::motion.cmove_to(&from->rotation.x, to.rotation.x, speed);
-    af::motion.cmove_to(&from->rotation.y, to.rotation.y, speed);
-    af::motion.cmove_to(&from->rotation.z, to.rotation.z, speed);
+    Framework::motion().cmove_to(&from->rotation.x, to.rotation.x, speed);
+    Framework::motion().cmove_to(&from->rotation.y, to.rotation.y, speed);
+    Framework::motion().cmove_to(&from->rotation.z, to.rotation.z, speed);
 
-    af::motion.cmove_to(&from->anchor.x, to.anchor.x, speed);
-    af::motion.cmove_to(&from->anchor.y, to.anchor.y, speed);
-    af::motion.cmove_to(&from->anchor.z, to.anchor.z, speed);
+    Framework::motion().cmove_to(&from->anchor.x, to.anchor.x, speed);
+    Framework::motion().cmove_to(&from->anchor.y, to.anchor.y, speed);
+    Framework::motion().cmove_to(&from->anchor.z, to.anchor.z, speed);
   }
   static void simple_camera_to(float x, float y, float rotation, float speed=1.0)
   {
@@ -66,7 +66,7 @@ public:
   }
   static void clear_attached_scripts()
   {
-    for (auto &e : world_render->manager->elements)
+    for (auto &e : world_render->manager->get_children())
     {
       Entity *entity = static_cast<Entity *>(e);
       entity->attach_script_id(0);
@@ -81,7 +81,8 @@ public:
   static int get_script_unique_id(std::string script_id)
   {
     Script *script = Script::find_by_id(script_id);
-    if (script) return script->get_unique_id_num();
+    if (script) return script->get_id();
+    //if (script) return script->get_unique_id_num();
 
     std::cout << CONSOLE_COLOR_RED << "could not locate script by id \"" << script_id << "\"" << CONSOLE_COLOR_DEFAULT << std::endl;
     return 0;
@@ -101,7 +102,8 @@ public:
   }
   static Entity *entity_by_id(std::string entity_id)
   {
-    Entity *e = static_cast<Entity *>(world_render->manager->get_element_by_id(entity_id));
+    //Entity *e = static_cast<Entity *>(world_render->manager->get_element_by_id(entity_id));
+    Entity *e = static_cast<Entity *>(world_render->manager->find_first(ENTITY_ID_ATTRIBUTE, entity_id));
     if (!e)
     {
       std::cout << CONSOLE_COLOR_RED << "could not locate entity by id \"" << entity_id << "\"" << CONSOLE_COLOR_DEFAULT << std::endl;
@@ -140,8 +142,8 @@ public:
     Entity *e = new Entity(
         world_render->manager,
         id,
-        af::models[obj_filename],
-        af::bitmaps[texture_filename]);
+        Framework::model(obj_filename),
+        Framework::bitmap(texture_filename));
     e->place.position = position;
     e->place.rotation.y = rotation;
 

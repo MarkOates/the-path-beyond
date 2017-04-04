@@ -1,11 +1,15 @@
 #define ALLEGRO_UNSTABLE
 
 #include <allegro_flare/allegro_flare.h>
+#include <cmath>
 
 #define SCREEN_W 1920
 #define SCREEN_H 1080
 
 #include "style_assets.hpp"
+
+#define SCRIPT_ID_ATTRIBUTE "script_id"
+#define ENTITY_ID_ATTRIBUTE "entity_id"
 
 #include "logging.hpp"
 #include "target_id.hpp"
@@ -24,10 +28,10 @@
 
 int main(int argc, char **argv)
 {
-  af::initialize();
-  Display *display = af::create_display(SCREEN_W, SCREEN_H, ALLEGRO_OPENGL | ALLEGRO_PROGRAMMABLE_PIPELINE);
+  Framework::initialize();
+  Display *display = Framework::create_display(SCREEN_W, SCREEN_H, ALLEGRO_OPENGL | ALLEGRO_PROGRAMMABLE_PIPELINE);
   Project *project = new Project(display);
-  af::run_loop();
+  Framework::run_loop();
   return 0;
 }
 

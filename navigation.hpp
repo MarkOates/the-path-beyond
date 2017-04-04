@@ -1,13 +1,13 @@
 
 
-class WorldNavigationGUINavView : public FGUIWidget
+class WorldNavigationGUINavView : public UIWidget
 {
 public:
   ALLEGRO_BITMAP *render;
   int mouse_x, mouse_y;
 
-  WorldNavigationGUINavView(FGUIWidget *parent)
-    : FGUIWidget(parent, new FGUISurfaceAreaBox(SCREEN_W/2, SCREEN_H/2, SCREEN_W, SCREEN_H))
+  WorldNavigationGUINavView(UIWidget *parent)
+    : UIWidget(parent, "WorldNavigationGUINavView", new UISurfaceAreaBox(SCREEN_W/2, SCREEN_H/2, SCREEN_W, SCREEN_H))
     , render(NULL)
     , mouse_x(0)
     , mouse_y(0)
@@ -43,27 +43,28 @@ public:
   void on_draw() override
   {
     al_draw_rectangle(0, 0, place.size.x, place.size.y, color::green, 8);
-    //al_draw_bitmap(render, 0, 0, 0);
+    al_draw_filled_rectangle(0, 0, place.size.x, place.size.y, color::mix(color::red, color::transparent, 0.4));
+    al_draw_bitmap(render, 0, 0, 0);
   }
   void show()
   {
-    af::motion.cmove_to(&place.scale.x, 1.0, 0);
+    Framework::motion().cmove_to(&place.scale.x, 1.0, 0);
   }
   void hide()
   {
-    af::motion.cmove_to(&place.scale.x, 0.0, 0);
+    Framework::motion().cmove_to(&place.scale.x, 0.0, 0);
   }
 };
 
 
-class WorldNavigationGUINavButton : public FGUIWidget
+class WorldNavigationGUINavButton : public UIWidget
 {
 public:
   TargetID target_id;
   float show_pos_y;
 
-  WorldNavigationGUINavButton(FGUIWidget *parent, float x, float y, float w, float h)
-    : FGUIWidget(parent, new FGUISurfaceAreaBox(x, y, w, h))
+  WorldNavigationGUINavButton(UIWidget *parent, float x, float y, float w, float h)
+    : UIWidget(parent, "WorldNavigationGUINavButton", new UISurfaceAreaBox(x, y, w, h))
     , target_id("")
     , show_pos_y(y)
   {}
@@ -75,11 +76,11 @@ public:
   }
   void show(float speed=0.4)
   {
-    af::motion.cmove_to(&place.position.y, show_pos_y, speed);
+    Framework::motion().cmove_to(&place.position.y, show_pos_y, speed);
   }
   void hide(float speed=0.4)
   {
-    af::motion.cmove_to(&place.position.y, -200, speed);
+    Framework::motion().cmove_to(&place.position.y, -200, speed);
   }
   void show_if_has_target(float speed=0.4)
   {
@@ -88,34 +89,34 @@ public:
 };
 
 
-class WorldNavigationGUIScreen : public FGUIScreen
+class WorldNavigationGUIScreen : public UIScreen
 {
 public:
-  FGUIScreen *project_screen;
+  UIScreen *project_screen;
 
-  WorldNavigationGUINavView *nav_view;
   WorldNavigationGUINavButton *nav_up_button;
   WorldNavigationGUINavButton *nav_down_button;
   WorldNavigationGUINavButton *nav_left_button;
   WorldNavigationGUINavButton *nav_right_button;
+  WorldNavigationGUINavView *nav_view;
 
-  WorldNavigationGUIScreen(FGUIScreen *project_screen, Display *display)
-    : FGUIScreen(display)
+  WorldNavigationGUIScreen(UIScreen *project_screen, Display *display)
+    : UIScreen(display)
     , project_screen(project_screen)
-    , nav_view(NULL)
     , nav_up_button(NULL)
     , nav_down_button(NULL)
     , nav_left_button(NULL)
     , nav_right_button(NULL)
+    , nav_view(NULL)
   {
-    nav_view = new WorldNavigationGUINavView(this);
     nav_up_button = new WorldNavigationGUINavButton(this, SCREEN_W/2, 100, 300, 30);
     nav_down_button = new WorldNavigationGUINavButton(this, SCREEN_W/2, SCREEN_H-100, 300, 30);
     nav_left_button = new WorldNavigationGUINavButton(this, 100, SCREEN_H/2, 30, 300);
     nav_right_button = new WorldNavigationGUINavButton(this, SCREEN_W-100, SCREEN_H/2, 30, 300);
+    nav_view = new WorldNavigationGUINavView(this);
   }
 
-  void on_message(FGUIWidget *sender, std::string message)
+  void on_message(UIWidget *sender, std::string message)
   {
     int unique_trigger_id = 0;
     std::string trigger_id = "";
