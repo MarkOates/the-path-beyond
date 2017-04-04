@@ -7,6 +7,7 @@
 
 #include "style_assets.hpp"
 
+#include "element_id.hpp"
 #include "logging.hpp"
 #include "target_id.hpp"
 #include "inventory.hpp"
