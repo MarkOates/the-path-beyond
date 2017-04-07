@@ -3,14 +3,9 @@
 #include <allegro_flare/allegro_flare.h>
 #include <cmath>
 
-#define SCREEN_W 1920
-#define SCREEN_H 1080
+#include <global_constants.hpp>
 
 #include "style_assets.hpp"
-
-#define SCRIPT_ID_ATTRIBUTE "script_id"
-#define ENTITY_ID_ATTRIBUTE "entity_id"
-
 #include "logging.hpp"
 #include "target_id.hpp"
 #include "inventory.hpp"
