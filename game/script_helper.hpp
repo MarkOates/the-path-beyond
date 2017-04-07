@@ -1,4 +1,7 @@
 
+#include <inventory_gui/notification.hpp>
+
+
 
 class ScriptHelper
 {
