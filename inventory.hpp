@@ -1,39 +1,6 @@
 #include <inventory_item.hpp>
 
-
-class InventoryGUIInventoryToggleButton : public UIWidget
-{
-public:
-  InventoryItem shown_item;
-
-  InventoryGUIInventoryToggleButton(UIWidget *parent)
-    : UIWidget(parent, "InventoryGUIInventoryToggleButton", new UISurfaceAreaBox(SCREEN_W-80, 60, 120, 80))
-    , shown_item(InventoryItem::Type::EMPTY)
-  {}
-  void on_click()
-  {
-    if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIInventoryToggleButton" << std::endl;
-    send_message_to_parent("toggle_visibility_mode()");
-  }
-  void set_shown_item(InventoryItem item)
-  {
-    shown_item = item;
-  }
-  void on_draw()
-  {
-    Style::draw_button(Style::NORMAL, place, shown_item.is_empty() ? "0" : "", shown_item.get_image());
-  }
-  void show(float speed=0.5)
-  {
-    if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIInventoryToggleButton.show()" << std::endl;
-    Framework::motion().cmove_to(&place.position.x, SCREEN_W-80, speed);
-  }
-  void hide(float speed=0.5)
-  {
-    if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIInventoryToggleButton.hide()" << std::endl;
-    Framework::motion().cmove_to(&place.position.x, SCREEN_W+60, speed);
-  }
-};
+#include <inventory_gui/inventory_toggle_button.hpp>
 
 
 class InventoryGUIItemButton : public UIWidget
