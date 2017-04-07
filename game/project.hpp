@@ -5,6 +5,8 @@
 #include "./scripts/start_title_screen.hpp"
 #include "./scripts/start_game.hpp"
 
+#include "logging.hpp"
+
 
 class Project : public UIScreen
 {
