@@ -2,88 +2,8 @@
 
 #include <inventory_gui/inventory_toggle_button.hpp>
 
+#include <inventory_gui/item_button.hpp>
 
-class InventoryGUIItemButton : public UIWidget
-{
-private:
-  class GUICombineButton : public UIWidget
-  {
-  public:
-    GUICombineButton(UIWidget *parent)
-      : UIWidget(parent, "InventoryGUIItemButton::GUICombineButton", new UISurfaceAreaBox(-30, parent->place.size.y/2, 40, 50))
-    {}
-    void on_click() override
-    {
-      if (Logging::at_least(L_VERBOSE)) std::cout << "GUICombineButton.on_click()" << std::endl;
-      send_message_to_parent("attempt_to_combine()");
-    }
-    void on_draw() override
-    {
-      Style::draw_button(Style::NORMAL, place, "<");
-    }
-  };
-
-public:
-  InventoryItem item;
-  int show_x_pos;
-  bool selected;
-
-  GUICombineButton *combine_button;
-
-  InventoryGUIItemButton(UIWidget *parent, float x, float y)
-    : UIWidget(parent, "InventoryGUIItemButton", new UISurfaceAreaBox(x, y, 80, 80))
-    , item(InventoryItem::Type::EMPTY)
-    , show_x_pos(x)
-    , selected(false)
-    , combine_button(NULL)
-  {
-    combine_button = new GUICombineButton(this);
-  }
-  void set_item(InventoryItem item)
-  {
-    this->item = item;
-  }
-  void clear_item()
-  {
-    this->item = InventoryItem(InventoryItem::Type::EMPTY);
-  }
-  bool is_empty()
-  {
-    return (item.type == InventoryItem::Type::EMPTY);
-  }
-  void on_click()
-  {
-    if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIItemButton" << std::endl;
-    send_message_to_parent("feature_my_item()");
-  }
-  void select()
-  {
-    selected = true;
-  }
-  void deselect()
-  {
-    selected = false;
-  }
-  void on_message(UIWidget *sender, std::string message)
-  {
-    // message will always be attempt_to_combine()
-    if (sender == combine_button) send_message_to_parent("attempt_to_combine()");
-  }
-  void on_draw()
-  {
-    Style::draw_button(selected ? Style::SELECTED : Style::NORMAL, place, item.is_empty() ? "-" : "", item.get_image());
-  }
-  void show(float speed=0.5)
-  {
-    if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIItemButton.show()" << std::endl;
-    Framework::motion().cmove_to(&place.position.x, show_x_pos, speed);
-  }
-  void hide(float speed=0.5)
-  {
-    if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIItemButton.hide()" << std::endl;
-    Framework::motion().cmove_to(&place.position.x, show_x_pos+200, speed);
-  }
-};
 
 
 class InventoryGUICurrentItemShowcase : public UIWidget
