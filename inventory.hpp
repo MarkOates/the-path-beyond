@@ -8,32 +8,7 @@
 
 #include <inventory_gui/notification.hpp>
 
-
-class InventoryGUIBehindBlocker : public UIWidget
-{
-public:
-  InventoryGUIBehindBlocker(UIWidget *parent)
-    : UIWidget(parent, "InventoryGUIBehindBlocker", new UISurfaceAreaBox(SCREEN_W/2, SCREEN_H/2, SCREEN_W, SCREEN_H))
-  {}
-  void on_click() override
-  {
-    send_message_to_parent("set_visibility_mode(1)");
-  }
-  void on_draw() override
-  {
-    al_draw_filled_rectangle(0, 0, place.size.x, place.size.y, color::color(color::black, 0.3));
-  }
-  void show()
-  {
-    place.scale.x = 1.0;
-    place.scale.y = 1.0;
-  }
-  void hide()
-  {
-    place.scale.x = 0;
-    place.scale.y = 0;
-  }
-};
+#include <inventory_gui/behind_blocker.hpp>
 
 
 class InventoryGUIScreen : public UIScreen
