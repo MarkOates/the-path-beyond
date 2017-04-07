@@ -6,41 +6,7 @@
 
 #include <inventory_gui/current_item_showcase.hpp>
 
-
-
-class InventoryGUINotification : public UIWidget
-{
-public:
-  std::string notification_text;
-  float visibility_timer;
-
-  InventoryGUINotification(UIWidget *parent)
-    : UIWidget(parent, "InventoryGUINotification", new UISurfaceAreaBox(SCREEN_W/2, SCREEN_H/4*3, 900, 100))
-    , visibility_timer(-1)
-  {
-  }
-  void on_timer() override
-  {
-    visibility_timer -= 1.0/60.0;
-    if (visibility_timer < 0) visibility_timer = -1.0;
-  }
-  void mouse_down_func() override
-  {
-    UIWidget::mouse_down_func();
-    visibility_timer = -1.0;
-  }
-  void on_draw() override
-  {
-    if (visibility_timer < 0) return;
-    Style::draw_button(Style::NORMAL, 0, 0, place.size.x, place.size.y, notification_text);
-    //Style::draw_text_box(0, 0, place.size.x, place.size.y, notification_text);
-  }
-  void show(std::string text)
-  {
-    notification_text = text;
-    visibility_timer = 5.0;
-  }
-};
+#include <inventory_gui/notification.hpp>
 
 
 class InventoryGUIBehindBlocker : public UIWidget
