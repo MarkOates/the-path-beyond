@@ -50,7 +50,7 @@ required_obj_dirs:
 
 
 
-obj/game.o: main.cpp include/style_assets.hpp include/logging.hpp inventory.hpp start_screen.hpp script.hpp target_id.hpp navigation.hpp world_render.hpp game/project.hpp game/script_helper.hpp game/load_game_scripts.hpp $(wildcard game/scripts/*)
+obj/game.o: main.cpp include/style_assets.hpp include/logging.hpp start_screen.hpp script.hpp target_id.hpp navigation.hpp world_render.hpp game/project.hpp game/script_helper.hpp game/load_game_scripts.hpp $(wildcard game/scripts/*)
 	g++ -o $@ -c -std=gnu++11 $< -I$(ALLEGRO_FLARE_DIR)/include -I$(ALLEGRO_DIR)/include -I./include
 
 
