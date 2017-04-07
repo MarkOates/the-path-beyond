@@ -31,6 +31,7 @@ all: bin/game$(EXE_EXTENSION)
 
 SOURCES := $(shell find src -name '*.cpp')
 OBJECTS := $(SOURCES:src/%.cpp=obj/%.o)
+REQUIRED_DIRECTORIES := $(dir $(OBJECTS))
 
 
 
@@ -39,8 +40,13 @@ bin/game$(EXE_EXTENSION): $(OBJECTS) obj/game.o
 
 
 
-obj/%.o: src/%.cpp
+obj/%.o: src/%.cpp | required_obj_dirs
 	g++ -c -std=gnu++11 $< -o $@ -I$(ALLEGRO_FLARE_DIR)/include -I$(ALLEGRO_DIR)/include -I./include
+
+
+
+required_obj_dirs:
+	@mkdir -p $(REQUIRED_DIRECTORIES)
 
 
 
