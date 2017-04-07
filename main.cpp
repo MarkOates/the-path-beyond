@@ -5,7 +5,7 @@
 
 #include <global_constants.hpp>
 
-#include "style_assets.hpp"
+#include <style_assets.hpp>
 #include "logging.hpp"
 #include "target_id.hpp"
 #include "inventory.hpp"
