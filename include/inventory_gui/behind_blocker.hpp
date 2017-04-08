@@ -18,7 +18,7 @@ namespace InventoryGUI
      void show();
      void hide();
    };
-};
+}
 
 
 

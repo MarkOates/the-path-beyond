@@ -22,7 +22,7 @@ namespace WorldNavigationGUI
      void show();
      void hide();
    };
-};
+}
 
 
 

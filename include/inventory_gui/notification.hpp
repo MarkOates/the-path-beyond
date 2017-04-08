@@ -22,7 +22,7 @@ namespace InventoryGUI
      void on_draw() override;
      void show(std::string text);
    };
-};
+}
 
 
 

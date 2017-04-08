@@ -27,7 +27,7 @@ namespace StartScreenGUI
      void show(float speed=2.0);
      void hide(float speed=2.0);
    };
-};
+}
 
 
 

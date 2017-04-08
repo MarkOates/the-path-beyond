@@ -14,7 +14,7 @@ namespace StartScreenGUI
     void on_click() override;
     void on_draw() override;
   };
-};
+}
 
 
 

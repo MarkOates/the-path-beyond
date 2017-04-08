@@ -27,7 +27,7 @@ namespace InventoryGUI
      void show(float speed=0.5);
      void hide(float speed=0.5);
    };
-};
+}
 
 
 

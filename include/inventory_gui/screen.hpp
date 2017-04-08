@@ -40,7 +40,7 @@ namespace InventoryGUI
      bool add_item(InventoryItem item);
      void set_visibility_mode(int mode);
    };
-};
+}
 
 
 

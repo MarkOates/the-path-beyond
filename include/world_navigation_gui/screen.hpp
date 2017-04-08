@@ -26,7 +26,7 @@ namespace WorldNavigationGUI
      void on_message(UIWidget *sender, std::string message);
      void set_usability_mode(int mode, float speed=0.4);
    };
-};
+}
 
 
 
