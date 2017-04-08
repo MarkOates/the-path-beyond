@@ -8,10 +8,10 @@
 
 
 class InventoryGUIInventoryToggleButton;
-class InventoryGUICurrentItemShowcase;
 namespace InventoryGUI
 {
    class BehindBlocker;
+   class CurrentItemShowcase;
 };
 class InventoryGUIItemButton;
 class InventoryGUINotification;
@@ -27,7 +27,7 @@ public:
   InventoryGUIInventoryToggleButton *toggle_button;
 
   // MODE 2 Widgets
-  InventoryGUICurrentItemShowcase *current_item_showcase;
+  InventoryGUI::CurrentItemShowcase *current_item_showcase;
   InventoryGUI::BehindBlocker *behind_blocker;
   std::vector<InventoryGUIItemButton *> item_buttons;
 
