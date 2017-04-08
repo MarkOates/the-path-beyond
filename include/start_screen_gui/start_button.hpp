@@ -7,13 +7,13 @@
 
 namespace StartScreenGUI
 {
-  class StartButton : public UIWidget
-  {
-  public:
-    StartButton(UIWidget *parent);
-    void on_click() override;
-    void on_draw() override;
-  };
+   class StartButton : public UIWidget
+   {
+   public:
+      StartButton(UIWidget *parent);
+      void on_click() override;
+      void on_draw() override;
+   };
 }
 
 

@@ -21,11 +21,11 @@
 
 int main(int argc, char **argv)
 {
-  Framework::initialize();
-  Display *display = Framework::create_display(SCREEN_W, SCREEN_H, ALLEGRO_OPENGL | ALLEGRO_PROGRAMMABLE_PIPELINE);
-  Project *project = new Project(display);
-  Framework::run_loop();
-  return 0;
+   Framework::initialize();
+   Display *display = Framework::create_display(SCREEN_W, SCREEN_H, ALLEGRO_OPENGL | ALLEGRO_PROGRAMMABLE_PIPELINE);
+   Project *project = new Project(display);
+   Framework::run_loop();
+   return 0;
 }
 
 

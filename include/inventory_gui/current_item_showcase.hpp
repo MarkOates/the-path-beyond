@@ -15,17 +15,17 @@ namespace InventoryGUI
    class CurrentItemShowcase : public UIWidget
    {
    public:
-     InventoryItem item;
-     UIImage *featured_image;
-     UIText *title_text;
-     UITextBox *description_textbox;
+      InventoryItem item;
+      UIImage *featured_image;
+      UIText *title_text;
+      UITextBox *description_textbox;
 
-     CurrentItemShowcase(UIWidget *parent);
+      CurrentItemShowcase(UIWidget *parent);
 
-     void on_draw() override;
-     void set_item(InventoryItem item);
-     void show(float speed=0.5);
-     void hide(float speed=0.5);
+      void on_draw() override;
+      void set_item(InventoryItem item);
+      void show(float speed=0.5);
+      void hide(float speed=0.5);
    };
 }
 

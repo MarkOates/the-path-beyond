@@ -13,9 +13,9 @@ namespace Style
 {
    enum BUTTON_STATE
    {
-     NORMAL = 0,
-     SELECTED,
-     ERROR,
+      NORMAL = 0,
+      SELECTED,
+      ERROR,
    };
 
    ALLEGRO_COLOR get_state_color(BUTTON_STATE state);

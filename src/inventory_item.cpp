@@ -67,18 +67,18 @@ ALLEGRO_BITMAP *InventoryItem::get_image()
 {
    switch(type)
    {
-   case ENCRYPTED_CARD_KEY:
-      return Framework::bitmap("card_key.png");
-      break;
-   case CARD_KEY_DECRYPTER:
-      return Framework::bitmap("card_key_decryptor.png");
-      break;
-   case DECRYPTED_CARD_KEY:
-      return Framework::bitmap("card_key.png");
-      break;
-   default:
-      return NULL;
-      break;
+      case ENCRYPTED_CARD_KEY:
+         return Framework::bitmap("card_key.png");
+         break;
+      case CARD_KEY_DECRYPTER:
+         return Framework::bitmap("card_key_decryptor.png");
+         break;
+      case DECRYPTED_CARD_KEY:
+         return Framework::bitmap("card_key.png");
+         break;
+      default:
+         return NULL;
+         break;
    }
    return NULL;
 }

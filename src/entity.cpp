@@ -27,7 +27,7 @@ Entity::Entity(ElementID *manager, std::string id, Model3D *model, ALLEGRO_BITMA
    , velocity()
    , model(model)
    , texture(texture)
-     , attached_script_id(0)
+   , attached_script_id(0)
 {
    initialize_shaders();
 

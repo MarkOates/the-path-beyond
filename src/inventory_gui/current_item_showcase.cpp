@@ -16,7 +16,7 @@ InventoryGUI::CurrentItemShowcase::CurrentItemShowcase(UIWidget *parent)
    , item(InventoryItem::Type::EMPTY)
    , title_text(NULL)
    , description_textbox(NULL)
-     , featured_image(NULL)
+   , featured_image(NULL)
 {
    featured_image = new UIImage(this, place.size.x/2, place.size.y/2, item.get_image());
    title_text = new UIText(this, 20, 20, item.get_name());
