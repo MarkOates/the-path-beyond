@@ -17,7 +17,7 @@ public:
   WorldNavigationGUI::NavButton *nav_down_button;
   WorldNavigationGUI::NavButton *nav_left_button;
   WorldNavigationGUI::NavButton *nav_right_button;
-  WorldNavigationGUINavView *nav_view;
+  WorldNavigationGUI::NavView *nav_view;
 
   WorldNavigationGUIScreen(UIScreen *project_screen, Display *display);
 

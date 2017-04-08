@@ -14,8 +14,8 @@
 
 
 
-WorldNavigationGUINavView::WorldNavigationGUINavView(UIWidget *parent)
-   : UIWidget(parent, "WorldNavigationGUINavView", new UISurfaceAreaBox(SCREEN_W/2, SCREEN_H/2, SCREEN_W, SCREEN_H))
+WorldNavigationGUI::NavView::NavView(UIWidget *parent)
+   : UIWidget(parent, "WorldNavigationGUI::NavView", new UISurfaceAreaBox(SCREEN_W/2, SCREEN_H/2, SCREEN_W, SCREEN_H))
    , render(NULL)
    , mouse_x(0)
    , mouse_y(0)
@@ -34,7 +34,7 @@ WorldNavigationGUINavView::WorldNavigationGUINavView(UIWidget *parent)
 
 
 
-void WorldNavigationGUINavView::on_mouse_move(float x, float y, float dx, float dy)
+void WorldNavigationGUI::NavView::on_mouse_move(float x, float y, float dx, float dy)
 {
    mouse_x = x;
    mouse_y = y;
@@ -42,7 +42,7 @@ void WorldNavigationGUINavView::on_mouse_move(float x, float y, float dx, float 
 
 
 
-void WorldNavigationGUINavView::on_click()
+void WorldNavigationGUI::NavView::on_click()
 {
    if (render)
    {
@@ -57,7 +57,7 @@ void WorldNavigationGUINavView::on_click()
 
 
 
-void WorldNavigationGUINavView::on_draw()
+void WorldNavigationGUI::NavView::on_draw()
 {
    al_draw_rectangle(0, 0, place.size.x, place.size.y, color::green, 8);
    al_draw_filled_rectangle(0, 0, place.size.x, place.size.y, color::mix(color::red, color::transparent, 0.4));
@@ -66,14 +66,14 @@ void WorldNavigationGUINavView::on_draw()
 
 
 
-void WorldNavigationGUINavView::show()
+void WorldNavigationGUI::NavView::show()
 {
    Framework::motion().cmove_to(&place.scale.x, 1.0, 0);
 }
 
 
 
-void WorldNavigationGUINavView::hide()
+void WorldNavigationGUI::NavView::hide()
 {
    Framework::motion().cmove_to(&place.scale.x, 0.0, 0);
 }

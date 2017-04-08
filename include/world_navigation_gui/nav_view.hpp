@@ -7,20 +7,22 @@
 
 
 
-class WorldNavigationGUINavView : public UIWidget
+namespace WorldNavigationGUI
 {
-public:
-  ALLEGRO_BITMAP *render;
-  int mouse_x, mouse_y;
+   class NavView : public UIWidget
+   {
+   public:
+     ALLEGRO_BITMAP *render;
+     int mouse_x, mouse_y;
 
-  WorldNavigationGUINavView(UIWidget *parent);
-  void on_mouse_move(float x, float y, float dx, float dy) override;
-  void on_click() override;
-  void on_draw() override;
-  void show();
-  void hide();
+     NavView(UIWidget *parent);
+     void on_mouse_move(float x, float y, float dx, float dy) override;
+     void on_click() override;
+     void on_draw() override;
+     void show();
+     void hide();
+   };
 };
-
 
 
 
