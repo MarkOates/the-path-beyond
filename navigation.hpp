@@ -1,60 +1,6 @@
 
 
-class WorldNavigationGUINavView : public UIWidget
-{
-public:
-  ALLEGRO_BITMAP *render;
-  int mouse_x, mouse_y;
-
-  WorldNavigationGUINavView(UIWidget *parent)
-    : UIWidget(parent, "WorldNavigationGUINavView", new UISurfaceAreaBox(SCREEN_W/2, SCREEN_H/2, SCREEN_W, SCREEN_H))
-    , render(NULL)
-    , mouse_x(0)
-    , mouse_y(0)
-  {
-    // initialize our rendering surface
-    al_set_new_bitmap_depth(32);
-    render = al_create_bitmap(place.size.x, place.size.y);
-    al_set_new_bitmap_depth(0);
-
-    ALLEGRO_STATE state;
-    al_store_state(&state, ALLEGRO_STATE_TARGET_BITMAP);
-    al_set_target_bitmap(render);
-    al_clear_to_color(color::transparent);
-    al_restore_state(&state);
-  }
-  void on_mouse_move(float x, float y, float dx, float dy) override
-  {
-    mouse_x = x;
-    mouse_y = y;
-  }
-  void on_click() override
-  {
-    if (render)
-    {
-      if (mouse_x < 0 || mouse_x > al_get_bitmap_width(render)) return;
-      if (mouse_y < 0 || mouse_y > al_get_bitmap_height(render)) return;
-      if (Logging::at_least(L_VERBOSE)) std::cout << "sampling bitmap at " << mouse_x << ", " << mouse_y << std::endl;
-
-      int clicked_id = decode_id(al_get_pixel(render, mouse_x, mouse_y));
-      send_message_to_parent(TargetID::compose_unique_trigger_id_message(clicked_id));
-    }
-  }
-  void on_draw() override
-  {
-    al_draw_rectangle(0, 0, place.size.x, place.size.y, color::green, 8);
-    al_draw_filled_rectangle(0, 0, place.size.x, place.size.y, color::mix(color::red, color::transparent, 0.4));
-    al_draw_bitmap(render, 0, 0, 0);
-  }
-  void show()
-  {
-    Framework::motion().cmove_to(&place.scale.x, 1.0, 0);
-  }
-  void hide()
-  {
-    Framework::motion().cmove_to(&place.scale.x, 0.0, 0);
-  }
-};
+#include <world_navigation_gui/nav_view.hpp>
 
 
 class WorldNavigationGUINavButton : public UIWidget
