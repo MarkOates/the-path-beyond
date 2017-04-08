@@ -14,14 +14,14 @@ class Project : public UIScreen
 public:
   WorldRenderScreen *world_render;
   WorldNavigationGUI::Screen *world_navigation_gui;
-  InventoryGUIScreen *inventory_gui;
+  InventoryGUI::Screen *inventory_gui;
   StartScreenGUI::Screen *start_screen_gui;
 
   Project(Display *display)
     : UIScreen(display)
     , world_render(new WorldRenderScreen(display))
     , world_navigation_gui(new WorldNavigationGUI::Screen(this, display))
-    , inventory_gui(new InventoryGUIScreen(display))
+    , inventory_gui(new InventoryGUI::Screen(display))
     , start_screen_gui(new StartScreenGUI::Screen(this, display))
   {
     // link nav render surface

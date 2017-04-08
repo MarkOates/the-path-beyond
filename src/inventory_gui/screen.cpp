@@ -12,7 +12,7 @@
 
 
 
-InventoryGUIScreen::InventoryGUIScreen(Display *display)
+InventoryGUI::Screen::Screen(Display *display)
    : UIScreen(display)
    , NUM_INVENTORY_ITEM_BUTTONS(2)
    , toggle_button(NULL)
@@ -40,7 +40,7 @@ InventoryGUIScreen::InventoryGUIScreen(Display *display)
 
 
 
-void InventoryGUIScreen::on_message(UIWidget *sender, std::string message)
+void InventoryGUI::Screen::on_message(UIWidget *sender, std::string message)
 {
    if (message == "") return;
    else if (message == "toggle_visibility_mode()")
@@ -96,7 +96,7 @@ void InventoryGUIScreen::on_message(UIWidget *sender, std::string message)
 
 
 
-bool InventoryGUIScreen::symmetric_yes(InventoryItem itemA, InventoryItem itemB, InventoryItem::Type type1, InventoryItem::Type type2)
+bool InventoryGUI::Screen::symmetric_yes(InventoryItem itemA, InventoryItem itemB, InventoryItem::Type type1, InventoryItem::Type type2)
    // ^ nice 3AM name for a function
 {
    if (itemA.type == type1 && itemB.type == type2) return true;
@@ -106,7 +106,7 @@ bool InventoryGUIScreen::symmetric_yes(InventoryItem itemA, InventoryItem itemB,
 
 
 
-InventoryItem InventoryGUIScreen::attempt_combination(InventoryItem itemA, InventoryItem itemB)
+InventoryItem InventoryGUI::Screen::attempt_combination(InventoryItem itemA, InventoryItem itemB)
 {
    if (symmetric_yes(itemA, itemB, InventoryItem::Type::ENCRYPTED_CARD_KEY, InventoryItem::Type::CARD_KEY_DECRYPTER))
    {
@@ -121,7 +121,7 @@ InventoryItem InventoryGUIScreen::attempt_combination(InventoryItem itemA, Inven
 
 
 
-bool InventoryGUIScreen::has_item(InventoryItem::Type item_type)
+bool InventoryGUI::Screen::has_item(InventoryItem::Type item_type)
 {
    for (auto &button : item_buttons)
       if (button->item.type == item_type) return true;
@@ -130,7 +130,7 @@ bool InventoryGUIScreen::has_item(InventoryItem::Type item_type)
 
 
 
-InventoryGUI::ItemButton *InventoryGUIScreen::get_selected_item_button()
+InventoryGUI::ItemButton *InventoryGUI::Screen::get_selected_item_button()
 {
    for (auto &button : item_buttons) if (button->selected) return button;
    return NULL;
@@ -138,7 +138,7 @@ InventoryGUI::ItemButton *InventoryGUIScreen::get_selected_item_button()
 
 
 
-InventoryGUI::ItemButton *InventoryGUIScreen::find_first_empty_inventory_button()
+InventoryGUI::ItemButton *InventoryGUI::Screen::find_first_empty_inventory_button()
 {
    for (auto &button : item_buttons) if (button->is_empty()) return button;
    return NULL;
@@ -146,7 +146,7 @@ InventoryGUI::ItemButton *InventoryGUIScreen::find_first_empty_inventory_button(
 
 
 
-bool InventoryGUIScreen::add_item(InventoryItem item)
+bool InventoryGUI::Screen::add_item(InventoryItem item)
 {
    InventoryGUI::ItemButton *empty_button = find_first_empty_inventory_button();
    if (!empty_button) return false;
@@ -156,7 +156,7 @@ bool InventoryGUIScreen::add_item(InventoryItem item)
 
 
 
-void InventoryGUIScreen::set_visibility_mode(int mode)
+void InventoryGUI::Screen::set_visibility_mode(int mode)
 {
    std::cout << " === setting GUI mode " << mode << " ===" << std::endl;
    switch(mode)
@@ -184,7 +184,7 @@ void InventoryGUIScreen::set_visibility_mode(int mode)
       break;
    default:
       // Undefined Mode
-      std::cout << "undefined InventoryGUIScreen mode " << mode << std::endl;
+      std::cout << "undefined InventoryGUI::Screen mode " << mode << std::endl;
       break;
    }
 }

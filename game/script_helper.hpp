@@ -9,7 +9,7 @@ class ScriptHelper
 protected:
   static WorldRenderScreen *world_render;
   static WorldNavigationGUI::Screen *world_navigation_gui;
-  static InventoryGUIScreen *inventory_gui;
+  static InventoryGUI::Screen *inventory_gui;
   static StartScreenGUI::Screen *start_screen_gui;
   static bool initialized;
 
@@ -179,7 +179,7 @@ public:
   static void initialize(
       WorldRenderScreen *wrs,
       WorldNavigationGUI::Screen *wnguis,
-      InventoryGUIScreen *iguis,
+      InventoryGUI::Screen *iguis,
       StartScreenGUI::Screen *ssgui
       )
   {
@@ -198,7 +198,7 @@ public:
   }
 };
 WorldNavigationGUI::Screen *ScriptHelper::world_navigation_gui = NULL;
-InventoryGUIScreen *ScriptHelper::inventory_gui = NULL;
+InventoryGUI::Screen *ScriptHelper::inventory_gui = NULL;
 StartScreenGUI::Screen *ScriptHelper::start_screen_gui = NULL;
 WorldRenderScreen *ScriptHelper::world_render = NULL;
 bool ScriptHelper::initialized = false;
