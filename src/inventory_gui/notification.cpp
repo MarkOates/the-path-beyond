@@ -9,15 +9,15 @@
 
 
 
-InventoryGUINotification::InventoryGUINotification(UIWidget *parent)
-   : UIWidget(parent, "InventoryGUINotification", new UISurfaceAreaBox(SCREEN_W/2, SCREEN_H/4*3, 900, 100))
+InventoryGUI::Notification::Notification(UIWidget *parent)
+   : UIWidget(parent, "InventoryGUI::Notification", new UISurfaceAreaBox(SCREEN_W/2, SCREEN_H/4*3, 900, 100))
    , visibility_timer(-1)
 {
 }
 
 
 
-void InventoryGUINotification::on_timer()
+void InventoryGUI::Notification::on_timer()
 {
    visibility_timer -= 1.0/60.0;
    if (visibility_timer < 0) visibility_timer = -1.0;
@@ -25,7 +25,7 @@ void InventoryGUINotification::on_timer()
 
 
 
-void InventoryGUINotification::mouse_down_func()
+void InventoryGUI::Notification::mouse_down_func()
 {
    UIWidget::mouse_down_func();
    visibility_timer = -1.0;
@@ -33,7 +33,7 @@ void InventoryGUINotification::mouse_down_func()
 
 
 
-void InventoryGUINotification::on_draw()
+void InventoryGUI::Notification::on_draw()
 {
    if (visibility_timer < 0) return;
    Style::draw_button(Style::NORMAL, 0, 0, place.size.x, place.size.y, notification_text);
@@ -42,7 +42,7 @@ void InventoryGUINotification::on_draw()
 
 
 
-void InventoryGUINotification::show(std::string text)
+void InventoryGUI::Notification::show(std::string text)
 {
    notification_text = text;
    visibility_timer = 5.0;

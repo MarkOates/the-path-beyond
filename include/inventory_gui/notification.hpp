@@ -8,17 +8,20 @@
 
 
 
-class InventoryGUINotification : public UIWidget
+namespace InventoryGUI
 {
-public:
-  std::string notification_text;
-  float visibility_timer;
+   class Notification : public UIWidget
+   {
+   public:
+     std::string notification_text;
+     float visibility_timer;
 
-  InventoryGUINotification(UIWidget *parent);
-  void on_timer() override;
-  void mouse_down_func() override;
-  void on_draw() override;
-  void show(std::string text);
+     Notification(UIWidget *parent);
+     void on_timer() override;
+     void mouse_down_func() override;
+     void on_draw() override;
+     void show(std::string text);
+   };
 };
 
 

@@ -26,7 +26,7 @@ InventoryGUIScreen::InventoryGUIScreen(Display *display)
    behind_blocker = new InventoryGUI::BehindBlocker(this);
    toggle_button = new InventoryGUI::InventoryToggleButton(this);
    current_item_showcase = new InventoryGUI::CurrentItemShowcase(this);
-   notification = new InventoryGUINotification(this);
+   notification = new InventoryGUI::Notification(this);
 
    for (unsigned i=0; i<NUM_INVENTORY_ITEM_BUTTONS; i++)
    {

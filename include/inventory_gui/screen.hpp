@@ -13,8 +13,8 @@ namespace InventoryGUI
    class CurrentItemShowcase;
    class InventoryToggleButton;
    class ItemButton;
+   class Notification;
 };
-class InventoryGUINotification;
 
 
 
@@ -31,7 +31,7 @@ public:
   InventoryGUI::BehindBlocker *behind_blocker;
   std::vector<InventoryGUI::ItemButton *> item_buttons;
 
-  InventoryGUINotification *notification;
+  InventoryGUI::Notification *notification;
 
   int current_mode;
 
