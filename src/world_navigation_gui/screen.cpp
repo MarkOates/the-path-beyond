@@ -9,14 +9,14 @@
 
 
 
-WorldNavigationGUIScreen::WorldNavigationGUIScreen(UIScreen *project_screen, Display *display)
+WorldNavigationGUI::Screen::Screen(UIScreen *project_screen, Display *display)
    : UIScreen(display)
    , project_screen(project_screen)
    , nav_up_button(NULL)
    , nav_down_button(NULL)
    , nav_left_button(NULL)
    , nav_right_button(NULL)
-     , nav_view(NULL)
+   , nav_view(NULL)
 {
    nav_up_button = new WorldNavigationGUI::NavButton(this, SCREEN_W/2, 100, 300, 30);
    nav_down_button = new WorldNavigationGUI::NavButton(this, SCREEN_W/2, SCREEN_H-100, 300, 30);
@@ -27,26 +27,26 @@ WorldNavigationGUIScreen::WorldNavigationGUIScreen(UIScreen *project_screen, Dis
 
 
 
-void WorldNavigationGUIScreen::on_message(UIWidget *sender, std::string message)
+void WorldNavigationGUI::Screen::on_message(UIWidget *sender, std::string message)
 {
    int unique_trigger_id = 0;
    std::string trigger_id = "";
    if (TargetID::extract_trigger_id(message, &trigger_id))
    {
-      if (Logging::at_least(L_VERBOSE)) std::cout << "WorldNavigationGUIScreen sending on_message for script \"" << trigger_id << "\"" << std::endl;
+      if (Logging::at_least(L_VERBOSE)) std::cout << "WorldNavigationGUI::Screen sending on_message for script \"" << trigger_id << "\"" << std::endl;
       project_screen->on_message(this, message);
    }
    else if (TargetID::extract_unique_trigger_id(message, &unique_trigger_id))
    {
       // we have a recieved trigger message
-      if (Logging::at_least(L_VERBOSE)) std::cout << "WorldNavigationGUIScreen sending on_message for script id \"" << unique_trigger_id << "\"" << std::endl;
+      if (Logging::at_least(L_VERBOSE)) std::cout << "WorldNavigationGUI::Screen sending on_message for script id \"" << unique_trigger_id << "\"" << std::endl;
       project_screen->on_message(this, message);
    }
 }
 
 
 
-void WorldNavigationGUIScreen::set_usability_mode(int mode, float speed)
+void WorldNavigationGUI::Screen::set_usability_mode(int mode, float speed)
 {
    if (Logging::at_least(L_VERBOSE)) std::cout << " === setting WorldNavigation mode " << mode << " ===" << std::endl;
    switch(mode)
@@ -70,7 +70,7 @@ void WorldNavigationGUIScreen::set_usability_mode(int mode, float speed)
       if (Logging::at_least(L_NORMAL))
          std::cout
             << CONSOLE_COLOR_YELLOW
-            << "undefined InventoryGUIScreen mode " << mode
+            << "undefined InventoryGUI::Screen mode " << mode
             << CONSOLE_COLOR_DEFAULT
             << std::endl;
       break;

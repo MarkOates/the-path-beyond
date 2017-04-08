@@ -13,14 +13,14 @@ class Project : public UIScreen
 {
 public:
   WorldRenderScreen *world_render;
-  WorldNavigationGUIScreen *world_navigation_gui;
+  WorldNavigationGUI::Screen *world_navigation_gui;
   InventoryGUIScreen *inventory_gui;
   StartScreenGUIScreen *start_screen_gui;
 
   Project(Display *display)
     : UIScreen(display)
     , world_render(new WorldRenderScreen(display))
-    , world_navigation_gui(new WorldNavigationGUIScreen(this, display))
+    , world_navigation_gui(new WorldNavigationGUI::Screen(this, display))
     , inventory_gui(new InventoryGUIScreen(display))
     , start_screen_gui(new StartScreenGUIScreen(this, display))
   {
