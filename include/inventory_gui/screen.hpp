@@ -14,12 +14,7 @@ namespace InventoryGUI
    class InventoryToggleButton;
    class ItemButton;
    class Notification;
-};
 
-
-
-namespace InventoryGUI
-{
    class Screen : public UIScreen
    {
    public:
