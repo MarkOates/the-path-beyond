@@ -25,10 +25,7 @@ namespace InventoryGUI
    public:
      const int NUM_INVENTORY_ITEM_BUTTONS;
 
-     // MODE 1 Widget
      InventoryGUI::InventoryToggleButton *toggle_button;
-
-     // MODE 2 Widgets
      InventoryGUI::CurrentItemShowcase *current_item_showcase;
      InventoryGUI::BehindBlocker *behind_blocker;
      std::vector<InventoryGUI::ItemButton *> item_buttons;
