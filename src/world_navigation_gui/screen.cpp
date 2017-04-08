@@ -18,10 +18,10 @@ WorldNavigationGUIScreen::WorldNavigationGUIScreen(UIScreen *project_screen, Dis
    , nav_right_button(NULL)
      , nav_view(NULL)
 {
-   nav_up_button = new WorldNavigationGUINavButton(this, SCREEN_W/2, 100, 300, 30);
-   nav_down_button = new WorldNavigationGUINavButton(this, SCREEN_W/2, SCREEN_H-100, 300, 30);
-   nav_left_button = new WorldNavigationGUINavButton(this, 100, SCREEN_H/2, 30, 300);
-   nav_right_button = new WorldNavigationGUINavButton(this, SCREEN_W-100, SCREEN_H/2, 30, 300);
+   nav_up_button = new WorldNavigationGUI::NavButton(this, SCREEN_W/2, 100, 300, 30);
+   nav_down_button = new WorldNavigationGUI::NavButton(this, SCREEN_W/2, SCREEN_H-100, 300, 30);
+   nav_left_button = new WorldNavigationGUI::NavButton(this, 100, SCREEN_H/2, 30, 300);
+   nav_right_button = new WorldNavigationGUI::NavButton(this, SCREEN_W-100, SCREEN_H/2, 30, 300);
    nav_view = new WorldNavigationGUINavView(this);
 }
 

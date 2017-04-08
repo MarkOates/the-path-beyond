@@ -13,10 +13,10 @@ class WorldNavigationGUIScreen : public UIScreen
 public:
   UIScreen *project_screen;
 
-  WorldNavigationGUINavButton *nav_up_button;
-  WorldNavigationGUINavButton *nav_down_button;
-  WorldNavigationGUINavButton *nav_left_button;
-  WorldNavigationGUINavButton *nav_right_button;
+  WorldNavigationGUI::NavButton *nav_up_button;
+  WorldNavigationGUI::NavButton *nav_down_button;
+  WorldNavigationGUI::NavButton *nav_left_button;
+  WorldNavigationGUI::NavButton *nav_right_button;
   WorldNavigationGUINavView *nav_view;
 
   WorldNavigationGUIScreen(UIScreen *project_screen, Display *display);

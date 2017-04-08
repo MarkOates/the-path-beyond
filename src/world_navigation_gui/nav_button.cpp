@@ -9,50 +9,50 @@
 
 
 
-WorldNavigationGUINavButton::WorldNavigationGUINavButton(UIWidget *parent, float x, float y, float w, float h)
-   : UIWidget(parent, "WorldNavigationGUINavButton", new UISurfaceAreaBox(x, y, w, h))
+WorldNavigationGUI::NavButton::NavButton(UIWidget *parent, float x, float y, float w, float h)
+   : UIWidget(parent, "WorldNavigationGUI::NavButton", new UISurfaceAreaBox(x, y, w, h))
    , target_id("")
    , show_pos_y(y)
 {}
 
 
 
-void WorldNavigationGUINavButton::set_target_id(TargetID target_id)
+void WorldNavigationGUI::NavButton::set_target_id(TargetID target_id)
 {
    this->target_id = target_id;
 }
 
 
 
-void WorldNavigationGUINavButton::on_click()
+void WorldNavigationGUI::NavButton::on_click()
 {
    send_message_to_parent(target_id.get_trigger_message());
 }
 
 
 
-void WorldNavigationGUINavButton::on_draw()
+void WorldNavigationGUI::NavButton::on_draw()
 {
    Style::draw_button(Style::NORMAL, place, "•");
 }
 
 
 
-void WorldNavigationGUINavButton::show(float speed)
+void WorldNavigationGUI::NavButton::show(float speed)
 {
    Framework::motion().cmove_to(&place.position.y, show_pos_y, speed);
 }
 
 
 
-void WorldNavigationGUINavButton::hide(float speed)
+void WorldNavigationGUI::NavButton::hide(float speed)
 {
    Framework::motion().cmove_to(&place.position.y, -200, speed);
 }
 
 
 
-void WorldNavigationGUINavButton::show_if_has_target(float speed)
+void WorldNavigationGUI::NavButton::show_if_has_target(float speed)
 {
    if (!target_id.is_empty()) show(speed);
 }
