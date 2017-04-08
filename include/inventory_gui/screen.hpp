@@ -7,11 +7,11 @@
 
 
 
-class InventoryGUIInventoryToggleButton;
 namespace InventoryGUI
 {
    class BehindBlocker;
    class CurrentItemShowcase;
+   class InventoryToggleButton;
 };
 class InventoryGUIItemButton;
 class InventoryGUINotification;
@@ -24,7 +24,7 @@ public:
   const int NUM_INVENTORY_ITEM_BUTTONS;
 
   // MODE 1 Widget
-  InventoryGUIInventoryToggleButton *toggle_button;
+  InventoryGUI::InventoryToggleButton *toggle_button;
 
   // MODE 2 Widgets
   InventoryGUI::CurrentItemShowcase *current_item_showcase;

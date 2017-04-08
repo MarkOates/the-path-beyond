@@ -7,18 +7,21 @@
 
 
 
-class InventoryGUIInventoryToggleButton : public UIWidget
+namespace InventoryGUI
 {
-public:
-   InventoryItem shown_item;
+   class InventoryToggleButton : public UIWidget
+   {
+   public:
+      InventoryItem shown_item;
 
-   InventoryGUIInventoryToggleButton(UIWidget *parent);
+      InventoryToggleButton(UIWidget *parent);
 
-   void on_click();
-   void set_shown_item(InventoryItem item);
-   void on_draw();
-   void show(float speed=0.5);
-   void hide(float speed=0.5);
+      void on_click();
+      void set_shown_item(InventoryItem item);
+      void on_draw();
+      void show(float speed=0.5);
+      void hide(float speed=0.5);
+   };
 };
 
 
