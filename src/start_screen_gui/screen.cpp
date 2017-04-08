@@ -13,39 +13,18 @@
 
 
 
-StartScreenGUI::Screen::StartScreenGUIStartButton::StartScreenGUIStartButton(UIWidget *parent)
-   : UIWidget(parent, "StartScreenGUI::Screen::StartScreenGUIStartButton", new UISurfaceAreaBox(SCREEN_W/2, SCREEN_H/3*2, 240, 90))
-{}
-
-
-
-void StartScreenGUI::Screen::StartScreenGUIStartButton::on_click()
-{
-   if (Logging::at_least(L_NORMAL)) std::cout << "StartScreeGUIStartButton" << std::endl;
-   send_message_to_parent(TargetID("StartGame()").get_trigger_message());
-}
-
-
-
-void StartScreenGUI::Screen::StartScreenGUIStartButton::on_draw()
-{
-   Style::draw_button(Style::NORMAL, place, "start");
-}
-
-
-
 StartScreenGUI::Screen::Screen(UIScreen *project_screen, Display *display)
    : UIScreen(display)
    , project_screen(project_screen)
    , title_text(NULL)
    , instructions(NULL)
-     , start_screen_button(NULL)
+   , start_screen_button(NULL)
 {
    title_text = new UIText(this, SCREEN_W/2, SCREEN_H/2, "- THE PATH -");
    title_text->set_font(Framework::font("space age.otf 100"));
    title_text->place.align.x = 0.5;
 
-   start_screen_button = new StartScreenGUIStartButton(this);
+   start_screen_button = new StartScreenGUI::StartButton(this);
 
    instructions = new UIText(this, SCREEN_W/2, SCREEN_H/2 + 60, "use only mouse clicks to play");
    instructions->set_font(Framework::font("space age.otf 40"));
