@@ -7,7 +7,7 @@
 #include <logging.hpp>
 #include <target_id.hpp>
 #include <inventory_gui/screen.hpp>
-#include "start_screen.hpp"
+#include <start_screen_gui/screen.hpp>
 #include "world_render.hpp"
 #include <world_navigation_gui/screen.hpp>
 #include <script.hpp>
