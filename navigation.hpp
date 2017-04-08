@@ -2,37 +2,8 @@
 
 #include <world_navigation_gui/nav_view.hpp>
 
+#include <world_navigation_gui/nav_button.hpp>
 
-class WorldNavigationGUINavButton : public UIWidget
-{
-public:
-  TargetID target_id;
-  float show_pos_y;
-
-  WorldNavigationGUINavButton(UIWidget *parent, float x, float y, float w, float h)
-    : UIWidget(parent, "WorldNavigationGUINavButton", new UISurfaceAreaBox(x, y, w, h))
-    , target_id("")
-    , show_pos_y(y)
-  {}
-  void set_target_id(TargetID target_id) { this->target_id = target_id; }
-  void on_click() override { send_message_to_parent(target_id.get_trigger_message()); }
-  void on_draw() override
-  {
-    Style::draw_button(Style::NORMAL, place, "•");
-  }
-  void show(float speed=0.4)
-  {
-    Framework::motion().cmove_to(&place.position.y, show_pos_y, speed);
-  }
-  void hide(float speed=0.4)
-  {
-    Framework::motion().cmove_to(&place.position.y, -200, speed);
-  }
-  void show_if_has_target(float speed=0.4)
-  {
-    if (!target_id.is_empty()) show(speed);
-  }
-};
 
 
 class WorldNavigationGUIScreen : public UIScreen
