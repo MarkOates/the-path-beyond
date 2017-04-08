@@ -57,6 +57,7 @@ obj/game.o: main.cpp include/style_assets.hpp include/logging.hpp include/start_
 
 clean:
 	-rm $(OBJECTS)
+	-rm obj/game.o
 	-rm bin/game
 
 
