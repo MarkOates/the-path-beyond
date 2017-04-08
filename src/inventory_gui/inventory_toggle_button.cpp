@@ -3,8 +3,8 @@
 
 #include <inventory_gui/inventory_toggle_button.hpp>
 
-#include <allegro_flare/framework.h>
 #include <allegro_flare/gui/surface_areas/box.h>
+#include <allegro_flare/framework.h>
 #include <global_constants.hpp>
 #include <logging.hpp>
 #include <style_assets.hpp>
