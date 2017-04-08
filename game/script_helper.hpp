@@ -10,7 +10,7 @@ protected:
   static WorldRenderScreen *world_render;
   static WorldNavigationGUI::Screen *world_navigation_gui;
   static InventoryGUIScreen *inventory_gui;
-  static StartScreenGUIScreen *start_screen_gui;
+  static StartScreenGUI::Screen *start_screen_gui;
   static bool initialized;
 
 public:
@@ -180,7 +180,7 @@ public:
       WorldRenderScreen *wrs,
       WorldNavigationGUI::Screen *wnguis,
       InventoryGUIScreen *iguis,
-      StartScreenGUIScreen *ssgui
+      StartScreenGUI::Screen *ssgui
       )
   {
     if (initialized) return;
@@ -199,7 +199,7 @@ public:
 };
 WorldNavigationGUI::Screen *ScriptHelper::world_navigation_gui = NULL;
 InventoryGUIScreen *ScriptHelper::inventory_gui = NULL;
-StartScreenGUIScreen *ScriptHelper::start_screen_gui = NULL;
+StartScreenGUI::Screen *ScriptHelper::start_screen_gui = NULL;
 WorldRenderScreen *ScriptHelper::world_render = NULL;
 bool ScriptHelper::initialized = false;
 

@@ -13,13 +13,13 @@
 
 
 
-StartScreenGUIScreen::StartScreenGUIStartButton::StartScreenGUIStartButton(UIWidget *parent)
-   : UIWidget(parent, "StartScreenGUIScreen::StartScreenGUIStartButton", new UISurfaceAreaBox(SCREEN_W/2, SCREEN_H/3*2, 240, 90))
+StartScreenGUI::Screen::StartScreenGUIStartButton::StartScreenGUIStartButton(UIWidget *parent)
+   : UIWidget(parent, "StartScreenGUI::Screen::StartScreenGUIStartButton", new UISurfaceAreaBox(SCREEN_W/2, SCREEN_H/3*2, 240, 90))
 {}
 
 
 
-void StartScreenGUIScreen::StartScreenGUIStartButton::on_click()
+void StartScreenGUI::Screen::StartScreenGUIStartButton::on_click()
 {
    if (Logging::at_least(L_NORMAL)) std::cout << "StartScreeGUIStartButton" << std::endl;
    send_message_to_parent(TargetID("StartGame()").get_trigger_message());
@@ -27,14 +27,14 @@ void StartScreenGUIScreen::StartScreenGUIStartButton::on_click()
 
 
 
-void StartScreenGUIScreen::StartScreenGUIStartButton::on_draw()
+void StartScreenGUI::Screen::StartScreenGUIStartButton::on_draw()
 {
    Style::draw_button(Style::NORMAL, place, "start");
 }
 
 
 
-StartScreenGUIScreen::StartScreenGUIScreen(UIScreen *project_screen, Display *display)
+StartScreenGUI::Screen::Screen(UIScreen *project_screen, Display *display)
    : UIScreen(display)
    , project_screen(project_screen)
    , title_text(NULL)
@@ -55,7 +55,7 @@ StartScreenGUIScreen::StartScreenGUIScreen(UIScreen *project_screen, Display *di
 
 
 
-void StartScreenGUIScreen::on_message(UIWidget *sender, std::string message)
+void StartScreenGUI::Screen::on_message(UIWidget *sender, std::string message)
 {
    std::string trigger_id;
    if (TargetID::extract_trigger_id(message, &trigger_id)) project_screen->on_message(this, message); // bubbles it up
@@ -63,7 +63,7 @@ void StartScreenGUIScreen::on_message(UIWidget *sender, std::string message)
 
 
 
-void StartScreenGUIScreen::show(float speed)
+void StartScreenGUI::Screen::show(float speed)
 {
    Framework::motion().cmove_to(&title_text->place.position.x, SCREEN_W/2, 1.0 * speed);
    Framework::motion().cmove_to(&start_screen_button->place.position.x, SCREEN_W/2, 1.0 * speed);
@@ -74,7 +74,7 @@ void StartScreenGUIScreen::show(float speed)
 
 
 
-void StartScreenGUIScreen::hide(float speed)
+void StartScreenGUI::Screen::hide(float speed)
 {
    Framework::motion().cmove_to(&title_text->place.position.x, -1000, 1.0 * speed);
    Framework::motion().cmove_to(&start_screen_button->place.position.x, SCREEN_W+200, 1.0 * speed);

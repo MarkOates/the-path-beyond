@@ -15,14 +15,14 @@ public:
   WorldRenderScreen *world_render;
   WorldNavigationGUI::Screen *world_navigation_gui;
   InventoryGUIScreen *inventory_gui;
-  StartScreenGUIScreen *start_screen_gui;
+  StartScreenGUI::Screen *start_screen_gui;
 
   Project(Display *display)
     : UIScreen(display)
     , world_render(new WorldRenderScreen(display))
     , world_navigation_gui(new WorldNavigationGUI::Screen(this, display))
     , inventory_gui(new InventoryGUIScreen(display))
-    , start_screen_gui(new StartScreenGUIScreen(this, display))
+    , start_screen_gui(new StartScreenGUI::Screen(this, display))
   {
     // link nav render surface
     world_render->set_scene_targets_render_surface(world_navigation_gui->nav_view->render);
