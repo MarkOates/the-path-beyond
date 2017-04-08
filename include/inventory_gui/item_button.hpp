@@ -10,23 +10,16 @@
 
 namespace InventoryGUI
 {
+   class CombineButton;
+
    class ItemButton : public UIWidget
    {
-   private:
-     class GUICombineButton : public UIWidget
-     {
-     public:
-       GUICombineButton(UIWidget *parent);
-       void on_click() override;
-       void on_draw() override;
-     };
-
    public:
      InventoryItem item;
      int show_x_pos;
      bool selected;
 
-     GUICombineButton *combine_button;
+     CombineButton *combine_button;
 
      ItemButton(UIWidget *parent, float x, float y);
 

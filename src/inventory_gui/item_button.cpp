@@ -5,29 +5,9 @@
 
 #include <allegro_flare/gui/surface_areas/box.h>
 #include <allegro_flare/framework.h>
+#include <inventory_gui/combine_items_button.hpp>
 #include <logging.hpp>
 #include <style_assets.hpp>
-
-
-
-InventoryGUI::ItemButton::GUICombineButton::GUICombineButton(UIWidget *parent)
-   : UIWidget(parent, "InventoryGUI::ItemButton::GUICombineButton", new UISurfaceAreaBox(-30, parent->place.size.y/2, 40, 50))
-{}
-
-
-
-void InventoryGUI::ItemButton::GUICombineButton::on_click()
-{
-   if (Logging::at_least(L_VERBOSE)) std::cout << "GUICombineButton.on_click()" << std::endl;
-   send_message_to_parent("attempt_to_combine()");
-}
-
-
-
-void InventoryGUI::ItemButton::GUICombineButton::on_draw()
-{
-   Style::draw_button(Style::NORMAL, place, "<");
-}
 
 
 
@@ -38,7 +18,7 @@ InventoryGUI::ItemButton::ItemButton(UIWidget *parent, float x, float y)
    , selected(false)
      , combine_button(NULL)
 {
-   combine_button = new GUICombineButton(this);
+   combine_button = new InventoryGUI::CombineButton(this);
 }
 
 
