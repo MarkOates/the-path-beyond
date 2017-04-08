@@ -16,7 +16,7 @@ InventoryGUI::ItemButton::ItemButton(UIWidget *parent, float x, float y)
    , item(InventoryItem::Type::EMPTY)
    , show_x_pos(x)
    , selected(false)
-     , combine_button(NULL)
+   , combine_button(NULL)
 {
    combine_button = new InventoryGUI::CombineButton(this);
 }
