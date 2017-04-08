@@ -12,8 +12,8 @@ namespace InventoryGUI
    class BehindBlocker;
    class CurrentItemShowcase;
    class InventoryToggleButton;
+   class ItemButton;
 };
-class InventoryGUIItemButton;
 class InventoryGUINotification;
 
 
@@ -29,7 +29,7 @@ public:
   // MODE 2 Widgets
   InventoryGUI::CurrentItemShowcase *current_item_showcase;
   InventoryGUI::BehindBlocker *behind_blocker;
-  std::vector<InventoryGUIItemButton *> item_buttons;
+  std::vector<InventoryGUI::ItemButton *> item_buttons;
 
   InventoryGUINotification *notification;
 
@@ -41,8 +41,8 @@ public:
   bool symmetric_yes(InventoryItem itemA, InventoryItem itemB, InventoryItem::Type type1, InventoryItem::Type type2);
    InventoryItem attempt_combination(InventoryItem itemA, InventoryItem itemB);
   bool has_item(InventoryItem::Type item_type);
-  InventoryGUIItemButton *get_selected_item_button();
-  InventoryGUIItemButton *find_first_empty_inventory_button();
+  InventoryGUI::ItemButton *get_selected_item_button();
+  InventoryGUI::ItemButton *find_first_empty_inventory_button();
   bool add_item(InventoryItem item);
   void set_visibility_mode(int mode);
 };

@@ -30,7 +30,7 @@ InventoryGUIScreen::InventoryGUIScreen(Display *display)
 
    for (unsigned i=0; i<NUM_INVENTORY_ITEM_BUTTONS; i++)
    {
-      InventoryGUIItemButton *button = new InventoryGUIItemButton(this, SCREEN_W-100, 200+90*i);
+      InventoryGUI::ItemButton *button = new InventoryGUI::ItemButton(this, SCREEN_W-100, 200+90*i);
       item_buttons.push_back(button);
    }
 
@@ -55,10 +55,10 @@ void InventoryGUIScreen::on_message(UIWidget *sender, std::string message)
    {
       // deselect all the other buttons
       for (auto &item : item_buttons)
-         if (item != sender) static_cast<InventoryGUIItemButton *>(item)->deselect();
+         if (item != sender) static_cast<InventoryGUI::ItemButton *>(item)->deselect();
 
       // set the item in the showcase
-      InventoryGUIItemButton *button = static_cast<InventoryGUIItemButton *>(sender);
+      InventoryGUI::ItemButton *button = static_cast<InventoryGUI::ItemButton *>(sender);
       current_item_showcase->set_item(button->item);
       button->select();
 
@@ -67,7 +67,7 @@ void InventoryGUIScreen::on_message(UIWidget *sender, std::string message)
    }
    else if (message == "attempt_to_combine()")
    {
-      InventoryGUIItemButton *combining_button = static_cast<InventoryGUIItemButton *>(sender);
+      InventoryGUI::ItemButton *combining_button = static_cast<InventoryGUI::ItemButton *>(sender);
       InventoryItem combined_item = attempt_combination(current_item_showcase->item, combining_button->item);
       if (!combined_item.is_empty())
       {
@@ -75,7 +75,7 @@ void InventoryGUIScreen::on_message(UIWidget *sender, std::string message)
          std::cout << "Combination was successful" << std::endl;
 
          // clear the item on both selected button
-         InventoryGUIItemButton *selected_item_button = get_selected_item_button();
+         InventoryGUI::ItemButton *selected_item_button = get_selected_item_button();
          selected_item_button->clear_item();
          selected_item_button->deselect();
 
@@ -130,7 +130,7 @@ bool InventoryGUIScreen::has_item(InventoryItem::Type item_type)
 
 
 
-InventoryGUIItemButton *InventoryGUIScreen::get_selected_item_button()
+InventoryGUI::ItemButton *InventoryGUIScreen::get_selected_item_button()
 {
    for (auto &button : item_buttons) if (button->selected) return button;
    return NULL;
@@ -138,7 +138,7 @@ InventoryGUIItemButton *InventoryGUIScreen::get_selected_item_button()
 
 
 
-InventoryGUIItemButton *InventoryGUIScreen::find_first_empty_inventory_button()
+InventoryGUI::ItemButton *InventoryGUIScreen::find_first_empty_inventory_button()
 {
    for (auto &button : item_buttons) if (button->is_empty()) return button;
    return NULL;
@@ -148,7 +148,7 @@ InventoryGUIItemButton *InventoryGUIScreen::find_first_empty_inventory_button()
 
 bool InventoryGUIScreen::add_item(InventoryItem item)
 {
-   InventoryGUIItemButton *empty_button = find_first_empty_inventory_button();
+   InventoryGUI::ItemButton *empty_button = find_first_empty_inventory_button();
    if (!empty_button) return false;
    empty_button->set_item(item);
    return true;

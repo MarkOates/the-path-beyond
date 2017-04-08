@@ -10,13 +10,13 @@
 
 
 
-InventoryGUIItemButton::GUICombineButton::GUICombineButton(UIWidget *parent)
-   : UIWidget(parent, "InventoryGUIItemButton::GUICombineButton", new UISurfaceAreaBox(-30, parent->place.size.y/2, 40, 50))
+InventoryGUI::ItemButton::GUICombineButton::GUICombineButton(UIWidget *parent)
+   : UIWidget(parent, "InventoryGUI::ItemButton::GUICombineButton", new UISurfaceAreaBox(-30, parent->place.size.y/2, 40, 50))
 {}
 
 
 
-void InventoryGUIItemButton::GUICombineButton::on_click()
+void InventoryGUI::ItemButton::GUICombineButton::on_click()
 {
    if (Logging::at_least(L_VERBOSE)) std::cout << "GUICombineButton.on_click()" << std::endl;
    send_message_to_parent("attempt_to_combine()");
@@ -24,15 +24,15 @@ void InventoryGUIItemButton::GUICombineButton::on_click()
 
 
 
-void InventoryGUIItemButton::GUICombineButton::on_draw()
+void InventoryGUI::ItemButton::GUICombineButton::on_draw()
 {
    Style::draw_button(Style::NORMAL, place, "<");
 }
 
 
 
-InventoryGUIItemButton::InventoryGUIItemButton(UIWidget *parent, float x, float y)
-   : UIWidget(parent, "InventoryGUIItemButton", new UISurfaceAreaBox(x, y, 80, 80))
+InventoryGUI::ItemButton::ItemButton(UIWidget *parent, float x, float y)
+   : UIWidget(parent, "InventoryGUI::ItemButton", new UISurfaceAreaBox(x, y, 80, 80))
    , item(InventoryItem::Type::EMPTY)
    , show_x_pos(x)
    , selected(false)
@@ -43,50 +43,50 @@ InventoryGUIItemButton::InventoryGUIItemButton(UIWidget *parent, float x, float 
 
 
 
-void InventoryGUIItemButton::set_item(InventoryItem item)
+void InventoryGUI::ItemButton::set_item(InventoryItem item)
 {
    this->item = item;
 }
 
 
 
-void InventoryGUIItemButton::clear_item()
+void InventoryGUI::ItemButton::clear_item()
 {
    this->item = InventoryItem(InventoryItem::Type::EMPTY);
 }
 
 
 
-bool InventoryGUIItemButton::is_empty()
+bool InventoryGUI::ItemButton::is_empty()
 {
    return (item.type == InventoryItem::Type::EMPTY);
 }
 
 
 
-void InventoryGUIItemButton::on_click()
+void InventoryGUI::ItemButton::on_click()
 {
-   if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIItemButton" << std::endl;
+   if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUI::ItemButton" << std::endl;
    send_message_to_parent("feature_my_item()");
 }
 
 
 
-void InventoryGUIItemButton::select()
+void InventoryGUI::ItemButton::select()
 {
    selected = true;
 }
 
 
 
-void InventoryGUIItemButton::deselect()
+void InventoryGUI::ItemButton::deselect()
 {
    selected = false;
 }
 
 
 
-void InventoryGUIItemButton::on_message(UIWidget *sender, std::string message)
+void InventoryGUI::ItemButton::on_message(UIWidget *sender, std::string message)
 {
    // message will always be attempt_to_combine()
    if (sender == combine_button) send_message_to_parent("attempt_to_combine()");
@@ -94,24 +94,24 @@ void InventoryGUIItemButton::on_message(UIWidget *sender, std::string message)
 
 
 
-void InventoryGUIItemButton::on_draw()
+void InventoryGUI::ItemButton::on_draw()
 {
    Style::draw_button(selected ? Style::SELECTED : Style::NORMAL, place, item.is_empty() ? "-" : "", item.get_image());
 }
 
 
 
-void InventoryGUIItemButton::show(float speed)
+void InventoryGUI::ItemButton::show(float speed)
 {
-   if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIItemButton.show()" << std::endl;
+   if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUI::ItemButton.show()" << std::endl;
    Framework::motion().cmove_to(&place.position.x, show_x_pos, speed);
 }
 
 
 
-void InventoryGUIItemButton::hide(float speed)
+void InventoryGUI::ItemButton::hide(float speed)
 {
-   if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUIItemButton.hide()" << std::endl;
+   if (Logging::at_least(L_VERBOSE)) std::cout << "InventoryGUI::ItemButton.hide()" << std::endl;
    Framework::motion().cmove_to(&place.position.x, show_x_pos+200, speed);
 }
 
