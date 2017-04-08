@@ -5,21 +5,24 @@
 #include "./scripts/start_title_screen.hpp"
 #include "./scripts/start_game.hpp"
 
+#include "logging.hpp"
+
+
 
 class Project : public UIScreen
 {
 public:
   WorldRenderScreen *world_render;
-  WorldNavigationGUIScreen *world_navigation_gui;
-  InventoryGUIScreen *inventory_gui;
-  StartScreenGUIScreen *start_screen_gui;
+  WorldNavigationGUI::Screen *world_navigation_gui;
+  InventoryGUI::Screen *inventory_gui;
+  StartScreenGUI::Screen *start_screen_gui;
 
   Project(Display *display)
     : UIScreen(display)
     , world_render(new WorldRenderScreen(display))
-    , world_navigation_gui(new WorldNavigationGUIScreen(this, display))
-    , inventory_gui(new InventoryGUIScreen(display))
-    , start_screen_gui(new StartScreenGUIScreen(this, display))
+    , world_navigation_gui(new WorldNavigationGUI::Screen(this, display))
+    , inventory_gui(new InventoryGUI::Screen(display))
+    , start_screen_gui(new StartScreenGUI::Screen(this, display))
   {
     // link nav render surface
     world_render->set_scene_targets_render_surface(world_navigation_gui->nav_view->render);

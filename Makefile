@@ -29,12 +29,37 @@ all: bin/game$(EXE_EXTENSION)
 
 
 
+SOURCES := $(shell find src -name '*.cpp')
+OBJECTS := $(SOURCES:src/%.cpp=obj/%.o)
+REQUIRED_DIRECTORIES := $(dir $(OBJECTS))
 
-bin/game$(EXE_EXTENSION): obj/game.o
-		g++ obj/game.o -o bin/game $(OPENGL_LIB) -l$(ALLEGRO_FLARE_LIB) $(ALLEGRO_LIBS) -L$(ALLEGRO_FLARE_DIR)/lib -L$(ALLEGRO_DIR)/build/lib
 
-obj/game.o: main.cpp style_assets.hpp logging.hpp inventory.hpp start_screen.hpp script.hpp target_id.hpp navigation.hpp world_render.hpp game/project.hpp game/script_helper.hpp game/load_game_scripts.hpp $(wildcard game/scripts/*)
-		g++ -o $@ -c -std=gnu++11 $< -I$(ALLEGRO_FLARE_DIR)/include -I$(ALLEGRO_DIR)/include
+
+bin/game$(EXE_EXTENSION): $(OBJECTS) obj/game.o
+	g++ $^ -o bin/game $(OPENGL_LIB) -l$(ALLEGRO_FLARE_LIB) $(ALLEGRO_LIBS) -L$(ALLEGRO_FLARE_DIR)/lib -L$(ALLEGRO_DIR)/build/lib
+
+
+
+obj/%.o: src/%.cpp | required_obj_dirs
+	g++ -c -std=gnu++11 $< -o $@ -I$(ALLEGRO_FLARE_DIR)/include -I$(ALLEGRO_DIR)/include -I./include
+
+
+
+required_obj_dirs:
+	@mkdir -p $(REQUIRED_DIRECTORIES)
+
+
+
+obj/game.o: main.cpp include/style_assets.hpp include/logging.hpp include/start_screen_gui/screen.hpp include/script.hpp include/target_id.hpp include/world_render_screen.hpp game/project.hpp game/script_helper.hpp game/load_game_scripts.hpp $(wildcard game/scripts/*)
+	g++ -o $@ -c -std=gnu++11 $< -I$(ALLEGRO_FLARE_DIR)/include -I$(ALLEGRO_DIR)/include -I./include
+
+
+
+clean:
+	-rm $(OBJECTS)
+	-rm obj/game.o
+	-rm bin/game
+
 
 
 

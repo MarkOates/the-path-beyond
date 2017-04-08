@@ -1,12 +1,16 @@
 
+#include <inventory_gui/notification.hpp>
+
+#include <entity.hpp>
+
 
 class ScriptHelper
 {
 protected:
   static WorldRenderScreen *world_render;
-  static WorldNavigationGUIScreen *world_navigation_gui;
-  static InventoryGUIScreen *inventory_gui;
-  static StartScreenGUIScreen *start_screen_gui;
+  static WorldNavigationGUI::Screen *world_navigation_gui;
+  static InventoryGUI::Screen *inventory_gui;
+  static StartScreenGUI::Screen *start_screen_gui;
   static bool initialized;
 
 public:
@@ -174,9 +178,9 @@ public:
   }
   static void initialize(
       WorldRenderScreen *wrs,
-      WorldNavigationGUIScreen *wnguis,
-      InventoryGUIScreen *iguis,
-      StartScreenGUIScreen *ssgui
+      WorldNavigationGUI::Screen *wnguis,
+      InventoryGUI::Screen *iguis,
+      StartScreenGUI::Screen *ssgui
       )
   {
     if (initialized) return;
@@ -193,9 +197,9 @@ public:
     initialized = true;
   }
 };
-WorldNavigationGUIScreen *ScriptHelper::world_navigation_gui = NULL;
-InventoryGUIScreen *ScriptHelper::inventory_gui = NULL;
-StartScreenGUIScreen *ScriptHelper::start_screen_gui = NULL;
+WorldNavigationGUI::Screen *ScriptHelper::world_navigation_gui = NULL;
+InventoryGUI::Screen *ScriptHelper::inventory_gui = NULL;
+StartScreenGUI::Screen *ScriptHelper::start_screen_gui = NULL;
 WorldRenderScreen *ScriptHelper::world_render = NULL;
 bool ScriptHelper::initialized = false;
 
