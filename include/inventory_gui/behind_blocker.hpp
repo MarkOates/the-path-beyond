@@ -6,15 +6,18 @@
 
 
 
-class InventoryGUIBehindBlocker : public UIWidget
+namespace InventoryGUI
 {
-public:
-  InventoryGUIBehindBlocker(UIWidget *parent);
+   class BehindBlocker : public UIWidget
+   {
+   public:
+     BehindBlocker(UIWidget *parent);
 
-  void on_click() override;
-  void on_draw() override;
-  void show();
-  void hide();
+     void on_click() override;
+     void on_draw() override;
+     void show();
+     void hide();
+   };
 };
 
 

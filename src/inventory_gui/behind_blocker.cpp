@@ -9,27 +9,27 @@
 
 
 
-InventoryGUIBehindBlocker::InventoryGUIBehindBlocker(UIWidget *parent)
-   : UIWidget(parent, "InventoryGUIBehindBlocker", new UISurfaceAreaBox(SCREEN_W/2, SCREEN_H/2, SCREEN_W, SCREEN_H))
+InventoryGUI::BehindBlocker::BehindBlocker(UIWidget *parent)
+   : UIWidget(parent, "InventoryGUI::BehindBlocker", new UISurfaceAreaBox(SCREEN_W/2, SCREEN_H/2, SCREEN_W, SCREEN_H))
 {}
 
 
 
-void InventoryGUIBehindBlocker::on_click()
+void InventoryGUI::BehindBlocker::on_click()
 {
    send_message_to_parent("set_visibility_mode(1)");
 }
 
 
 
-void InventoryGUIBehindBlocker::on_draw()
+void InventoryGUI::BehindBlocker::on_draw()
 {
    al_draw_filled_rectangle(0, 0, place.size.x, place.size.y, color::color(color::black, 0.3));
 }
 
 
 
-void InventoryGUIBehindBlocker::show()
+void InventoryGUI::BehindBlocker::show()
 {
    place.scale.x = 1.0;
    place.scale.y = 1.0;
@@ -37,7 +37,7 @@ void InventoryGUIBehindBlocker::show()
 
 
 
-void InventoryGUIBehindBlocker::hide()
+void InventoryGUI::BehindBlocker::hide()
 {
    place.scale.x = 0;
    place.scale.y = 0;

@@ -23,7 +23,7 @@ InventoryGUIScreen::InventoryGUIScreen(Display *display)
    , current_mode(1)
 {
    // create our Inventory GUI Widgets
-   behind_blocker = new InventoryGUIBehindBlocker(this);
+   behind_blocker = new InventoryGUI::BehindBlocker(this);
    toggle_button = new InventoryGUIInventoryToggleButton(this);
    current_item_showcase = new InventoryGUICurrentItemShowcase(this);
    notification = new InventoryGUINotification(this);
