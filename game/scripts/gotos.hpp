@@ -1,10 +1,10 @@
 
 
 
-class goto1: public ScriptCollection, public ScriptHelper
+class goto1: public Script, public ScriptHelper
 {
 public:
-   goto1() : ScriptCollection("goto1") {}
+   goto1() : Script("goto1") {}
    void activate() override
    {
       clear_attached_scripts();
@@ -17,10 +17,10 @@ public:
 
 
 
-class goto2: public ScriptCollection, public ScriptHelper
+class goto2: public Script, public ScriptHelper
 {
 public:
-   goto2() : ScriptCollection("goto2") {}
+   goto2() : Script("goto2") {}
    void activate() override
    {
       clear_attached_scripts();
@@ -31,10 +31,10 @@ public:
 
 
 
-class goto3: public ScriptCollection, public ScriptHelper
+class goto3: public Script, public ScriptHelper
 {
 public:
-   goto3() : ScriptCollection("goto3") {}
+   goto3() : Script("goto3") {}
    void activate() override
    {
       clear_attached_scripts();
@@ -45,10 +45,10 @@ public:
 
 
 
-class goto4: public ScriptCollection, public ScriptHelper
+class goto4: public Script, public ScriptHelper
 {
 public:
-   goto4() : ScriptCollection("goto4") {}
+   goto4() : Script("goto4") {}
    void activate() override
    {
       clear_attached_scripts();
@@ -62,10 +62,10 @@ public:
 
 
 
-class goto5: public ScriptCollection, public ScriptHelper
+class goto5: public Script, public ScriptHelper
 {
 public:
-   goto5() : ScriptCollection("goto5") {}
+   goto5() : Script("goto5") {}
    void activate() override
    {
       clear_attached_scripts();
@@ -78,10 +78,10 @@ public:
 
 
 
-class goto8: public ScriptCollection, public ScriptHelper
+class goto8: public Script, public ScriptHelper
 {
 public:
-   goto8() : ScriptCollection("goto8") {}
+   goto8() : Script("goto8") {}
    void activate() override
    {
       clear_attached_scripts();
@@ -96,10 +96,10 @@ public:
 ////
 
 
-class goto18: public ScriptCollection, public ScriptHelper
+class goto18: public Script, public ScriptHelper
 {
 public:
-   goto18() : ScriptCollection("goto18") {}
+   goto18() : Script("goto18") {}
    void activate() override
    {
       clear_attached_scripts();
@@ -112,10 +112,10 @@ public:
 
 
 
-class goto23: public ScriptCollection, public ScriptHelper
+class goto23: public Script, public ScriptHelper
 {
 public:
-   goto23() : ScriptCollection("goto23") {}
+   goto23() : Script("goto23") {}
    void activate() override
    {
       clear_attached_scripts();

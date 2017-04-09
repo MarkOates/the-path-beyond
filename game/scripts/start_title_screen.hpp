@@ -1,10 +1,14 @@
 
 
 
-class StartTitleScreen: public ScriptCollection, public ScriptHelper
+#include <script.hpp>
+
+
+
+class StartTitleScreen: public Script, public ScriptHelper
 {
 public:
-   StartTitleScreen() : ScriptCollection("StartTitleScreen()") {}
+   StartTitleScreen() : Script("StartTitleScreen()") {}
    void activate() override
    {
       simple_camera_to(0, 0, 0.2, 0);

@@ -1,10 +1,14 @@
 
 
 
-class PickupCardKeyDecrypter : public ScriptCollection, public ScriptHelper
+#include <script.hpp>
+
+
+
+class PickupCardKeyDecrypter : public Script, public ScriptHelper
 {
 public:
-   PickupCardKeyDecrypter() : ScriptCollection("PickupCardKeyDecrypter") {}
+   PickupCardKeyDecrypter() : Script("PickupCardKeyDecrypter") {}
    void activate() override
    {
       inventory_gui->add_item(InventoryItem::CARD_KEY_DECRYPTER);
@@ -15,10 +19,10 @@ public:
 
 
 
-class PickupEncryptedCardKey : public ScriptCollection, public ScriptHelper
+class PickupEncryptedCardKey : public Script, public ScriptHelper
 {
 public:
-   PickupEncryptedCardKey() : ScriptCollection("PickupEncryptedCardKey") {}
+   PickupEncryptedCardKey() : Script("PickupEncryptedCardKey") {}
    void activate() override
    {
       inventory_gui->add_item(InventoryItem::ENCRYPTED_CARD_KEY);
@@ -29,10 +33,10 @@ public:
 
 
 
-class OpenMainDoor : public ScriptCollection, public ScriptHelper
+class OpenMainDoor : public Script, public ScriptHelper
 {
 public:
-   OpenMainDoor() : ScriptCollection("OpenMainDoor") {}
+   OpenMainDoor() : Script("OpenMainDoor") {}
    void activate() override
    {
       if (inventory_gui->has_item(InventoryItem::Type::DECRYPTED_CARD_KEY))

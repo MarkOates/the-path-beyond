@@ -5,3 +5,4 @@
 
 #define SCRIPT_ID_ATTRIBUTE "script_id"
 #define ENTITY_ID_ATTRIBUTE "entity_id"
+#define SCRIPT_NAME_ATTRIBUTE "name"

@@ -6,14 +6,7 @@
 #include <allegro_flare/console_color.h>
 #include <global_constants.hpp>
 #include <logging.hpp>
-
-
-
-ScriptCollection::ScriptCollection(std::string id)
-   : ElementID(get_manager())
-{
-   set(SCRIPT_ID_ATTRIBUTE, id);
-}
+#include <script.hpp>
 
 
 
@@ -25,25 +18,25 @@ bool ScriptCollection::initialized = false;
 
 
 
-ScriptCollection *ScriptCollection::find_by_unique_id(int unique_id)
+Script *ScriptCollection::find_by_unique_id(int unique_id)
 {
-   return static_cast<ScriptCollection *>(manager->find_descendant_by_id(unique_id));
+   return static_cast<Script *>(manager->find_descendant_by_id(unique_id));
    //return static_cast<ScriptCollection *>(manager->get_element_by_unique_id(unique_id));
 }
 
 
 
-ScriptCollection *ScriptCollection::find_by_id(std::string id)
+Script *ScriptCollection::find_by_id(std::string id)
 {
    ElementID *element = manager->find_first(SCRIPT_ID_ATTRIBUTE, id);
    //ElementID *element = manager->get_element_by_id(id);
-   if (element) return static_cast<ScriptCollection *>(element);
+   if (element) return static_cast<Script *>(element);
    return NULL;
 }
 
 
 
-void ScriptCollection::run_script(ScriptCollection *script)
+void ScriptCollection::run_script(Script *script)
 {
    std::cout << "{{{ Activating script \"" << script->get_id() << "\"" << std::endl;
    script->activate();
@@ -54,7 +47,7 @@ void ScriptCollection::run_script(ScriptCollection *script)
 
 bool ScriptCollection::run_by_unique_id(int unique_id)
 {
-   ScriptCollection *script = find_by_unique_id(unique_id);
+   Script *script = find_by_unique_id(unique_id);
    if (!script)
    {
       if (Logging::at_least(L_ERRORS))
@@ -74,7 +67,7 @@ bool ScriptCollection::run_by_unique_id(int unique_id)
 
 bool ScriptCollection::run(std::string id)
 {
-   ScriptCollection *script = find_by_id(id);
+   Script *script = find_by_id(id);
    if (!script)
    {
       if (Logging::at_least(L_ERRORS))

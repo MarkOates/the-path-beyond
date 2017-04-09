@@ -1,10 +1,10 @@
 
 
 
-class StartGame: public ScriptCollection, public ScriptHelper
+class StartGame: public Script, public ScriptHelper
 {
 public:
-   StartGame() : ScriptCollection("StartGame()") {}
+   StartGame() : Script("StartGame()") {}
    void activate() override
    {
       world_navigation_gui->set_usability_mode(1);

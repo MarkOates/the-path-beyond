@@ -6,10 +6,6 @@
 
 
 
-#define SCRIPT_NAME_ATTRIBUTE "name"
-
-
-
 class Script : public ElementID
 {
 public:

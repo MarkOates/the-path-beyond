@@ -4,6 +4,9 @@
 #include <allegro_flare/element_id.h>
 
 
+class Script;
+
+
 class ScriptCollection : public ElementID
 {
 private:
@@ -11,12 +14,9 @@ private:
    static bool initialized;
 
 public:
-   ScriptCollection(std::string id);
-   virtual void activate() = 0;
-
-   static ScriptCollection *find_by_unique_id(int unique_id);
-   static ScriptCollection *find_by_id(std::string id);
-   static void run_script(ScriptCollection *script);
+   static Script *find_by_unique_id(int unique_id);
+   static Script *find_by_id(std::string id);
+   static void run_script(Script *script);
    static bool run_by_unique_id(int unique_id);
    static bool run(std::string id);
    static void initialize();
