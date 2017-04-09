@@ -3,6 +3,7 @@
 
 #include <world_render_screen.hpp>
 
+#include <allegro_flare/converters/color_id_converter.h>
 #include <allegro_flare/color.h>
 #include <allegro_flare/element_id.h>
 #include <entity.hpp>
@@ -100,7 +101,7 @@ void WorldRenderScreen::draw_scene_targets(ALLEGRO_BITMAP *surface)
    for (auto &elem : manager->get_children())
    {
       Entity *entity = static_cast<Entity *>(elem);
-      entity->draw_flat_color(TargetID::id_to_color(entity->get_attached_script_id()));
+      entity->draw_flat_color(ColorIDConverter::encode_id(entity->get_attached_script_id()));
    }
 
    al_restore_state(&state);

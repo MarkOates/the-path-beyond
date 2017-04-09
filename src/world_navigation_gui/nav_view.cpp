@@ -5,6 +5,7 @@
 
 #include <world_navigation_gui/nav_view.hpp>
 
+#include <allegro_flare/converters/color_id_converter.h>
 #include <allegro_flare/gui/surface_areas/box.h>
 #include <allegro_flare/user_event_emitter.h>
 #include <allegro_flare/framework.h>
@@ -51,7 +52,7 @@ void WorldNavigationGUI::NavView::on_click()
       if (mouse_y < 0 || mouse_y > al_get_bitmap_height(render)) return;
       if (Logging::at_least(L_VERBOSE)) std::cout << "sampling bitmap at " << mouse_x << ", " << mouse_y << std::endl;
 
-      int clicked_id = TargetID::color_to_id(al_get_pixel(render, mouse_x, mouse_y));
+      int clicked_id = ColorIDConverter::decode_id(al_get_pixel(render, mouse_x, mouse_y));
       UserEventEmitter::emit_event(RUN_SCRIPT_EVENT, clicked_id);
    }
 }
