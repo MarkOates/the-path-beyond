@@ -1,16 +1,14 @@
 #include <allegro_flare/allegro_flare.h>
-#include <cmath>
 
 #include <global_constants.hpp>
 
 #include <style_assets.hpp>
 #include <logging.hpp>
-#include <target_id.hpp>
 #include <inventory_gui/screen.hpp>
 #include <start_screen_gui/screen.hpp>
 #include <world_render_screen.hpp>
 #include <world_navigation_gui/screen.hpp>
-#include <script.hpp>
+#include <script_collection.hpp>
 
 #include "game/project.hpp"
 #include "game/load_game_scripts.hpp"

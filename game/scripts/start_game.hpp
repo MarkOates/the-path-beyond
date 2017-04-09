@@ -38,7 +38,8 @@ public:
       create_entity("MainDoorDoor", vec3d(-12, 0, 0), 0.25, "main_door_door-01.obj", "sci_fi_panel2.jpg");
 
       // goto the starting point
-      Script::run("goto1");
+      Script *goto1_script = ScriptCollection::find_by_name("goto1");
+      UserEventEmitter::emit_event(RUN_SCRIPT_EVENT, goto1_script->get_id());
    }
 };
 

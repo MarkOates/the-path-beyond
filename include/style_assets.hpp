@@ -9,7 +9,7 @@
 
 
 
-namespace Style
+namespace StyleAssets
 {
    enum BUTTON_STATE
    {

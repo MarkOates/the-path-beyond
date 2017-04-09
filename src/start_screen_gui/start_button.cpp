@@ -4,10 +4,10 @@
 #include <start_screen_gui/start_button.hpp>
 
 #include <allegro_flare/gui/surface_areas/box.h>
+#include <allegro_flare/user_event_emitter.h>
 #include <global_constants.hpp>
 #include <logging.hpp>
 #include <style_assets.hpp>
-#include <target_id.hpp>
 
 
 
@@ -20,14 +20,14 @@ StartScreenGUI::StartButton::StartButton(UIWidget *parent)
 void StartScreenGUI::StartButton::on_click()
 {
    if (Logging::at_least(L_NORMAL)) std::cout << "StartScreeGUI::StartButton" << std::endl;
-   send_message_to_parent(TargetID("StartGame()").get_trigger_message());
+   UserEventEmitter::emit_event(START_GAME_EVENT);
 }
 
 
 
 void StartScreenGUI::StartButton::on_draw()
 {
-   Style::draw_button(Style::NORMAL, place, "start");
+   StyleAssets::draw_button(StyleAssets::NORMAL, place, "start");
 }
 
 

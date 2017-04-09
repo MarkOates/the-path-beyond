@@ -76,7 +76,7 @@ void InventoryGUI::ItemButton::on_message(UIWidget *sender, std::string message)
 
 void InventoryGUI::ItemButton::on_draw()
 {
-   Style::draw_button(selected ? Style::SELECTED : Style::NORMAL, place, item.is_empty() ? "-" : "", item.get_image());
+   StyleAssets::draw_button(selected ? StyleAssets::SELECTED : StyleAssets::NORMAL, place, item.is_empty() ? "-" : "", item.get_image());
 }
 
 

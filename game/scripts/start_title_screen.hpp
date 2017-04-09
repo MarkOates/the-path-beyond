@@ -1,6 +1,10 @@
 
 
 
+#include <script.hpp>
+
+
+
 class StartTitleScreen: public Script, public ScriptHelper
 {
 public:

@@ -3,5 +3,8 @@
 #define SCREEN_W 1920
 #define SCREEN_H 1080
 
-#define SCRIPT_ID_ATTRIBUTE "script_id"
 #define ENTITY_ID_ATTRIBUTE "entity_id"
+#define SCRIPT_NAME_ATTRIBUTE "name"
+
+#define RUN_SCRIPT_EVENT ALLEGRO_GET_EVENT_TYPE('S', 'C', 'R', 'P')
+#define START_GAME_EVENT ALLEGRO_GET_EVENT_TYPE('S', 'T', 'R', 'T')

@@ -8,7 +8,7 @@
 
 
 
-ALLEGRO_COLOR Style::get_state_color(BUTTON_STATE state)
+ALLEGRO_COLOR StyleAssets::get_state_color(BUTTON_STATE state)
 {
    switch(state)
    {
@@ -29,7 +29,7 @@ ALLEGRO_COLOR Style::get_state_color(BUTTON_STATE state)
 
 
 
-void Style::draw_button(BUTTON_STATE state, float x, float y, float w, float h, std::string text, ALLEGRO_BITMAP *bitmap)
+void StyleAssets::draw_button(BUTTON_STATE state, float x, float y, float w, float h, std::string text, ALLEGRO_BITMAP *bitmap)
 {
    int inset = 4;
 
@@ -57,7 +57,7 @@ void Style::draw_button(BUTTON_STATE state, float x, float y, float w, float h, 
 
 
 
-void Style::draw_text_box(float x, float y, float w, float h, std::string text)
+void StyleAssets::draw_text_box(float x, float y, float w, float h, std::string text)
 {
    int inset = 4;
 
@@ -75,7 +75,7 @@ void Style::draw_text_box(float x, float y, float w, float h, std::string text)
 
 
 
-void Style::draw_button(BUTTON_STATE state, const placement2d &place, std::string text, ALLEGRO_BITMAP *bitmap)
+void StyleAssets::draw_button(BUTTON_STATE state, const placement2d &place, std::string text, ALLEGRO_BITMAP *bitmap)
 {
    draw_button(state, 0, 0, place.size.x, place.size.y, text, bitmap);
 }

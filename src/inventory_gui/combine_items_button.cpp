@@ -25,7 +25,7 @@ void InventoryGUI::CombineButton::on_click()
 
 void InventoryGUI::CombineButton::on_draw()
 {
-   Style::draw_button(Style::NORMAL, place, "<");
+   StyleAssets::draw_button(StyleAssets::NORMAL, place, "<");
 }
 
 

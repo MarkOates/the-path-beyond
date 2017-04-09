@@ -32,7 +32,7 @@ InventoryGUI::CurrentItemShowcase::CurrentItemShowcase(UIWidget *parent)
 
 void InventoryGUI::CurrentItemShowcase::on_draw()
 {
-   Style::draw_button(Style::NORMAL, place, item.is_empty() ? "- EMPTY -" : "");
+   StyleAssets::draw_button(StyleAssets::NORMAL, place, item.is_empty() ? "- EMPTY -" : "");
 }
 
 

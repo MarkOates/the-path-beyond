@@ -7,6 +7,8 @@
 
 #include "logging.hpp"
 
+#include <allegro_flare/user_event_emitter.h>
+
 
 
 class Project : public UIScreen
@@ -20,30 +22,60 @@ public:
    Project(Display *display)
       : UIScreen(display)
       , world_render(new WorldRenderScreen(display))
-      , world_navigation_gui(new WorldNavigationGUI::Screen(this, display))
+      , world_navigation_gui(new WorldNavigationGUI::Screen(display))
       , inventory_gui(new InventoryGUI::Screen(display))
-      , start_screen_gui(new StartScreenGUI::Screen(this, display))
+      , start_screen_gui(new StartScreenGUI::Screen(display))
    {
       // link nav render surface
       world_render->set_scene_targets_render_surface(world_navigation_gui->nav_view->render);
 
       ScriptHelper::initialize(world_render, world_navigation_gui, inventory_gui, start_screen_gui);
 
-      Script::run("StartTitleScreen()");
+      Script *start_title_screen_script = ScriptCollection::find_by_name("StartTitleScreen()");
+      UserEventEmitter::emit_event(RUN_SCRIPT_EVENT, start_title_screen_script->get_id());
    }
-   void on_message(UIWidget *sender, std::string message)
+   void user_event_func() override
    {
-      std::string trigger_id = "";
-      int unique_trigger_id = 0;
-      if (TargetID::extract_trigger_id(message, &trigger_id))
+      ALLEGRO_EVENT *event = Framework::current_event;
+
+      switch (event->user.type)
       {
-         std::cout << "Project running script \"" << trigger_id << "\"" << std::endl;
-         Script::run(trigger_id);
+      case START_GAME_EVENT:
+         {
+            Script *start_game_script = ScriptCollection::find_by_name("StartGame()");
+            UserEventEmitter::emit_event(RUN_SCRIPT_EVENT, start_game_script->get_id());
+         }
+         break;
+      case RUN_SCRIPT_EVENT:
+         {
+            int script_id = event->user.data1;
+            _play_script(script_id);
+         }
+         break;
+      default:
+         std::cout << "Uncaught user event" << std::endl;
+         break;
       }
-      else if (TargetID::extract_unique_trigger_id(message, &unique_trigger_id))
+   }
+   void _play_script(int script_id)
+   {
+      if (Logging::at_least(L_VERBOSE)) std::cout << "Project running script ID\"" << script_id << "\"" << std::endl;
+
+      Script *script = ScriptCollection::find_by_id(script_id);
+      if (!script)
       {
-         if (Logging::at_least(L_VERBOSE)) std::cout << "Project running script ID\"" << unique_trigger_id << "\"" << std::endl;
-         Script::run_by_unique_id(unique_trigger_id);
+         if (Logging::at_least(L_ERRORS))
+            std::cout
+               << CONSOLE_COLOR_RED
+               << "Could not run script: ScriptCollection with script_id [" << script_id << "] not foud."
+               << CONSOLE_COLOR_DEFAULT
+               << std::endl;
+      }
+      else
+      {
+         std::cout << "{{{ Activating script \"" << script->get(SCRIPT_NAME_ATTRIBUTE) << "\"" << std::endl;
+         script->activate();
+         std::cout << "}}} ScriptCollection \"" << script->get(SCRIPT_NAME_ATTRIBUTE) << "\" finished" << std::endl;
       }
    }
 };

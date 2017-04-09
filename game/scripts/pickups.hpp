@@ -1,6 +1,10 @@
 
 
 
+#include <script.hpp>
+
+
+
 class PickupCardKeyDecrypter : public Script, public ScriptHelper
 {
 public:

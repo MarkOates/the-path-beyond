@@ -9,13 +9,11 @@
 #include <global_constants.hpp>
 #include <logging.hpp>
 #include <style_assets.hpp>
-#include <target_id.hpp>
 
 
 
-StartScreenGUI::Screen::Screen(UIScreen *project_screen, Display *display)
+StartScreenGUI::Screen::Screen(Display *display)
    : UIScreen(display)
-   , project_screen(project_screen)
    , title_text(NULL)
    , instructions(NULL)
    , start_screen_button(NULL)
@@ -30,14 +28,6 @@ StartScreenGUI::Screen::Screen(UIScreen *project_screen, Display *display)
    instructions->set_font(Framework::font("space age.otf 40"));
    instructions->set_font_color(color::gray);
    instructions->place.align.x = 0.5;
-}
-
-
-
-void StartScreenGUI::Screen::on_message(UIWidget *sender, std::string message)
-{
-   std::string trigger_id;
-   if (TargetID::extract_trigger_id(message, &trigger_id)) project_screen->on_message(this, message); // bubbles it up
 }
 
 

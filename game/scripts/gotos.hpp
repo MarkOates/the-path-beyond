@@ -11,7 +11,7 @@ public:
       simple_camera_to(0, 0, 0.25);
       set_nav_buttons("", "", "goto5", "goto2");
 
-      attach("MainDoorDoor", "goto18");
+      attach_script_to_entity("MainDoorDoor", "goto18");
    }
 };
 
@@ -55,8 +55,8 @@ public:
       simple_camera_to(0, 0, 0.7);
       set_nav_buttons("", "", "goto3", "goto5");
 
-      attach("EncryptedCardKey", "PickupEncryptedCardKey");
-      attach("SnowPoster", "goto23");
+      attach_script_to_entity("EncryptedCardKey", "PickupEncryptedCardKey");
+      attach_script_to_entity("SnowPoster", "goto23");
    }
 };
 
@@ -72,7 +72,7 @@ public:
       simple_camera_to(0, 0, 0.5);
       set_nav_buttons("", "", "goto4", "goto1");
 
-      attach("PoetryPoster", "goto8");
+      attach_script_to_entity("PoetryPoster", "goto8");
    }
 };
 
@@ -88,7 +88,7 @@ public:
       simple_camera_to(0, 24, 0.45);
       set_nav_buttons("", "goto5", "", "");
 
-      attach("CardKeyDecrypter", "PickupCardKeyDecrypter");
+      attach_script_to_entity("CardKeyDecrypter", "PickupCardKeyDecrypter");
    }
 };
 
@@ -106,7 +106,7 @@ public:
       simple_camera_to(-7, 0, 0.25);
       set_nav_buttons("", "goto1", "", "");
 
-      attach("MainDoorTerminal", "OpenMainDoor");
+      attach_script_to_entity("MainDoorTerminal", "OpenMainDoor");
    }
 };
 

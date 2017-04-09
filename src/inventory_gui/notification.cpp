@@ -36,8 +36,7 @@ void InventoryGUI::Notification::mouse_down_func()
 void InventoryGUI::Notification::on_draw()
 {
    if (visibility_timer < 0) return;
-   Style::draw_button(Style::NORMAL, 0, 0, place.size.x, place.size.y, notification_text);
-   //Style::draw_text_box(0, 0, place.size.x, place.size.y, notification_text);
+   StyleAssets::draw_button(StyleAssets::NORMAL, 0, 0, place.size.x, place.size.y, notification_text);
 }
 
 
