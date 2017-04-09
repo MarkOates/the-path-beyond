@@ -40,26 +40,6 @@ void ScriptCollection::run_script(Script *script)
 
 
 
-bool ScriptCollection::run(std::string id)
-{
-   Script *script = find_by_id(id);
-   if (!script)
-   {
-      if (Logging::at_least(L_ERRORS))
-         std::cout
-            << CONSOLE_COLOR_RED
-            << "Could not run script: ScriptCollection \"" << id << "\" not foud."
-            << CONSOLE_COLOR_DEFAULT
-            << std::endl;
-
-      return false;
-   }
-   run_script(script);
-   return true;
-}
-
-
-
 ElementID *ScriptCollection::get_instance()
 {
    if (!instance) instance = new ElementID(nullptr);
