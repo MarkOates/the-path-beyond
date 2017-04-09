@@ -40,6 +40,12 @@ public:
 
       switch (event->user.type)
       {
+      case START_GAME_EVENT:
+         {
+            Script *start_game_script = ScriptCollection::find_by_name("StartGame()");
+            UserEventEmitter::emit_event(RUN_SCRIPT_EVENT, start_game_script->get_id());
+         }
+         break;
       case RUN_SCRIPT_EVENT:
          {
             int script_id = event->user.data1;

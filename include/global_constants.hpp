@@ -7,3 +7,4 @@
 #define SCRIPT_NAME_ATTRIBUTE "name"
 
 #define RUN_SCRIPT_EVENT ALLEGRO_GET_EVENT_TYPE('S', 'C', 'R', 'P')
+#define START_GAME_EVENT ALLEGRO_GET_EVENT_TYPE('S', 'T', 'R', 'T')
