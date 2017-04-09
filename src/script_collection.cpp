@@ -3,9 +3,7 @@
 
 #include <script_collection.hpp>
 
-#include <allegro_flare/console_color.h>
 #include <global_constants.hpp>
-#include <logging.hpp>
 #include <script.hpp>
 
 
