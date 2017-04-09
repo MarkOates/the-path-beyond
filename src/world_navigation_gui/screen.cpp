@@ -29,17 +29,17 @@ WorldNavigationGUI::Screen::Screen(UIScreen *project_screen, Display *display)
 
 void WorldNavigationGUI::Screen::on_message(UIWidget *sender, std::string message)
 {
-   int unique_trigger_id = 0;
+   int script_id = 0;
    std::string trigger_id = "";
    if (TargetID::extract_trigger_id(message, &trigger_id))
    {
       if (Logging::at_least(L_VERBOSE)) std::cout << "WorldNavigationGUI::Screen sending on_message for script \"" << trigger_id << "\"" << std::endl;
       project_screen->on_message(this, message);
    }
-   else if (TargetID::extract_unique_trigger_id(message, &unique_trigger_id))
+   else if (TargetID::extract_script_id(message, &script_id))
    {
       // we have a recieved trigger message
-      if (Logging::at_least(L_VERBOSE)) std::cout << "WorldNavigationGUI::Screen sending on_message for script id \"" << unique_trigger_id << "\"" << std::endl;
+      if (Logging::at_least(L_VERBOSE)) std::cout << "WorldNavigationGUI::Screen sending on_message for script id \"" << script_id << "\"" << std::endl;
       project_screen->on_message(this, message);
    }
 }

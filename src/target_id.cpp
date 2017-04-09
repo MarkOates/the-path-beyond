@@ -42,14 +42,14 @@ bool TargetID::extract_trigger_id(std::string message, std::string *extracted_id
 
 
 
-std::string TargetID::compose_unique_trigger_id_message(int unique_id)
+std::string TargetID::compose_trigger_script_id_message(int unique_id)
 {
    return tostring("trigger_unique_target_id ") + tostring(unique_id);
 }
 
 
 
-bool TargetID::extract_unique_trigger_id(std::string message, int *extracted_unique_id)
+bool TargetID::extract_script_id(std::string message, int *extracted_unique_id)
 {
    if (strncmp(message.c_str(), "trigger_unique_target_id ", 25) == 0)
    {

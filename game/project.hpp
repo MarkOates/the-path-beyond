@@ -35,7 +35,7 @@ public:
    void on_message(UIWidget *sender, std::string message)
    {
       std::string trigger_id = "";
-      int unique_trigger_id = 0;
+      int script_id = 0;
       if (TargetID::extract_trigger_id(message, &trigger_id))
       {
          std::cout << "Project running script \"" << trigger_id << "\"" << std::endl;
@@ -43,17 +43,17 @@ public:
          Script *found_script = ScriptCollection::find_by_name(trigger_id);
          ScriptCollection::run_script(found_script);
       }
-      else if (TargetID::extract_unique_trigger_id(message, &unique_trigger_id))
+      else if (TargetID::extract_script_id(message, &script_id))
       {
-         if (Logging::at_least(L_VERBOSE)) std::cout << "Project running script ID\"" << unique_trigger_id << "\"" << std::endl;
+         if (Logging::at_least(L_VERBOSE)) std::cout << "Project running script ID\"" << script_id << "\"" << std::endl;
 
-         Script *script = ScriptCollection::find_by_unique_id(unique_trigger_id);
+         Script *script = ScriptCollection::find_by_id(script_id);
          if (!script)
          {
             if (Logging::at_least(L_ERRORS))
                std::cout
                   << CONSOLE_COLOR_RED
-                  << "Could not run script: ScriptCollection with unique_trigger_id [" << unique_trigger_id << "] not foud."
+                  << "Could not run script: ScriptCollection with script_id [" << script_id << "] not foud."
                   << CONSOLE_COLOR_DEFAULT
                   << std::endl;
          }

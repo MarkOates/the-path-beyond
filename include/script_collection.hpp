@@ -16,7 +16,7 @@ private:
    static ElementID *get_instance();
 
 public:
-   static Script *find_by_unique_id(int unique_id);
+   static Script *find_by_id(int id);
    static Script *find_by_name(std::string name);
    static void run_script(Script *script);
 };
