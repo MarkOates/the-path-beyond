@@ -88,9 +88,9 @@ void ScriptHelper::clear_attached_scripts()
 
 
 
-void ScriptHelper::delete_entity(std::string entity_id)
+void ScriptHelper::delete_entity(std::string entity_name)
 {
-   Entity *e = entity_by_id(entity_id);
+   Entity *e = entity_by_name(entity_name);
    // god save us all...
    delete e; 
 }
@@ -109,9 +109,9 @@ int ScriptHelper::get_script_id(std::string script_name)
 
 
 
-void ScriptHelper::attach(std::string entity_id, std::string script_name)
+void ScriptHelper::attach_script_to_entity(std::string entity_name, std::string script_name)
 {
-   Entity *e = entity_by_id(entity_id);
+   Entity *e = entity_by_name(entity_name);
    int script_id = get_script_id(script_name);
    if (e && (script_id != 0))
    {
@@ -125,13 +125,13 @@ void ScriptHelper::attach(std::string entity_id, std::string script_name)
 
 
 
-Entity *ScriptHelper::entity_by_id(std::string entity_id)
+Entity *ScriptHelper::entity_by_name(std::string entity_name)
 {
    //Entity *e = static_cast<Entity *>(world_render->manager->get_element_by_id(entity_id));
-   Entity *e = static_cast<Entity *>(world_render->manager->find_first(ENTITY_ID_ATTRIBUTE, entity_id));
+   Entity *e = static_cast<Entity *>(world_render->manager->find_first(ENTITY_ID_ATTRIBUTE, entity_name));
    if (!e)
    {
-      std::cout << CONSOLE_COLOR_RED << "could not locate entity by id \"" << entity_id << "\"" << CONSOLE_COLOR_DEFAULT << std::endl;
+      std::cout << CONSOLE_COLOR_RED << "could not locate entity by name \"" << entity_name << "\"" << CONSOLE_COLOR_DEFAULT << std::endl;
    }
    return e;
 }

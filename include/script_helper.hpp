@@ -31,10 +31,10 @@ public:
    static void move_to(placement3d *from, placement3d to, float speed=0.4);
    static void simple_camera_to(float x, float y, float rotation, float speed=1.0);
    static void clear_attached_scripts();
-   static void delete_entity(std::string entity_id);
+   static void delete_entity(std::string entity_name);
    static int get_script_id(std::string script_name);
-   static void attach(std::string entity_id, std::string script_name);
-   static Entity *entity_by_id(std::string entity_id);
+   static void attach_script_to_entity(std::string entity_name, std::string script_name);
+   static Entity *entity_by_name(std::string entity_name);
    static void show_notification(std::string message);
    static void camera_to(vec3d position, vec3d rotation, vec3d anchor, float speed=0.4);
    void set_nav_buttons(std::string up_target, std::string down_target, std::string left_target, std::string right_target);
