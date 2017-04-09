@@ -78,21 +78,5 @@ public:
          std::cout << "}}} ScriptCollection \"" << script->get(SCRIPT_NAME_ATTRIBUTE) << "\" finished" << std::endl;
       }
    }
-   void on_message(UIWidget *sender, std::string message)
-   {
-      std::string script_name = "";
-      int script_id = 0;
-      if (TargetID::extract_script_name(message, &script_name))
-      {
-         std::cout << "Project running script \"" << script_name << "\"" << std::endl;
-
-         Script *found_script = ScriptCollection::find_by_name(script_name);
-         UserEventEmitter::emit_event(RUN_SCRIPT_EVENT, found_script->get_id());
-      }
-      else if (TargetID::extract_script_id(message, &script_id))
-      {
-         UserEventEmitter::emit_event(RUN_SCRIPT_EVENT, script_id);
-      }
-   }
 };
 
