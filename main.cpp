@@ -1,5 +1,4 @@
 #include <allegro_flare/allegro_flare.h>
-#include <cmath>
 
 #include <global_constants.hpp>
 
