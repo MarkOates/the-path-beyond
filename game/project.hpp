@@ -32,7 +32,7 @@ public:
       ScriptHelper::initialize(world_render, world_navigation_gui, inventory_gui, start_screen_gui);
 
       Script *start_title_screen_script = ScriptCollection::find_by_name("StartTitleScreen()");
-      ScriptCollection::run_script(start_title_screen_script);
+      UserEventEmitter::emit_event(RUN_SCRIPT_EVENT, start_title_screen_script->get_id());
    }
    void user_event_func() override
    {
@@ -81,7 +81,7 @@ public:
          std::cout << "Project running script \"" << script_name << "\"" << std::endl;
 
          Script *found_script = ScriptCollection::find_by_name(script_name);
-         ScriptCollection::run_script(found_script);
+         UserEventEmitter::emit_event(RUN_SCRIPT_EVENT, found_script->get_id());
       }
       else if (TargetID::extract_script_id(message, &script_id))
       {
