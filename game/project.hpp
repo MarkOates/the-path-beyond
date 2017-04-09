@@ -29,7 +29,7 @@ public:
 
       ScriptHelper::initialize(world_render, world_navigation_gui, inventory_gui, start_screen_gui);
 
-      Script *start_title_screen_script = ScriptCollection::find_by_id("StartTitleScreen()");
+      Script *start_title_screen_script = ScriptCollection::find_by_name("StartTitleScreen()");
       ScriptCollection::run_script(start_title_screen_script);
    }
    void on_message(UIWidget *sender, std::string message)
@@ -40,7 +40,7 @@ public:
       {
          std::cout << "Project running script \"" << trigger_id << "\"" << std::endl;
 
-         Script *found_script = ScriptCollection::find_by_id(trigger_id);
+         Script *found_script = ScriptCollection::find_by_name(trigger_id);
          ScriptCollection::run_script(found_script);
       }
       else if (TargetID::extract_unique_trigger_id(message, &unique_trigger_id))

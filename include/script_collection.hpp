@@ -17,7 +17,7 @@ private:
 
 public:
    static Script *find_by_unique_id(int unique_id);
-   static Script *find_by_id(std::string id);
+   static Script *find_by_name(std::string name);
    static void run_script(Script *script);
 };
 

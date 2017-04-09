@@ -83,13 +83,13 @@ public:
       // god save us all...
       delete e; 
    }
-   static int get_script_unique_id(std::string script_id)
+   static int get_script_unique_id(std::string script_name)
    {
-      Script *script = ScriptCollection::find_by_id(script_id);
+      Script *script = ScriptCollection::find_by_name(script_name);
       if (script) return script->get_id();
       //if (script) return script->get_unique_id_num();
 
-      std::cout << CONSOLE_COLOR_RED << "could not locate script by id \"" << script_id << "\"" << CONSOLE_COLOR_DEFAULT << std::endl;
+      std::cout << CONSOLE_COLOR_RED << "could not locate script by name \"" << script_name << "\"" << CONSOLE_COLOR_DEFAULT << std::endl;
       return 0;
    }
    static void attach(std::string entity_id, std::string script_id)

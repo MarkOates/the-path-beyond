@@ -19,9 +19,9 @@ Script *ScriptCollection::find_by_unique_id(int unique_id)
 
 
 
-Script *ScriptCollection::find_by_id(std::string id)
+Script *ScriptCollection::find_by_name(std::string name)
 {
-   return static_cast<Script *>(get_instance()->find_first(SCRIPT_ID_ATTRIBUTE, id));
+   return static_cast<Script *>(get_instance()->find_first(SCRIPT_NAME_ATTRIBUTE, name));
 }
 
 
