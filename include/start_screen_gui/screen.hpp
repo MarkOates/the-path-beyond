@@ -23,7 +23,6 @@ namespace StartScreenGUI
       StartButton *start_screen_button;
 
       Screen(UIScreen *project_screen, Display *display);
-      void on_message(UIWidget *sender, std::string message) override;
       void show(float speed=2.0);
       void hide(float speed=2.0);
    };

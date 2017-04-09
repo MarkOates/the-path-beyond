@@ -9,7 +9,6 @@
 #include <global_constants.hpp>
 #include <logging.hpp>
 #include <style_assets.hpp>
-#include <target_id.hpp>
 
 
 
@@ -30,14 +29,6 @@ StartScreenGUI::Screen::Screen(UIScreen *project_screen, Display *display)
    instructions->set_font(Framework::font("space age.otf 40"));
    instructions->set_font_color(color::gray);
    instructions->place.align.x = 0.5;
-}
-
-
-
-void StartScreenGUI::Screen::on_message(UIWidget *sender, std::string message)
-{
-   std::string script_name;
-   if (TargetID::extract_script_name(message, &script_name)) project_screen->on_message(this, message); // bubbles it up
 }
 
 
