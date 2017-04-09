@@ -7,6 +7,8 @@
 
 #include "logging.hpp"
 
+#include <allegro_flare/user_event_emitter.h>
+
 
 
 class Project : public UIScreen
@@ -31,6 +33,23 @@ public:
 
       Script *start_title_screen_script = ScriptCollection::find_by_name("StartTitleScreen()");
       ScriptCollection::run_script(start_title_screen_script);
+   }
+   void user_event_func() override
+   {
+      ALLEGRO_EVENT *event = Framework::current_event;
+
+      switch (event->user.type)
+      {
+      case RUN_SCRIPT_EVENT:
+         {
+            int script_id = event->user.data1;
+            _play_script(script_id);
+         }
+         break;
+      default:
+         std::cout << "Uncaught user event" << std::endl;
+         break;
+      }
    }
    void _play_script(int script_id)
    {
@@ -64,7 +83,7 @@ public:
       }
       else if (TargetID::extract_script_id(message, &script_id))
       {
-         _play_script(script_id);
+         UserEventEmitter::emit_event(RUN_SCRIPT_EVENT, script_id);
       }
    }
 };

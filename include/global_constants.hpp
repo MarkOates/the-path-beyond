@@ -5,3 +5,5 @@
 
 #define ENTITY_ID_ATTRIBUTE "entity_id"
 #define SCRIPT_NAME_ATTRIBUTE "name"
+
+#define RUN_SCRIPT_EVENT ALLEGRO_GET_EVENT_TYPE('S', 'C', 'R', 'P')
