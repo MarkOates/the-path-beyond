@@ -32,6 +32,25 @@ public:
       Script *start_title_screen_script = ScriptCollection::find_by_name("StartTitleScreen()");
       ScriptCollection::run_script(start_title_screen_script);
    }
+   void _play_script(int script_id)
+   {
+      if (Logging::at_least(L_VERBOSE)) std::cout << "Project running script ID\"" << script_id << "\"" << std::endl;
+
+      Script *script = ScriptCollection::find_by_id(script_id);
+      if (!script)
+      {
+         if (Logging::at_least(L_ERRORS))
+            std::cout
+               << CONSOLE_COLOR_RED
+               << "Could not run script: ScriptCollection with script_id [" << script_id << "] not foud."
+               << CONSOLE_COLOR_DEFAULT
+               << std::endl;
+      }
+      else
+      {
+         ScriptCollection::run_script(script);
+      }
+   }
    void on_message(UIWidget *sender, std::string message)
    {
       std::string script_name = "";
@@ -45,22 +64,7 @@ public:
       }
       else if (TargetID::extract_script_id(message, &script_id))
       {
-         if (Logging::at_least(L_VERBOSE)) std::cout << "Project running script ID\"" << script_id << "\"" << std::endl;
-
-         Script *script = ScriptCollection::find_by_id(script_id);
-         if (!script)
-         {
-            if (Logging::at_least(L_ERRORS))
-               std::cout
-                  << CONSOLE_COLOR_RED
-                  << "Could not run script: ScriptCollection with script_id [" << script_id << "] not foud."
-                  << CONSOLE_COLOR_DEFAULT
-                  << std::endl;
-         }
-         else
-         {
-            ScriptCollection::run_script(script);
-         }
+         _play_script(script_id);
       }
    }
 };
