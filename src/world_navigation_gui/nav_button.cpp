@@ -5,7 +5,11 @@
 
 #include <allegro_flare/gui/surface_areas/box.h>
 #include <allegro_flare/framework.h>
+#include <allegro_flare/user_event_emitter.h>
+#include <global_constants.hpp>
 #include <style_assets.hpp>
+#include <script_collection.hpp>
+#include <script.hpp>
 
 
 
@@ -26,7 +30,8 @@ void WorldNavigationGUI::NavButton::set_target_id(TargetID target_id)
 
 void WorldNavigationGUI::NavButton::on_click()
 {
-   send_message_to_parent(target_id.get_trigger_message());
+   Script *found_script = ScriptCollection::find_by_name(target_id.id);
+   if (found_script) UserEventEmitter::emit_event(RUN_SCRIPT_EVENT, found_script->get_id());
 }
 
 
