@@ -32,6 +32,7 @@ Script *ScriptCollection::find_by_id(std::string id)
 
 void ScriptCollection::run_script(Script *script)
 {
+   if (!script) throw std::runtime_error("Can not run a null script");
    std::cout << "{{{ Activating script \"" << script->get_id() << "\"" << std::endl;
    script->activate();
    std::cout << "}}} ScriptCollection \"" << script->get_id() << "\" finished" << std::endl;
