@@ -24,7 +24,7 @@ public:
       , world_render(new WorldRenderScreen(display))
       , world_navigation_gui(new WorldNavigationGUI::Screen(display))
       , inventory_gui(new InventoryGUI::Screen(display))
-      , start_screen_gui(new StartScreenGUI::Screen(this, display))
+      , start_screen_gui(new StartScreenGUI::Screen(display))
    {
       // link nav render surface
       world_render->set_scene_targets_render_surface(world_navigation_gui->nav_view->render);

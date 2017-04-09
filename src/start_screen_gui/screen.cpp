@@ -12,9 +12,8 @@
 
 
 
-StartScreenGUI::Screen::Screen(UIScreen *project_screen, Display *display)
+StartScreenGUI::Screen::Screen(Display *display)
    : UIScreen(display)
-   , project_screen(project_screen)
    , title_text(NULL)
    , instructions(NULL)
    , start_screen_button(NULL)
