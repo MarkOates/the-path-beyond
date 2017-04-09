@@ -84,7 +84,7 @@ public:
    }
    static int get_script_unique_id(std::string script_id)
    {
-      Script *script = Script::find_by_id(script_id);
+      ScriptCollection *script = ScriptCollection::find_by_id(script_id);
       if (script) return script->get_id();
       //if (script) return script->get_unique_id_num();
 
@@ -164,7 +164,7 @@ public:
    {
       if (initialized) return;
 
-      Script::initialize();
+      ScriptCollection::initialize();
 
       world_render = wrs;
       world_navigation_gui = wnguis;

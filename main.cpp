@@ -10,7 +10,7 @@
 #include <start_screen_gui/screen.hpp>
 #include <world_render_screen.hpp>
 #include <world_navigation_gui/screen.hpp>
-#include <script.hpp>
+#include <script_collection.hpp>
 
 #include "game/project.hpp"
 #include "game/load_game_scripts.hpp"

@@ -1,10 +1,10 @@
 
 
 
-class StartGame: public Script, public ScriptHelper
+class StartGame: public ScriptCollection, public ScriptHelper
 {
 public:
-   StartGame() : Script("StartGame()") {}
+   StartGame() : ScriptCollection("StartGame()") {}
    void activate() override
    {
       world_navigation_gui->set_usability_mode(1);
@@ -38,7 +38,7 @@ public:
       create_entity("MainDoorDoor", vec3d(-12, 0, 0), 0.25, "main_door_door-01.obj", "sci_fi_panel2.jpg");
 
       // goto the starting point
-      Script::run("goto1");
+      ScriptCollection::run("goto1");
    }
 };
 

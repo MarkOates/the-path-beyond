@@ -1,7 +1,7 @@
 
 
 
-#include <script.hpp>
+#include <script_collection.hpp>
 
 #include <allegro_flare/console_color.h>
 #include <global_constants.hpp>
@@ -9,7 +9,7 @@
 
 
 
-Script::Script(std::string id)
+ScriptCollection::ScriptCollection(std::string id)
    : ElementID(get_manager())
 {
    set(SCRIPT_ID_ATTRIBUTE, id);
@@ -17,50 +17,50 @@ Script::Script(std::string id)
 
 
 
-ElementID *Script::manager = nullptr;
+ElementID *ScriptCollection::manager = nullptr;
 
 
 
-bool Script::initialized = false;
+bool ScriptCollection::initialized = false;
 
 
 
-Script *Script::find_by_unique_id(int unique_id)
+ScriptCollection *ScriptCollection::find_by_unique_id(int unique_id)
 {
-   return static_cast<Script *>(manager->find_descendant_by_id(unique_id));
-   //return static_cast<Script *>(manager->get_element_by_unique_id(unique_id));
+   return static_cast<ScriptCollection *>(manager->find_descendant_by_id(unique_id));
+   //return static_cast<ScriptCollection *>(manager->get_element_by_unique_id(unique_id));
 }
 
 
 
-Script *Script::find_by_id(std::string id)
+ScriptCollection *ScriptCollection::find_by_id(std::string id)
 {
    ElementID *element = manager->find_first(SCRIPT_ID_ATTRIBUTE, id);
    //ElementID *element = manager->get_element_by_id(id);
-   if (element) return static_cast<Script *>(element);
+   if (element) return static_cast<ScriptCollection *>(element);
    return NULL;
 }
 
 
 
-void Script::run_script(Script *script)
+void ScriptCollection::run_script(ScriptCollection *script)
 {
    std::cout << "{{{ Activating script \"" << script->get_id() << "\"" << std::endl;
    script->activate();
-   std::cout << "}}} Script \"" << script->get_id() << "\" finished" << std::endl;
+   std::cout << "}}} ScriptCollection \"" << script->get_id() << "\" finished" << std::endl;
 }
 
 
 
-bool Script::run_by_unique_id(int unique_id)
+bool ScriptCollection::run_by_unique_id(int unique_id)
 {
-   Script *script = find_by_unique_id(unique_id);
+   ScriptCollection *script = find_by_unique_id(unique_id);
    if (!script)
    {
       if (Logging::at_least(L_ERRORS))
          std::cout
             << CONSOLE_COLOR_RED
-            << "Could not run script: Script with unique_id [" << unique_id << "] not foud."
+            << "Could not run script: ScriptCollection with unique_id [" << unique_id << "] not foud."
             << CONSOLE_COLOR_DEFAULT
             << std::endl;
 
@@ -72,15 +72,15 @@ bool Script::run_by_unique_id(int unique_id)
 
 
 
-bool Script::run(std::string id)
+bool ScriptCollection::run(std::string id)
 {
-   Script *script = find_by_id(id);
+   ScriptCollection *script = find_by_id(id);
    if (!script)
    {
       if (Logging::at_least(L_ERRORS))
          std::cout
             << CONSOLE_COLOR_RED
-            << "Could not run script: Script \"" << id << "\" not foud."
+            << "Could not run script: ScriptCollection \"" << id << "\" not foud."
             << CONSOLE_COLOR_DEFAULT
             << std::endl;
 
@@ -92,7 +92,7 @@ bool Script::run(std::string id)
 
 
 
-void Script::initialize()
+void ScriptCollection::initialize()
 {
    if (initialized) return;
    manager = new ElementID(nullptr);
@@ -101,7 +101,7 @@ void Script::initialize()
 
 
 
-ElementID *Script::get_manager()
+ElementID *ScriptCollection::get_manager()
 {
    if (!initialized) initialize();
    return manager;
