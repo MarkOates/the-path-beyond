@@ -67,7 +67,9 @@ public:
       }
       else
       {
-         ScriptCollection::run_script(script);
+         std::cout << "{{{ Activating script \"" << script->get(SCRIPT_NAME_ATTRIBUTE) << "\"" << std::endl;
+         script->activate();
+         std::cout << "}}} ScriptCollection \"" << script->get(SCRIPT_NAME_ATTRIBUTE) << "\" finished" << std::endl;
       }
    }
    void on_message(UIWidget *sender, std::string message)

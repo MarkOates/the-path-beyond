@@ -18,7 +18,6 @@ private:
 public:
    static Script *find_by_id(int id);
    static Script *find_by_name(std::string name);
-   static void run_script(Script *script);
 };
 
 

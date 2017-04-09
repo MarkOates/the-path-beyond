@@ -26,16 +26,6 @@ Script *ScriptCollection::find_by_name(std::string name)
 
 
 
-void ScriptCollection::run_script(Script *script)
-{
-   if (!script) throw std::runtime_error("Can not run a null script");
-   std::cout << "{{{ Activating script \"" << script->get(SCRIPT_NAME_ATTRIBUTE) << "\"" << std::endl;
-   script->activate();
-   std::cout << "}}} ScriptCollection \"" << script->get(SCRIPT_NAME_ATTRIBUTE) << "\" finished" << std::endl;
-}
-
-
-
 ElementID *ScriptCollection::get_instance()
 {
    if (!instance) instance = new ElementID(nullptr);
