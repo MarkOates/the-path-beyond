@@ -22,6 +22,7 @@ namespace WorldNavigationGUI
      Screen(Display *display);
 
      void set_usability_mode(int mode, float speed=0.4);
+     void on_key_down() override;
    };
 }
 

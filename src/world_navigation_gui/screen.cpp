@@ -3,6 +3,7 @@
 
 #include <world_navigation_gui/screen.hpp>
 
+#include <allegro_flare/framework.h>
 #include <logging.hpp>
 #include <global_constants.hpp>
 
@@ -52,6 +53,29 @@ void WorldNavigationGUI::Screen::set_usability_mode(int mode, float speed)
             << "undefined InventoryGUI::Screen mode " << mode
             << CONSOLE_COLOR_DEFAULT
             << std::endl;
+      break;
+   }
+}
+
+
+
+void WorldNavigationGUI::Screen::on_key_down()
+{
+   switch (Framework::current_event->keyboard.keycode)
+   {
+   case ALLEGRO_KEY_UP:
+      nav_up_button->activate_script();
+      break;
+   case ALLEGRO_KEY_DOWN:
+      nav_down_button->activate_script();
+      break;
+   case ALLEGRO_KEY_LEFT:
+      nav_left_button->activate_script();
+      break;
+   case ALLEGRO_KEY_RIGHT:
+      nav_right_button->activate_script();
+      break;
+   default:
       break;
    }
 }
