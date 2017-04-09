@@ -137,10 +137,10 @@ public:
       {
          world_navigation_gui->set_usability_mode(0);
 
-         world_navigation_gui->nav_up_button->set_target_id(TargetID(up_target));
-         world_navigation_gui->nav_down_button->set_target_id(TargetID(down_target));
-         world_navigation_gui->nav_left_button->set_target_id(TargetID(left_target));
-         world_navigation_gui->nav_right_button->set_target_id(TargetID(right_target));
+         world_navigation_gui->nav_up_button->set_script_by_name(up_target);
+         world_navigation_gui->nav_down_button->set_script_by_name(down_target);
+         world_navigation_gui->nav_left_button->set_script_by_name(left_target);
+         world_navigation_gui->nav_right_button->set_script_by_name(right_target);
 
          world_navigation_gui->set_usability_mode(1);
       }

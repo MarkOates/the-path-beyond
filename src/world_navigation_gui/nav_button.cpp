@@ -15,22 +15,22 @@
 
 WorldNavigationGUI::NavButton::NavButton(UIWidget *parent, float x, float y, float w, float h)
    : UIWidget(parent, "WorldNavigationGUI::NavButton", new UISurfaceAreaBox(x, y, w, h))
-   , target_id("")
+   , script_name("")
    , show_pos_y(y)
 {}
 
 
 
-void WorldNavigationGUI::NavButton::set_target_id(TargetID target_id)
+void WorldNavigationGUI::NavButton::set_script_by_name(std::string script_name)
 {
-   this->target_id = target_id;
+   this->script_name = script_name;
 }
 
 
 
 void WorldNavigationGUI::NavButton::on_click()
 {
-   Script *found_script = ScriptCollection::find_by_name(target_id.id);
+   Script *found_script = ScriptCollection::find_by_name(script_name);
    if (found_script) UserEventEmitter::emit_event(RUN_SCRIPT_EVENT, found_script->get_id());
 }
 
@@ -59,7 +59,7 @@ void WorldNavigationGUI::NavButton::hide(float speed)
 
 void WorldNavigationGUI::NavButton::show_if_has_target(float speed)
 {
-   if (!target_id.is_empty()) show(speed);
+   if (!script_name.empty()) show(speed);
 }
 
 

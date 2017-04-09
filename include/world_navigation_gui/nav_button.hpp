@@ -3,7 +3,6 @@
 
 
 #include <allegro_flare/gui/widget.h>
-#include <target_id.hpp>
 
 
 
@@ -12,11 +11,11 @@ namespace WorldNavigationGUI
    class NavButton : public UIWidget
    {
    public:
-      TargetID target_id;
+      std::string script_name;
       float show_pos_y;
 
       NavButton(UIWidget *parent, float x, float y, float w, float h);
-      void set_target_id(TargetID target_id);
+      void set_script_by_name(std::string script_name);
       void on_click() override;
       void on_draw() override;
       void show(float speed=0.4);
