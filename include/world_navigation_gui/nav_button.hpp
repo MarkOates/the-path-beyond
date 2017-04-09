@@ -21,6 +21,7 @@ namespace WorldNavigationGUI
       void show(float speed=0.4);
       void hide(float speed=0.4);
       void show_if_has_target(float speed=0.4);
+      void activate_script();
    };
 }
 

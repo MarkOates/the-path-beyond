@@ -30,8 +30,7 @@ void WorldNavigationGUI::NavButton::set_script_by_name(std::string script_name)
 
 void WorldNavigationGUI::NavButton::on_click()
 {
-   Script *found_script = ScriptCollection::find_by_name(script_name);
-   if (found_script) UserEventEmitter::emit_event(RUN_SCRIPT_EVENT, found_script->get_id());
+   activate_script();
 }
 
 
@@ -60,6 +59,14 @@ void WorldNavigationGUI::NavButton::hide(float speed)
 void WorldNavigationGUI::NavButton::show_if_has_target(float speed)
 {
    if (!script_name.empty()) show(speed);
+}
+
+
+
+void WorldNavigationGUI::NavButton::activate_script()
+{
+   Script *found_script = ScriptCollection::find_by_name(script_name);
+   if (found_script) UserEventEmitter::emit_event(RUN_SCRIPT_EVENT, found_script->get_id());
 }
 
 
