@@ -10,8 +10,7 @@ class Script;
 class ScriptCollection : public ElementID
 {
 private:
-   static ElementID *manager;
-   static bool initialized;
+   static ElementID *instance;
 
 public:
    static Script *find_by_unique_id(int unique_id);
@@ -19,8 +18,7 @@ public:
    static void run_script(Script *script);
    static bool run_by_unique_id(int unique_id);
    static bool run(std::string id);
-   static void initialize();
-   static ElementID *get_manager();
+   static ElementID *get_instance();
 };
 
 

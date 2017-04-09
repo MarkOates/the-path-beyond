@@ -10,26 +10,22 @@
 
 
 
-ElementID *ScriptCollection::manager = nullptr;
-
-
-
-bool ScriptCollection::initialized = false;
+ElementID *ScriptCollection::instance = nullptr;
 
 
 
 Script *ScriptCollection::find_by_unique_id(int unique_id)
 {
-   return static_cast<Script *>(manager->find_descendant_by_id(unique_id));
-   //return static_cast<ScriptCollection *>(manager->get_element_by_unique_id(unique_id));
+   return static_cast<Script *>(get_instance()->find_descendant_by_id(unique_id));
+   //return static_cast<ScriptCollection *>(get_instance()->get_element_by_unique_id(unique_id));
 }
 
 
 
 Script *ScriptCollection::find_by_id(std::string id)
 {
-   ElementID *element = manager->find_first(SCRIPT_ID_ATTRIBUTE, id);
-   //ElementID *element = manager->get_element_by_id(id);
+   ElementID *element = get_instance()->find_first(SCRIPT_ID_ATTRIBUTE, id);
+   //ElementID *element = get_instance()->get_element_by_id(id);
    if (element) return static_cast<Script *>(element);
    return NULL;
 }
@@ -85,19 +81,10 @@ bool ScriptCollection::run(std::string id)
 
 
 
-void ScriptCollection::initialize()
+ElementID *ScriptCollection::get_instance()
 {
-   if (initialized) return;
-   manager = new ElementID(nullptr);
-   initialized = true;
-}
-
-
-
-ElementID *ScriptCollection::get_manager()
-{
-   if (!initialized) initialize();
-   return manager;
+   if (!instance) instance = new ElementID(nullptr);
+   return instance;
 }
 
 

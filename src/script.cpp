@@ -9,7 +9,7 @@
 
 
 Script::Script(std::string name)
-   : ElementID(ScriptCollection::get_manager())
+   : ElementID(ScriptCollection::get_instance())
 {
    set(SCRIPT_NAME_ATTRIBUTE, name);
    set(SCRIPT_ID_ATTRIBUTE, name);

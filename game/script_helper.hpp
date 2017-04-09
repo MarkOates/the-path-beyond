@@ -165,8 +165,6 @@ public:
    {
       if (initialized) return;
 
-      ScriptCollection::initialize();
-
       world_render = wrs;
       world_navigation_gui = wnguis;
       start_screen_gui = ssgui;
