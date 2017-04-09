@@ -22,7 +22,7 @@ public:
    Project(Display *display)
       : UIScreen(display)
       , world_render(new WorldRenderScreen(display))
-      , world_navigation_gui(new WorldNavigationGUI::Screen(this, display))
+      , world_navigation_gui(new WorldNavigationGUI::Screen(display))
       , inventory_gui(new InventoryGUI::Screen(display))
       , start_screen_gui(new StartScreenGUI::Screen(this, display))
    {

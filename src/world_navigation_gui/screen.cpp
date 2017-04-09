@@ -9,9 +9,8 @@
 
 
 
-WorldNavigationGUI::Screen::Screen(UIScreen *project_screen, Display *display)
+WorldNavigationGUI::Screen::Screen(Display *display)
    : UIScreen(display)
-   , project_screen(project_screen)
    , nav_up_button(NULL)
    , nav_down_button(NULL)
    , nav_left_button(NULL)
@@ -23,25 +22,6 @@ WorldNavigationGUI::Screen::Screen(UIScreen *project_screen, Display *display)
    nav_left_button = new WorldNavigationGUI::NavButton(this, 100, SCREEN_H/2, 30, 300);
    nav_right_button = new WorldNavigationGUI::NavButton(this, SCREEN_W-100, SCREEN_H/2, 30, 300);
    nav_view = new WorldNavigationGUI::NavView(this);
-}
-
-
-
-void WorldNavigationGUI::Screen::on_message(UIWidget *sender, std::string message)
-{
-   int script_id = 0;
-   std::string script_name = "";
-   if (TargetID::extract_script_name(message, &script_name))
-   {
-      if (Logging::at_least(L_VERBOSE)) std::cout << "WorldNavigationGUI::Screen sending on_message for script \"" << script_name << "\"" << std::endl;
-      project_screen->on_message(this, message);
-   }
-   else if (TargetID::extract_script_id(message, &script_id))
-   {
-      // we have a recieved trigger message
-      if (Logging::at_least(L_VERBOSE)) std::cout << "WorldNavigationGUI::Screen sending on_message for script id \"" << script_id << "\"" << std::endl;
-      project_screen->on_message(this, message);
-   }
 }
 
 
