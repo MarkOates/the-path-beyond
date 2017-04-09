@@ -9,7 +9,7 @@ public:
    {
       clear_attached_scripts();
       simple_camera_to(0, 0, 0.25);
-      set_nav("", "", "5", "2");
+      set_nav_buttons("", "", "goto5", "goto2");
 
       attach("MainDoorDoor", "goto18");
    }
@@ -25,7 +25,7 @@ public:
    {
       clear_attached_scripts();
       simple_camera_to(0, 0, 0.124);
-      set_nav("", "", "1", "3");
+      set_nav_buttons("", "", "goto1", "goto3");
    }
 };
 
@@ -39,7 +39,7 @@ public:
    {
       clear_attached_scripts();
       simple_camera_to(0, 0, 0.9);
-      set_nav("", "", "2", "4");
+      set_nav_buttons("", "", "goto2", "goto4");
    }
 };
 
@@ -53,7 +53,7 @@ public:
    {
       clear_attached_scripts();
       simple_camera_to(0, 0, 0.7);
-      set_nav("", "", "3", "5");
+      set_nav_buttons("", "", "goto3", "goto5");
 
       attach("EncryptedCardKey", "PickupEncryptedCardKey");
       attach("SnowPoster", "goto23");
@@ -70,7 +70,7 @@ public:
    {
       clear_attached_scripts();
       simple_camera_to(0, 0, 0.5);
-      set_nav("", "", "4", "1");
+      set_nav_buttons("", "", "goto4", "goto1");
 
       attach("PoetryPoster", "goto8");
    }
@@ -86,7 +86,7 @@ public:
    {
       clear_attached_scripts();
       simple_camera_to(0, 24, 0.45);
-      set_nav("", "5", "", "");
+      set_nav_buttons("", "goto5", "", "");
 
       attach("CardKeyDecrypter", "PickupCardKeyDecrypter");
    }
@@ -104,7 +104,7 @@ public:
    {
       clear_attached_scripts();
       simple_camera_to(-7, 0, 0.25);
-      set_nav("", "1", "", "");
+      set_nav_buttons("", "goto1", "", "");
 
       attach("MainDoorTerminal", "OpenMainDoor");
    }
@@ -120,7 +120,7 @@ public:
    {
       clear_attached_scripts();
       simple_camera_to(16, 0, 0.75);
-      set_nav("", "4", "", "");
+      set_nav_buttons("", "goto4", "", "");
    }
 };
 

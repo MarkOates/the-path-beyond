@@ -134,6 +134,8 @@ public:
     , std::string right_target
     )
   {
+    world_navigation_gui->set_usability_mode(0);
+
     world_navigation_gui->nav_up_button->set_target_id(TargetID(up_target));
     world_navigation_gui->nav_down_button->set_target_id(TargetID(down_target));
     world_navigation_gui->nav_left_button->set_target_id(TargetID(left_target));
@@ -152,29 +154,6 @@ public:
     e->place.rotation.y = rotation;
 
     return e;
-  }
-  static void set_nav
-    ( std::string up_target_num
-    , std::string down_target_num
-    , std::string left_target_num
-    , std::string right_target_num
-    )
-  {
-    world_navigation_gui->set_usability_mode(0);
-
-    std::string up = (up_target_num.empty() ? "" : (tostring("goto") + up_target_num));
-    world_navigation_gui->nav_up_button->set_target_id(TargetID(up));
-
-    std::string down = (down_target_num.empty() ? "" : (tostring("goto") + down_target_num));
-    world_navigation_gui->nav_down_button->set_target_id(TargetID(down));
-
-    std::string left = (left_target_num.empty() ? "" : (tostring("goto") + left_target_num));
-    world_navigation_gui->nav_left_button->set_target_id(TargetID(left));
-
-    std::string right = (right_target_num.empty() ? "" : (tostring("goto") + right_target_num));
-    world_navigation_gui->nav_right_button->set_target_id(TargetID(right));
-
-    world_navigation_gui->set_usability_mode(1);
   }
   static void initialize(
       WorldRenderScreen *wrs,

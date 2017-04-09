@@ -31,7 +31,7 @@ namespace InventoryGUI
 
       Screen(Display *display);
 
-      void on_message(UIWidget *sender, std::string message);
+      void on_message(UIWidget *sender, std::string message) override;
       bool symmetric_yes(InventoryItem itemA, InventoryItem itemB, InventoryItem::Type type1, InventoryItem::Type type2);
       InventoryItem attempt_combination(InventoryItem itemA, InventoryItem itemB);
       bool has_item(InventoryItem::Type item_type);

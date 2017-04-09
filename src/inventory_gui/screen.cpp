@@ -22,17 +22,18 @@ InventoryGUI::Screen::Screen(Display *display)
    , item_buttons()
    , current_mode(1)
 {
-   // create our Inventory GUI Widgets
-   behind_blocker = new InventoryGUI::BehindBlocker(this);
-   toggle_button = new InventoryGUI::InventoryToggleButton(this);
-   current_item_showcase = new InventoryGUI::CurrentItemShowcase(this);
    notification = new InventoryGUI::Notification(this);
 
+   // create our Inventory GUI Widgets
    for (unsigned i=0; i<NUM_INVENTORY_ITEM_BUTTONS; i++)
    {
       InventoryGUI::ItemButton *button = new InventoryGUI::ItemButton(this, SCREEN_W-100, 200+90*i);
       item_buttons.push_back(button);
    }
+
+   current_item_showcase = new InventoryGUI::CurrentItemShowcase(this);
+   toggle_button = new InventoryGUI::InventoryToggleButton(this);
+   behind_blocker = new InventoryGUI::BehindBlocker(this);
 
    // set our current GUI mode
    set_visibility_mode(current_mode);
