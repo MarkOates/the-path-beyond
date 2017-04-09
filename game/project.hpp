@@ -34,13 +34,13 @@ public:
    }
    void on_message(UIWidget *sender, std::string message)
    {
-      std::string trigger_id = "";
+      std::string script_name = "";
       int script_id = 0;
-      if (TargetID::extract_trigger_id(message, &trigger_id))
+      if (TargetID::extract_script_name(message, &script_name))
       {
-         std::cout << "Project running script \"" << trigger_id << "\"" << std::endl;
+         std::cout << "Project running script \"" << script_name << "\"" << std::endl;
 
-         Script *found_script = ScriptCollection::find_by_name(trigger_id);
+         Script *found_script = ScriptCollection::find_by_name(script_name);
          ScriptCollection::run_script(found_script);
       }
       else if (TargetID::extract_script_id(message, &script_id))

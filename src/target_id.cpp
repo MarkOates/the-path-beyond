@@ -29,12 +29,12 @@ std::string TargetID::get_trigger_message()
 
 
 
-bool TargetID::extract_trigger_id(std::string message, std::string *extracted_id)
+bool TargetID::extract_script_name(std::string message, std::string *extracted_script_name)
 {
    if (strncmp(message.c_str(), "trigger_target_id ", 18) == 0)
    {
       // we have a valid trigger message
-      *extracted_id = message.substr(18);
+      *extracted_script_name = message.substr(18);
       return true;
    }
    return false;

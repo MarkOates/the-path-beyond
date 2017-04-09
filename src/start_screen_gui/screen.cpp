@@ -36,8 +36,8 @@ StartScreenGUI::Screen::Screen(UIScreen *project_screen, Display *display)
 
 void StartScreenGUI::Screen::on_message(UIWidget *sender, std::string message)
 {
-   std::string trigger_id;
-   if (TargetID::extract_trigger_id(message, &trigger_id)) project_screen->on_message(this, message); // bubbles it up
+   std::string script_name;
+   if (TargetID::extract_script_name(message, &script_name)) project_screen->on_message(this, message); // bubbles it up
 }
 
 
