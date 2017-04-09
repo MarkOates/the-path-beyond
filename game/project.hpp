@@ -43,7 +43,21 @@ public:
       else if (TargetID::extract_unique_trigger_id(message, &unique_trigger_id))
       {
          if (Logging::at_least(L_VERBOSE)) std::cout << "Project running script ID\"" << unique_trigger_id << "\"" << std::endl;
-         ScriptCollection::run_by_unique_id(unique_trigger_id);
+
+         Script *script = ScriptCollection::find_by_unique_id(unique_trigger_id);
+         if (!script)
+         {
+            if (Logging::at_least(L_ERRORS))
+               std::cout
+                  << CONSOLE_COLOR_RED
+                  << "Could not run script: ScriptCollection with unique_trigger_id [" << unique_trigger_id << "] not foud."
+                  << CONSOLE_COLOR_DEFAULT
+                  << std::endl;
+         }
+         else
+         {
+            ScriptCollection::run_script(script);
+         }
       }
    }
 };

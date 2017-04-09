@@ -39,26 +39,6 @@ void ScriptCollection::run_script(Script *script)
 
 
 
-bool ScriptCollection::run_by_unique_id(int unique_id)
-{
-   Script *script = find_by_unique_id(unique_id);
-   if (!script)
-   {
-      if (Logging::at_least(L_ERRORS))
-         std::cout
-            << CONSOLE_COLOR_RED
-            << "Could not run script: ScriptCollection with unique_id [" << unique_id << "] not foud."
-            << CONSOLE_COLOR_DEFAULT
-            << std::endl;
-
-      return false;
-   }
-   run_script(script);
-   return true;
-}
-
-
-
 bool ScriptCollection::run(std::string id)
 {
    Script *script = find_by_id(id);
