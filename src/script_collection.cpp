@@ -17,7 +17,6 @@ ElementID *ScriptCollection::instance = nullptr;
 Script *ScriptCollection::find_by_unique_id(int unique_id)
 {
    return static_cast<Script *>(get_instance()->find_descendant_by_id(unique_id));
-   //return static_cast<ScriptCollection *>(get_instance()->get_element_by_unique_id(unique_id));
 }
 
 
@@ -25,7 +24,6 @@ Script *ScriptCollection::find_by_unique_id(int unique_id)
 Script *ScriptCollection::find_by_id(std::string id)
 {
    ElementID *element = get_instance()->find_first(SCRIPT_ID_ATTRIBUTE, id);
-   //ElementID *element = get_instance()->get_element_by_id(id);
    if (element) return static_cast<Script *>(element);
    return NULL;
 }
