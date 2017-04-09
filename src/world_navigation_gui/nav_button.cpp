@@ -33,7 +33,7 @@ void WorldNavigationGUI::NavButton::on_click()
 
 void WorldNavigationGUI::NavButton::on_draw()
 {
-   Style::draw_button(Style::NORMAL, place, "•");
+   StyleAssets::draw_button(StyleAssets::NORMAL, place, "•");
 }
 
 

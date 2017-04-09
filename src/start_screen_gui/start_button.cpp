@@ -27,7 +27,7 @@ void StartScreenGUI::StartButton::on_click()
 
 void StartScreenGUI::StartButton::on_draw()
 {
-   Style::draw_button(Style::NORMAL, place, "start");
+   StyleAssets::draw_button(StyleAssets::NORMAL, place, "start");
 }
 
 

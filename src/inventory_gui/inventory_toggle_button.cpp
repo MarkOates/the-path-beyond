@@ -35,7 +35,7 @@ void InventoryGUI::InventoryToggleButton::set_shown_item(InventoryItem item)
 
 void InventoryGUI::InventoryToggleButton::on_draw()
 {
-   Style::draw_button(Style::NORMAL, place, shown_item.is_empty() ? "0" : "", shown_item.get_image());
+   StyleAssets::draw_button(StyleAssets::NORMAL, place, shown_item.is_empty() ? "0" : "", shown_item.get_image());
 }
 
 
