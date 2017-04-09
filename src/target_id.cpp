@@ -3,27 +3,9 @@
 
 #include <target_id.hpp>
 
+#include <allegro_flare/converters/color_id_converter.h>
 #include <allegro_flare/useful.h>
 #include <allegro5/allegro_color.h>
-
-
-
-ALLEGRO_COLOR encode_id(int id)
-{
-   ALLEGRO_COLOR color;
-   unsigned char r = id / 256;
-   unsigned char g = id % 256;
-   return al_map_rgba(r, g, 0, 255);
-}
-
-
-
-int decode_id(ALLEGRO_COLOR color)
-{
-   unsigned char r, g, b, a;
-   al_unmap_rgba(color, &r, &g, &b, &a);
-   return r * 256 + g;
-}
 
 
 
@@ -76,6 +58,20 @@ bool TargetID::extract_unique_trigger_id(std::string message, int *extracted_uni
       return true;
    }
    return false;
+}
+
+
+
+int TargetID::color_to_id(ALLEGRO_COLOR color)
+{
+   return ColorIDConverter::decode_id(color);
+}
+
+
+
+ALLEGRO_COLOR TargetID::id_to_color(int id)
+{
+   return ColorIDConverter::encode_id(id);
 }
 
 

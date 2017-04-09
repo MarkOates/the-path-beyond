@@ -7,10 +7,6 @@
 
 
 
-ALLEGRO_COLOR encode_id(int id);
-int decode_id(ALLEGRO_COLOR color);
-
-
 class TargetID
 {
 public:
@@ -19,6 +15,8 @@ public:
    TargetID(std::string id);
 
    bool is_empty();
+   static int color_to_id(ALLEGRO_COLOR color);
+   static ALLEGRO_COLOR id_to_color(int id);
    std::string get_trigger_message();
    static bool extract_trigger_id(std::string message, std::string *extracted_id);
    static std::string compose_unique_trigger_id_message(int unique_id);

@@ -50,7 +50,7 @@ void WorldNavigationGUI::NavView::on_click()
       if (mouse_y < 0 || mouse_y > al_get_bitmap_height(render)) return;
       if (Logging::at_least(L_VERBOSE)) std::cout << "sampling bitmap at " << mouse_x << ", " << mouse_y << std::endl;
 
-      int clicked_id = decode_id(al_get_pixel(render, mouse_x, mouse_y));
+      int clicked_id = TargetID::color_to_id(al_get_pixel(render, mouse_x, mouse_y));
       send_message_to_parent(TargetID::compose_unique_trigger_id_message(clicked_id));
    }
 }
