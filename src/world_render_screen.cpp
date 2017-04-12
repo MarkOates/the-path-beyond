@@ -8,6 +8,7 @@
 #include <allegro_flare/element_id.h>
 #include <entity.hpp>
 #include <global_constants.hpp>
+#include <scene_renderer.hpp>
 
 
 
@@ -80,12 +81,8 @@ void WorldRenderScreen::draw_scene()
    al_clear_to_color(color::black);
    prep_render(backbuffer_sub_bitmap, camera->place);
 
-   // draw our entities
-   for (auto &elem : manager->get_children())
-   {
-      Entity *entity = static_cast<Entity *>(elem);
-      entity->draw();
-   }
+   SceneRenderer scene_renderer(manager);
+   scene_renderer.render();
 }
 
 
