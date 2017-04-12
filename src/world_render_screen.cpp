@@ -33,10 +33,12 @@ WorldRenderScreen::WorldRenderScreen(Display *display)
    : Screen(display)
    , manager(new ElementID(nullptr))
    , camera(NULL)
+   , light_1(nullptr)
    , scene_targets_render_surface_ref(NULL)
 {
    // create the camera
    camera = new Entity(manager, CAMERA_ENTITY_NAME, NULL, NULL);
+   light_1 = new Entity(manager, LIGHT_1_ENTITY_NAME, NULL, NULL);
 }
 
 

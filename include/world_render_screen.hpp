@@ -21,6 +21,7 @@ private:
 public:
    ElementID *manager;
    Entity *camera;
+   Entity *light_1;
 
    ALLEGRO_BITMAP *scene_targets_render_surface_ref;
 
