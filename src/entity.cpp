@@ -15,6 +15,7 @@ Entity::Entity(ElementID *manager, std::string id, Model3D *model, ALLEGRO_BITMA
    , place()
    , velocity()
    , model(model)
+   , shader(nullptr)
    , texture(texture)
    , attached_script_id(0)
 {
@@ -52,7 +53,8 @@ void Entity::draw()
    if (!model) return;
    if (texture) model->set_texture(texture);
 
-   Shader::stop();
+   if (shader) shader->use();
+   else Shader::stop();
 
    place.start_transform();
    model->draw();

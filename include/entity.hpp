@@ -19,6 +19,7 @@ public:
    placement3d place;
    placement3d velocity;
    Model3D *model;
+   Shader *shader;
    ALLEGRO_BITMAP *texture;
    int attached_script_id;
 
