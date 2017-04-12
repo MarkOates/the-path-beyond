@@ -7,6 +7,7 @@
 #include <allegro_flare/color.h>
 #include <allegro_flare/element_id.h>
 #include <entity.hpp>
+#include <global_constants.hpp>
 
 
 
@@ -35,7 +36,7 @@ WorldRenderScreen::WorldRenderScreen(Display *display)
    , scene_targets_render_surface_ref(NULL)
 {
    // create the camera
-   camera = new Entity(manager, "Camera", NULL, NULL);
+   camera = new Entity(manager, CAMERA_ENTITY_NAME, NULL, NULL);
 }
 
 
