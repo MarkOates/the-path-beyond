@@ -15,12 +15,6 @@ class Model3D;
 
 class Entity : public ElementID
 {
-private:
-   static Shader *flat_color_shader;
-   static bool shaders_initialized;
-
-   void initialize_shaders();
-
 public:
    placement3d place;
    placement3d velocity;
