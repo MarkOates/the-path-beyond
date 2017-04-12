@@ -15,7 +15,7 @@ private:
 public:
    SceneRenderer(ElementID *scene_root);
    void render();
-   void draw_entity(Entity *entity);
+   void draw_entity(Entity *entity, Entity *camera, Entity *light_1);
 };
 
 
