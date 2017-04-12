@@ -27,7 +27,6 @@ public:
    void attach_script_id(int script_unique_id);
    int get_attached_script_id();
    bool is_script_attached();
-   void draw();
    void draw_flat_color(ALLEGRO_COLOR color);
 };
 

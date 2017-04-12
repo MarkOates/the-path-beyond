@@ -48,21 +48,6 @@ bool Entity::is_script_attached()
 
 
 
-void Entity::draw()
-{
-   if (!model) return;
-   if (texture) model->set_texture(texture);
-
-   if (shader) shader->use();
-   else Shader::stop();
-
-   place.start_transform();
-   model->draw();
-   place.restore_transform();
-}
-
-
-
 void Entity::draw_flat_color(ALLEGRO_COLOR color)
 {
    if (!model) return;
