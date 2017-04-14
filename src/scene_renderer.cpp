@@ -41,8 +41,8 @@ void SceneRenderer::draw_entity(Entity *entity, Entity *camera, Entity *light_1)
 
          ALLEGRO_TRANSFORM transform;
          entity->place.build_transform(&transform);
-         //Shader::set_vec3("camera_position", camera->place.position);
-         //Shader::set_vec3("light_position", light_1->place.position);
+         Shader::set_vec3("camera_position", camera->place.position);
+         Shader::set_vec3("light_position", light_1->place.position);
          Shader::set_mat4("position_transform", &transform);
 
 
