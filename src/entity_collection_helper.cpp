@@ -14,6 +14,13 @@ EntityCollectionHelper::EntityCollectionHelper(ElementID *root)
 
 
 
+Entity *EntityCollectionHelper::get_by_name(const std::string &name)
+{
+   return static_cast<Entity *>(root->find_first(ENTITY_NAME_ATTRIBUTE, name));
+}
+
+
+
 Entity *EntityCollectionHelper::get_camera()
 {
    return static_cast<Entity *>(root->find_first(CAMERA_ENTITY_NAME));
