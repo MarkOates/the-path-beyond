@@ -7,6 +7,7 @@
 #include <inventory_gui/notification.hpp>
 #include <cmath>
 #include <script_collection.hpp>
+#include <entity_collection_helper.hpp>
 #include <global_constants.hpp>
 
 
@@ -79,11 +80,8 @@ void ScriptHelper::simple_camera_to(float x, float y, float rotation, float spee
 
 void ScriptHelper::clear_attached_scripts()
 {
-   for (auto &e : world_render->manager->get_children())
-   {
-      Entity *entity = static_cast<Entity *>(e);
-      entity->attach_script_id(0);
-   }
+   EntityCollectionHelper collection_helper(world_render->manager);
+   for (auto &entity : collection_helper.get_all_entities()) entity->attach_script_id(0);
 }
 
 
@@ -127,7 +125,8 @@ void ScriptHelper::attach_script_to_entity(std::string entity_name, std::string 
 
 Entity *ScriptHelper::entity_by_name(std::string entity_name)
 {
-   Entity *e = static_cast<Entity *>(world_render->manager->find_first(ENTITY_NAME_ATTRIBUTE, entity_name));
+   EntityCollectionHelper collection_helper(world_render->manager);
+   Entity *e = collection_helper.get_by_name(entity_name);
    if (!e)
    {
       std::cout << CONSOLE_COLOR_RED << "could not locate entity by name \"" << entity_name << "\"" << CONSOLE_COLOR_DEFAULT << std::endl;
