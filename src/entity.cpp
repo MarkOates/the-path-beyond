@@ -10,7 +10,7 @@
 
 
 
-Entity::Entity(ElementID *manager, std::string id, Model3D *model, ALLEGRO_BITMAP *texture)
+Entity::Entity(ElementID *manager, std::string name, Model3D *model, ALLEGRO_BITMAP *texture)
    : ElementID(manager)
    , place()
    , velocity()
@@ -20,7 +20,7 @@ Entity::Entity(ElementID *manager, std::string id, Model3D *model, ALLEGRO_BITMA
    , attached_script_id(0)
 {
    //set_id(id);
-   set(ENTITY_ID_ATTRIBUTE, id);
+   set(ENTITY_NAME_ATTRIBUTE, name);
    velocity.align = vec3d(0, 0, 0);
    velocity.scale = vec3d(0, 0, 0);
 }

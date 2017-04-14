@@ -23,7 +23,7 @@ public:
    ALLEGRO_BITMAP *texture;
    int attached_script_id;
 
-   Entity(ElementID *manager, std::string id, Model3D *model=NULL, ALLEGRO_BITMAP *texture=NULL);
+   Entity(ElementID *manager, std::string name, Model3D *model=NULL, ALLEGRO_BITMAP *texture=NULL);
    void attach_script_id(int script_unique_id);
    int get_attached_script_id();
    bool is_script_attached();

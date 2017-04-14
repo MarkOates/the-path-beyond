@@ -127,8 +127,7 @@ void ScriptHelper::attach_script_to_entity(std::string entity_name, std::string 
 
 Entity *ScriptHelper::entity_by_name(std::string entity_name)
 {
-   //Entity *e = static_cast<Entity *>(world_render->manager->get_element_by_id(entity_id));
-   Entity *e = static_cast<Entity *>(world_render->manager->find_first(ENTITY_ID_ATTRIBUTE, entity_name));
+   Entity *e = static_cast<Entity *>(world_render->manager->find_first(ENTITY_NAME_ATTRIBUTE, entity_name));
    if (!e)
    {
       std::cout << CONSOLE_COLOR_RED << "could not locate entity by name \"" << entity_name << "\"" << CONSOLE_COLOR_DEFAULT << std::endl;
