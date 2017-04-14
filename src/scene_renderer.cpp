@@ -24,7 +24,9 @@ void SceneRenderer::render()
    std::vector<Entity *> all_entities = entity_collection_helper.get_all_entities();
 
    Entity *camera = entity_collection_helper.get_camera();
+   if (!camera) throw std::runtime_error("The scene does not have a camera");
    Entity *light_1 = entity_collection_helper.get_light_1();
+   if (!light_1) throw std::runtime_error("The scene does not have a light");
 
    for (auto &entity : all_entities) draw_entity(entity, camera, light_1);
 }
