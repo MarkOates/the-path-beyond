@@ -23,14 +23,14 @@ Entity *EntityCollectionHelper::get_by_name(const std::string &name)
 
 Entity *EntityCollectionHelper::get_camera()
 {
-   return static_cast<Entity *>(root->find_first(CAMERA_ENTITY_NAME));
+   return get_by_name(CAMERA_ENTITY_NAME);
 }
 
 
 
 Entity *EntityCollectionHelper::get_light_1()
 {
-   return static_cast<Entity *>(root->find_first(LIGHT_1_ENTITY_NAME));
+   return get_by_name(LIGHT_1_ENTITY_NAME);
 }
 
 
