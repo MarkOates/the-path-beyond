@@ -6,6 +6,10 @@
 
 
 
+class Shader2;
+
+
+
 class ShaderCollection
 {
 private:
@@ -16,10 +20,12 @@ private:
 
    Shader *flat_color_shader;
    Shader *simple_map_shader;
+   Shader2 *wall_shader;
 
 public:
    static Shader *get_flat_color_shader();
    static Shader *get_simple_map_shader();
+   static Shader2 *get_wall_shader();
 };
 
 
