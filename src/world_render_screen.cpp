@@ -7,6 +7,8 @@
 #include <allegro_flare/color.h>
 #include <allegro_flare/element_id.h>
 #include <entity.hpp>
+#include <global_constants.hpp>
+#include <scene_renderer.hpp>
 
 
 
@@ -32,10 +34,12 @@ WorldRenderScreen::WorldRenderScreen(Display *display)
    : Screen(display)
    , manager(new ElementID(nullptr))
    , camera(NULL)
+   , light_1(nullptr)
    , scene_targets_render_surface_ref(NULL)
 {
    // create the camera
-   camera = new Entity(manager, "Camera", NULL, NULL);
+   camera = new Entity(manager, CAMERA_ENTITY_NAME, NULL, NULL);
+   light_1 = new Entity(manager, LIGHT_1_ENTITY_NAME, NULL, NULL);
 }
 
 
@@ -77,12 +81,8 @@ void WorldRenderScreen::draw_scene()
    al_clear_to_color(color::black);
    prep_render(backbuffer_sub_bitmap, camera->place);
 
-   // draw our entities
-   for (auto &elem : manager->get_children())
-   {
-      Entity *entity = static_cast<Entity *>(elem);
-      entity->draw();
-   }
+   SceneRenderer scene_renderer(manager);
+   scene_renderer.render();
 }
 
 

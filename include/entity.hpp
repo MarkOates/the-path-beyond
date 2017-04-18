@@ -8,31 +8,25 @@
 
 
 
-class Shader;
+class Shader2;
 class Model3D;
 
 
 
 class Entity : public ElementID
 {
-private:
-   static Shader *flat_color_shader;
-   static bool shaders_initialized;
-
-   void initialize_shaders();
-
 public:
    placement3d place;
    placement3d velocity;
    Model3D *model;
+   Shader2 *shader;
    ALLEGRO_BITMAP *texture;
    int attached_script_id;
 
-   Entity(ElementID *manager, std::string id, Model3D *model=NULL, ALLEGRO_BITMAP *texture=NULL);
+   Entity(ElementID *manager, std::string name, Model3D *model=NULL, ALLEGRO_BITMAP *texture=NULL);
    void attach_script_id(int script_unique_id);
    int get_attached_script_id();
    bool is_script_attached();
-   void draw();
    void draw_flat_color(ALLEGRO_COLOR color);
 };
 

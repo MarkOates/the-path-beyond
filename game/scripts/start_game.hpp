@@ -1,6 +1,10 @@
 
 
 
+#include <shader_collection.hpp>
+
+
+
 class StartGame: public Script, public ScriptHelper
 {
 public:
@@ -21,6 +25,7 @@ public:
             Framework::model("space_station-04.obj"),
             Framework::bitmap("floor_texture.jpeg"));
       //Framework::bitmaps["uv.png"]);
+      e->shader = ShaderCollection::get_wall_shader();
 
       // create the card key
       create_entity("EncryptedCardKey", vec3d(5, 0, 4), 0.4, "card_key-02.obj", "sci_fi_panel2.jpg");
