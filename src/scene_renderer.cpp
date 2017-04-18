@@ -8,6 +8,7 @@
 #include <entity_collection_helper.hpp>
 #include <entity.hpp>
 #include <global_constants.hpp>
+#include <shaders/wall_shader.hpp>
 
 
 
@@ -39,19 +40,24 @@ void SceneRenderer::draw_entity(Entity *entity, Entity *camera, Entity *light_1)
 
    if (entity->shader)
    {
-      entity->shader->use();
+      entity->shader->use(entity->get_root(), entity);
+      if (entity->texture) entity->model->set_texture(entity->texture);
+      entity->model->draw();
+
+      /*
+         entity->shader->use();
 
          ALLEGRO_TRANSFORM transform;
+
          entity->place.build_transform(&transform);
          Shader::set_vec3("camera_position", camera->place.position);
          Shader::set_vec3("light_position", light_1->place.position);
          Shader::set_mat4("position_transform", &transform);
+         Shader::set_sampler("diffuse_texture", entity->texture, 0);
+         if (entity->texture) entity->model->set_texture(entity->texture);
 
 
          //Shader::set_bool("reflecting", cube_map_reflecting);
-
-         Shader::set_sampler("diffuse_texture", entity->texture, 0);
-
          //if (shadow_map_depth_pass_transform && shadow_map_depth_pass_surface)
          //{
          //Shader::set_sampler("depth_pass_surface", shadow_map_depth_pass_surface, 1);
@@ -63,9 +69,9 @@ void SceneRenderer::draw_entity(Entity *entity, Entity *camera, Entity *light_1)
          //Shader::set_sampler("normal_texture", normal_texture, 4);
          //Shader::set_sampler_cube("cube_map_A", cube_map_A, 5);
          //Shader::set_sampler_cube("cube_map_B", cube_map_B, 6);
-         if (entity->texture) entity->model->set_texture(entity->texture);
 
-      entity->model->draw();
+         entity->model->draw();
+      */
    }
    else
    {
